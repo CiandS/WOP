@@ -25,7 +25,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
     Step(
       isActive: false,
       state: StepState.editing,
-      title: const Text('Address'),
+      title: const Text('Step #2'),
       content: Column(
         children: <Widget>[
           TextFormField(
