@@ -37,6 +37,39 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
         ],
       ),
     ),
+
+    Step(
+      isActive: false,
+      state: StepState.editing,
+      title: const Text('Address'),
+      content: Column(
+        children: <Widget>[
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Home Address'),
+          ),
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Postcode'),
+          ),
+        ],
+      ),
+    ),
+
+    Step(
+      isActive: false,
+      state: StepState.editing,
+      title: const Text('Address'),
+      content: Column(
+        children: <Widget>[
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Home Address'),
+          ),
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Postcode'),
+          ),
+        ],
+      ),
+    ),
+
     Step(
       state: StepState.error,
       title: const Text('Avatar'),
@@ -51,6 +84,25 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
     ),
   ];
 
+  int currentStep = 0;
+  bool complete = false;
+
+  next() {
+    currentStep + 1 != steps.length
+        ? goTo(currentStep + 1)
+        : setState (() => complete = true);
+  }
+
+  cancel() {
+    if(currentStep > 0) {
+      goTo(currentStep - 1);
+    }
+  }
+
+  goTo(int step) {
+    setState(() => currentStep = step);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +115,12 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
             child: Stepper(
               steps: steps,
               type: StepperType.horizontal,
+              currentStep: currentStep,
+              onStepContinue: next,
+              onStepCancel: cancel,
+              onStepTapped: (step) => goTo(step)),
             ),
-          ),
-        ]));
+  ],
+        ));
   }
 }
