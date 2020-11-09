@@ -51,6 +51,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
     ),
   ];
 
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -61,6 +62,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
           Expanded(
             child: Stepper(
               steps: steps,
+              type: StepperType.horizontal,
             ),
           ),
         ]));
