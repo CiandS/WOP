@@ -6,103 +6,80 @@ class WorkOrderPage extends StatefulWidget {
 }
 
 class _WorkOrderPageState extends State<WorkOrderPage> {
-  List<Step> steps = [
-    Step(
-      title: const Text('Issue Material'),
-      isActive: true,
-      state: StepState.complete,
-      content: Column(
-        children: <Widget>[
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Username (test)'),
-          ),
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Password (test)'),
-          ),
-        ],
-      ),
-    ),
-    Step(
-      isActive: false,
-      state: StepState.editing,
-      title: const Text('Step #2'),
-      content: Column(
-        children: <Widget>[
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Home Address'),
-          ),
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Postcode'),
-          ),
-        ],
-      ),
-    ),
 
-    Step(
-      isActive: false,
-      state: StepState.editing,
-      title: const Text('Address'),
-      content: Column(
-        children: <Widget>[
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Home Address'),
-          ),
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Postcode'),
-          ),
-        ],
-      ),
+  List<Step> spr = <Step>[];
+  List<Step> _getSteps(BuildContext context) {
+    spr = <Step>[
+      Step(
+          title: const Text('Issue Material'),
+          subtitle: Text('SubTitle1'),
+          content: Column(
+    children: <Widget>[
+    TextFormField(
+    decoration: InputDecoration(labelText: 'Email Address'),
     ),
+    TextFormField(
+    decoration: InputDecoration(labelText: 'Password'),
+    ),
+    ],
+    ),
+          state: _getState(1),
+          isActive: isActive(1)),
+      Step(
 
-    Step(
-      isActive: false,
-      state: StepState.editing,
-      title: const Text('Address'),
-      content: Column(
-        children: <Widget>[
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Home Address'),
-          ),
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Postcode'),
-          ),
-        ],
-      ),
-    ),
+          title: const Text('Hello2'),
+          subtitle: Text('SubTitle2'),
+          content: const Text('This is Content2'),
+          state: _getState(2),
+          isActive: isActive(2)),
+      Step(
+          title: const Text('Hello3'),
+          subtitle: Text('SubTitle3'),
+          content: const Text('This is Content3'),
+          state: _getState(3),
+          isActive: isActive(3)),
+    ];
+    return spr;
+  }
 
-    Step(
-      state: StepState.error,
-      title: const Text('Avatar'),
-      subtitle: const Text("Error!"),
-      content: Column(
-        children: <Widget>[
-          CircleAvatar(
-            backgroundColor: Colors.red,
-          )
-        ],
-      ),
-    ),
-  ];
+  StepState _getState(int i) {
+    if (currentStep >= i) {
+    return StepState.complete;
+    } else {
+    return  StepState.editing;
+    }
+  }
+
+  bool isActive(int i) {
+    return _getState (i) == StepState.complete;
+  }
 
   int currentStep = 0;
   bool complete = false;
 
+
+
   next() {
-    currentStep + 1 != steps.length
-        ? goTo(currentStep + 1)
+    // setState(() {
+    //   currentStep++;
+    // });
+
+    currentStep + 1 != spr.length
+        ? setState(() => currentStep++)
         : setState (() => complete = true);
   }
 
   cancel() {
     if(currentStep > 0) {
-      goTo(currentStep - 1);
+      setState(() {
+        currentStep = 0;
+      });
     }
   }
 
   goTo(int step) {
     setState(() => currentStep = step);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +109,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
     )
     : Expanded(
             child: Stepper(
-              steps: steps,
+              steps: _getSteps(context),
               type: StepperType.horizontal,
               currentStep: currentStep,
               onStepContinue: next,
