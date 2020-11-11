@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:work_order_process/screens/work_order_history/work_order_history.dart';
+
 
 class WorkOrderPage extends StatefulWidget {
   @override
@@ -117,9 +119,12 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
               onStepTapped: (step) => goTo(step)),
             ),
            ]),
-    floatingActionButton: FloatingActionButton (
-      child: Icon (Icons.list),
-
-    ),);
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+        Navigator.push(context, new MaterialPageRoute(
+            builder: (context) => WO_HistoryPage()
+        ));
+      },),
+);
   }
 }
