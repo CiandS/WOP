@@ -18,7 +18,9 @@ class _WO_HistoryState extends State<WO_HistoryPage> {
             ));
           },),
         appBar: AppBar(
-          title: Text("Work Order History"),
+          title: new Center(
+            child: Text("Work Order History"),
+          )
         ),
        body: Container(
          child: Center(
@@ -27,17 +29,17 @@ class _WO_HistoryState extends State<WO_HistoryPage> {
                 GFAccordion(
                   collapsedIcon: Icon(Icons.add),
                   expandedIcon: Icon(Icons.minimize),
-                  title: 'JDE Product',
+                  title: 'JDE Status changed to 10',
                   content:
                   'Turpis architecto morbi, senectus, hac ratione facere nonummy nascetur fugiat! Inceptos explicabo. Aliquid non aut malesuada labore lobortis felis sociis.',
                ),
                GFAccordion(
-                 title: 'Title Z',
+                 title: 'Folder Assigned: Blue',
                  content:
                  'Turpis architecto morbi, senectus, hac ratione facere nonummy nascetur fugiat! Inceptos explicabo. Aliquid non aut malesuada labore lobortis felis sociis.',
                ),
                GFAccordion(
-                 title: 'Title Z',
+                 title: 'Lot Traveller/BOM. Rev 1 printed',
                  content:
                  'Turpis architecto morbi, senectus, hac ratione facere nonummy nascetur fugiat! Inceptos explicabo. Aliquid non aut malesuada labore lobortis felis sociis.',
                )

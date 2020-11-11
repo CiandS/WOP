@@ -87,8 +87,9 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: AppBar(
-          title: Text('Work Order Process'),
-        ),
+          title: new Center (
+            child: Text('Work Order Process'),
+          )),
         body: Column(
             children: <Widget>[
         complete ? Expanded(
@@ -121,7 +122,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
            ]),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-        Navigator.push(context, new MaterialPageRoute(
+          Navigator.push(context, new MaterialPageRoute(
             builder: (context) => WO_HistoryPage()
         ));
       },),
