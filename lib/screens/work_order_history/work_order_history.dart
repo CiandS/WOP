@@ -26,23 +26,16 @@ class _WO_HistoryState extends State<WO_HistoryPage> {
          child: Center(
            child: Column(
              children: <Widget> [
-                GFAccordion(
-                  collapsedIcon: Icon(Icons.add),
-                  expandedIcon: Icon(Icons.minimize),
-                  title: 'JDE Status changed to 10',
-                  content:
-                  'Turpis architecto morbi, senectus, hac ratione facere nonummy nascetur fugiat! Inceptos explicabo. Aliquid non aut malesuada labore lobortis felis sociis.',
-               ),
-               GFAccordion(
-                 title: 'Folder Assigned: Blue',
-                 content:
-                 'Turpis architecto morbi, senectus, hac ratione facere nonummy nascetur fugiat! Inceptos explicabo. Aliquid non aut malesuada labore lobortis felis sociis.',
-               ),
-               GFAccordion(
-                 title: 'Lot Traveller/BOM. Rev 1 printed',
-                 content:
-                 'Turpis architecto morbi, senectus, hac ratione facere nonummy nascetur fugiat! Inceptos explicabo. Aliquid non aut malesuada labore lobortis felis sociis.',
-               )
+               DataTable(
+                   columns: [
+                      DataColumn(label: Text('Description')),
+                     DataColumn(label: Text('Date / Time'))
+               ], rows: [
+                 DataRow(cells: [
+                   DataCell(Text('JDE STATUS CHANGE TO 10. BY BOCONNO5')),
+                   DataCell(Text('16-OCT-2020 16:16'))
+                 ])
+               ])
              ]
            )
            ),
