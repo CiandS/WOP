@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:work_order_process/providers/scrap_provider.dart';
 import 'screens/login/login.dart';
 import 'screens/work_order_history/work_order_history.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(ChangeNotifierProvider(
+      create: (context) => ScrapProvider(),
+      child: MyApp(),
+    ));
 
 class MyApp extends StatelessWidget {
   @override
