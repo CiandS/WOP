@@ -20,7 +20,6 @@ class _WO_HistoryState extends State<WO_HistoryPage> {
       ),
       appBar: AppBar(
           title: new Center(
-<<<<<<< HEAD
         child: Text("Work Order History"),
       )),
       body: Container(
@@ -33,47 +32,22 @@ class _WO_HistoryState extends State<WO_HistoryPage> {
             DataRow(cells: [
               DataCell(Text('JDE STATUS CHANGE TO 10. BY BOCONNO5')),
               DataCell(Text('16-OCT-2020 16:16'))
-            ])
+            ]),
+            DataRow(cells: [
+              DataCell(Text('JDE STATUS CHANGE TO 10. BY BOCONNO5')),
+              DataCell(Text('16-OCT-2020 16:16'))
+            ]),
+            DataRow(cells: [
+              DataCell(Text('JDE STATUS CHANGE TO 10. BY BOCONNO5')),
+              DataCell(Text('16-OCT-2020 16:16'))
+            ]),
+            DataRow(cells: [
+              DataCell(Text('JDE STATUS CHANGE TO 10. BY BOCONNO5')),
+              DataCell(Text('16-OCT-2020 16:16'))
+            ]),
           ])
         ])),
       ),
     ));
-=======
-            child: Text("Work Order History"),
-          )
-        ),
-       body: Container(
-         child: Center(
-           child: Column(
-             children: <Widget> [
-               DataTable(
-                   columns: [
-                      DataColumn(label: Text('Description')),
-                     DataColumn(label: Text('Date / Time'))
-               ], rows: [
-                 DataRow(cells: [
-                   DataCell(Text('JDE STATUS CHANGE TO 10. BY BOCONNO5')),
-                   DataCell(Text('16-OCT-2020 16:16'))
-                 ]),
-                 DataRow(cells: [
-                   DataCell(Text('JDE STATUS CHANGE TO 10. BY BOCONNO5')),
-                   DataCell(Text('16-OCT-2020 16:16'))
-                 ]),
-                 DataRow(cells: [
-                   DataCell(Text('JDE STATUS CHANGE TO 10. BY BOCONNO5')),
-                   DataCell(Text('16-OCT-2020 16:16'))
-                 ]),
-                 DataRow(cells: [
-                   DataCell(Text('JDE STATUS CHANGE TO 10. BY BOCONNO5')),
-                   DataCell(Text('16-OCT-2020 16:16'))
-                 ]),
-               ])
-             ]
-           )
-           ),
-         ),
-      ));
-
->>>>>>> fc920b68b4d23b6bd9d728a99901b52dccc25e5c
   }
 }
