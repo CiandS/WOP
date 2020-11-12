@@ -142,12 +142,11 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
               ),
       ]),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.list),
-        onPressed: (){
-          Navigator.push(context, new MaterialPageRoute(
-            builder: (context) => WO_HistoryPage()
-        ));
-      ),
+          child: Icon(Icons.list),
+          onPressed: () {
+            Navigator.push(context,
+                new MaterialPageRoute(builder: (context) => WO_HistoryPage()));
+          }),
     );
   }
 }
