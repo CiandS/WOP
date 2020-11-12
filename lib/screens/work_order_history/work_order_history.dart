@@ -34,7 +34,19 @@ class _WO_HistoryState extends State<WO_HistoryPage> {
                  DataRow(cells: [
                    DataCell(Text('JDE STATUS CHANGE TO 10. BY BOCONNO5')),
                    DataCell(Text('16-OCT-2020 16:16'))
-                 ])
+                 ]),
+                 DataRow(cells: [
+                   DataCell(Text('JDE STATUS CHANGE TO 10. BY BOCONNO5')),
+                   DataCell(Text('16-OCT-2020 16:16'))
+                 ]),
+                 DataRow(cells: [
+                   DataCell(Text('JDE STATUS CHANGE TO 10. BY BOCONNO5')),
+                   DataCell(Text('16-OCT-2020 16:16'))
+                 ]),
+                 DataRow(cells: [
+                   DataCell(Text('JDE STATUS CHANGE TO 10. BY BOCONNO5')),
+                   DataCell(Text('16-OCT-2020 16:16'))
+                 ]),
                ])
              ]
            )
