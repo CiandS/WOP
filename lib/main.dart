@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/login/login.dart';
-import 'screens/work_order/work_order.dart';
+import 'screens/work_order_history/work_order_history.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,5 +13,18 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.red,
         ),
         home: Login());
+  }
+}
+
+class WO_History extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Operations Management System Work Order History',
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+      ),
+      home: WO_HistoryPage(),
+    );
   }
 }
