@@ -12,11 +12,11 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   bool complete = false;
   List<Step> steps = <Step>[];
   List<WorkOrderStep> workOrderSteps = [
-    WorkOrderStep(0, 'Issue Material', 'SubTitle1'),
-    WorkOrderStep(1, 'Step 2', 'SubTitle1'),
-    WorkOrderStep(2, 'Step 3', 'SubTitle1'),
-    WorkOrderStep(3, 'Step 4', 'SubTitle1'),
-    WorkOrderStep(4, 'Step 5', 'SubTitle1'),
+    WorkOrderStep(0, 'Issue Material', 'Q1'),
+    WorkOrderStep(1, 'Cut Blocks', 'Q1'),
+    WorkOrderStep(2, 'Machine', 'Q1'),
+    WorkOrderStep(3, 'Cleanline', 'Q1'),
+    WorkOrderStep(4, 'Generate Labels', 'Q1'),
   ];
 
   List<Step> _getSteps(BuildContext context) {
@@ -24,21 +24,21 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
     workOrderSteps.forEach(
       (workOrderStep) => steps.add(
         Step(
-          title: Text(workOrderStep.stepTitle),
-          subtitle: Text(workOrderStep.stepSubTitle),
-          content: Column(
-            children: <Widget>[
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Email Address'),
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Password'),
-              ),
-            ],
-          ),
-          state: _getState(workOrderStep.index),
-          isActive: isActive(workOrderStep.index),
+        title: Text(workOrderStep.stepTitle),
+        subtitle: Text(workOrderStep.stepSubTitle),
+        content: Column(
+          children: <Widget>[
+            Text ('Original Qty / Rem Qty'),
+            Text ('10 / 5'),
+            TextFormField(
+              decoration: InputDecoration(labelText: 'Input Number'),
+            ),
+          ],
         ),
+        state: _getState(workOrderStep.index),
+        isActive: isActive(workOrderStep.index),
+      ),
+
       ),
     );
     // steps = <Step>[
