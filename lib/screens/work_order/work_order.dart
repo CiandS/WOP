@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/work_order_step.dart';
 import '../../screens/work_order_history/work_order_history.dart';
+import 'widgets/issue_material.dart';
 
 class WorkOrderPage extends StatefulWidget {
   @override
@@ -12,11 +13,12 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   bool complete = false;
   List<Step> steps = <Step>[];
   List<WorkOrderStep> workOrderSteps = [
-    WorkOrderStep(0, 'Issue Material', 'SubTitle1'),
-    WorkOrderStep(1, 'Step 2', 'SubTitle1'),
-    WorkOrderStep(2, 'Step 3', 'SubTitle1'),
-    WorkOrderStep(3, 'Step 4', 'SubTitle1'),
-    WorkOrderStep(4, 'Step 5', 'SubTitle1'),
+    WorkOrderStep(0, 'Issue Material', 'Q1', IssueMaterial()),
+    WorkOrderStep(1, 'Cut Blocks', 'Q1', IssueMaterial()),
+    WorkOrderStep(2, 'Machine', 'Q1', IssueMaterial()),
+    WorkOrderStep(3, 'Cleanline', 'Q1', IssueMaterial()),
+    WorkOrderStep(4, 'Generate Labels', 'Q1', IssueMaterial()),
+    WorkOrderStep(5, 'Cleanroom Packaging', 'Q1', IssueMaterial()),
   ];
 
   List<Step> _getSteps(BuildContext context) {
@@ -24,21 +26,13 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
     workOrderSteps.forEach(
       (workOrderStep) => steps.add(
         Step(
-          title: Text(workOrderStep.stepTitle),
-          subtitle: Text(workOrderStep.stepSubTitle),
-          content: Column(
-            children: <Widget>[
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Email Address'),
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Password'),
-              ),
-            ],
-          ),
-          state: _getState(workOrderStep.index),
-          isActive: isActive(workOrderStep.index),
-        ),
+        title: Text(workOrderStep.stepTitle),
+        subtitle: Text(workOrderStep.stepSubTitle),
+        content: workOrderStep.stepContent,
+        state: _getState(workOrderStep.index),
+        isActive: isActive(workOrderStep.index),
+      ),
+
       ),
     );
     // steps = <Step>[
