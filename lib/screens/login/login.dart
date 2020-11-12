@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:work_order_process/screens/scrap/scrap_screen.dart';
 import 'package:work_order_process/screens/work_order/work_order.dart';
 
 class Login extends StatefulWidget {
@@ -25,14 +26,20 @@ class _LoginState extends State<Login> {
                 SizedBox(
                   height: 30,
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  child: Text(
-                    'Heading 1',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold),
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ScrapScreen()),
+                  ),
+                  child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                    child: Text(
+                      'Scrap',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
                 Container(
