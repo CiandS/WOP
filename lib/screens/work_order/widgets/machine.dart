@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-class Machine extends StatelessWidget {
+class MachineStep extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(

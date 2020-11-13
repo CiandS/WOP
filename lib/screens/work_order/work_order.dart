@@ -22,7 +22,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   List<WorkOrderStep> workOrderSteps = [
     WorkOrderStep(0, 'Issue Material', 'Q1', IssueMaterial()),
     WorkOrderStep(1, 'Cut Blocks', 'Q1', CutBlocks()),
-    WorkOrderStep(2, 'Machine', 'Q1', Machine()),
+    WorkOrderStep(2, 'Machine', 'Q1', MachineStep()),
     WorkOrderStep(3, 'Cleanline', 'Q1', Cleanline()),
     WorkOrderStep(4, 'Generate Labels', 'Q1', GenLabels()),
     WorkOrderStep(5, 'Cleanroom Packaging', 'Q1', CleanroomPack()),
