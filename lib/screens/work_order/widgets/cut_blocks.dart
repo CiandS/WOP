@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 
 class CutBlocks extends StatelessWidget {
-  @override
+
+  int _value = 1;
+
+
+@override
   Widget build(BuildContext context) {
     return Center(
         child: Column (
@@ -10,11 +14,28 @@ class CutBlocks extends StatelessWidget {
           children: <Widget>[
             Text ("Cut Blocks\n", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             Text ("Processing Amount", style: TextStyle(fontSize: 24)),
-            Text ('Test', style: TextStyle(fontSize: 24, color: Colors.redAccent)),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Input Amount'),
-              keyboardType: TextInputType.number,
-            )],
-        ),
-    );}
+            DropdownButton(
+              value: _value,
+              items: [
+                DropdownMenuItem(
+                  child: Text("First Item"),
+                  value: 1,
+                ),
+                DropdownMenuItem(
+                  child: Text("Second Item"),
+                  value: 2,
+                ),
+                DropdownMenuItem(
+                    child: Text("Third Item"),
+                    value: 3
+                ),
+                DropdownMenuItem(
+                    child: Text("Fourth Item"),
+                    value: 4
+                )
+              ],
+            )]
+        )
+    );
+}
 }
