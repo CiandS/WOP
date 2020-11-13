@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:work_order_process/screens/work_order/widgets/cleanline.dart';
+import 'package:work_order_process/screens/work_order/widgets/cleanroom_pack.dart';
 import '../../models/work_order_step.dart';
 import '../../screens/work_order_history/work_order_history.dart';
 import 'widgets/cut_blocks.dart';
+import 'widgets/gen_labels.dart';
 import 'widgets/issue_material.dart';
+import 'widgets/machine.dart';
+import 'widgets/cleanline.dart';
+import 'widgets/cleanroom_pack.dart';
 
 class WorkOrderPage extends StatefulWidget {
   @override
@@ -16,10 +22,10 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   List<WorkOrderStep> workOrderSteps = [
     WorkOrderStep(0, 'Issue Material', 'Q1', IssueMaterial()),
     WorkOrderStep(1, 'Cut Blocks', 'Q1', CutBlocks()),
-    WorkOrderStep(2, 'Machine', 'Q1', IssueMaterial()),
-    WorkOrderStep(3, 'Cleanline', 'Q1', IssueMaterial()),
-    WorkOrderStep(4, 'Generate Labels', 'Q1', IssueMaterial()),
-    WorkOrderStep(5, 'Cleanroom Packaging', 'Q1', IssueMaterial()),
+    WorkOrderStep(2, 'Machine', 'Q1', Machine()),
+    WorkOrderStep(3, 'Cleanline', 'Q1', Cleanline()),
+    WorkOrderStep(4, 'Generate Labels', 'Q1', GenLabels()),
+    WorkOrderStep(5, 'Cleanroom Packaging', 'Q1', CleanroomPack()),
   ];
 
   List<Step> _getSteps(BuildContext context) {
