@@ -103,38 +103,40 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
       appBar: AppBar(
         title: Text('Work Order Process'),
       ),
-      body: Column(children: <Widget>[
-        complete
-            ? Expanded(
-                child: Center(
-                  child: AlertDialog(
-                    title: new Text("Work Order Complete"),
-                    content: new Text(
-                      "Tada!",
-                    ),
-                    actions: <Widget>[
-                      new FlatButton(
-                        child: new Text("Close"),
-                        onPressed: () {
-                          setState(() {
-                            complete = false;
-                          });
-                        },
+      body: Center(
+        child: Column(children: <Widget>[
+          complete
+              ? Expanded(
+                  child: Center(
+                    child: AlertDialog(
+                      title: new Text("Work Order Complete"),
+                      content: new Text(
+                        "Tada!",
                       ),
-                    ],
+                      actions: <Widget>[
+                        new FlatButton(
+                          child: new Text("Close"),
+                          onPressed: () {
+                            setState(() {
+                              complete = false;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
                   ),
+                )
+              : Expanded(
+                  child: Stepper(
+                      steps: _getSteps(context),
+                      type: StepperType.horizontal,
+                      currentStep: currentStep,
+                      onStepContinue: next,
+                      onStepCancel: cancel,
+                      onStepTapped: (step) => goTo(step)),
                 ),
-              )
-            : Expanded(
-                child: Stepper(
-                    steps: _getSteps(context),
-                    type: StepperType.horizontal,
-                    currentStep: currentStep,
-                    onStepContinue: next,
-                    onStepCancel: cancel,
-                    onStepTapped: (step) => goTo(step)),
-              ),
-      ]),
+        ]),
+      ),
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.list),
           onPressed: () {
