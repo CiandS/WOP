@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/work_order_step.dart';
 import '../../screens/work_order_history/work_order_history.dart';
+import 'widgets/cut_blocks.dart';
 import 'widgets/issue_material.dart';
 
 class WorkOrderPage extends StatefulWidget {
@@ -14,7 +15,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   List<Step> steps = <Step>[];
   List<WorkOrderStep> workOrderSteps = [
     WorkOrderStep(0, 'Issue Material', 'Q1', IssueMaterial()),
-    WorkOrderStep(1, 'Cut Blocks', 'Q1', IssueMaterial()),
+    WorkOrderStep(1, 'Cut Blocks', 'Q1', CutBlocks()),
     WorkOrderStep(2, 'Machine', 'Q1', IssueMaterial()),
     WorkOrderStep(3, 'Cleanline', 'Q1', IssueMaterial()),
     WorkOrderStep(4, 'Generate Labels', 'Q1', IssueMaterial()),
