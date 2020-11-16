@@ -6,20 +6,23 @@ class MachineStep extends StatefulWidget {
 }
 
 class _MachineStepState extends State<MachineStep> {
-
   int _value = 1;
   int _valuetwo = 1;
+  bool _check = false;
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Container(
+        alignment: Alignment.centerLeft,
+        margin: new EdgeInsets.symmetric(horizontal: 200.0),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text("Machine\n", style: TextStyle(
-                    fontSize: 24, fontWeight: FontWeight.bold)),
+                Text("Machine\n",
+                    style: TextStyle(
+                        fontSize: 24, fontWeight: FontWeight.bold)),
                 Text("Quality Machine", style: TextStyle(fontSize: 20)),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 25.0),
@@ -34,14 +37,8 @@ class _MachineStepState extends State<MachineStep> {
                           child: Text("Machine 2 "),
                           value: 2,
                         ),
-                        DropdownMenuItem(
-                            child: Text("Machine 3"),
-                            value: 3
-                        ),
-                        DropdownMenuItem(
-                            child: Text("Machine 4"),
-                            value: 4
-                        )
+                        DropdownMenuItem(child: Text("Machine 3"), value: 3),
+                        DropdownMenuItem(child: Text("Machine 4"), value: 4)
                       ],
                       onChanged: (value) {
                         setState(() {
@@ -49,7 +46,10 @@ class _MachineStepState extends State<MachineStep> {
                         });
                       }),
                 ),
-                Text("Process Machine", style: TextStyle(fontSize: 20,)),
+                Text("Process Machine",
+                    style: TextStyle(
+                      fontSize: 20,
+                    )),
                 DropdownButton(
                     value: _valuetwo,
                     items: [
@@ -61,14 +61,8 @@ class _MachineStepState extends State<MachineStep> {
                         child: Text("Machine 2 test"),
                         value: 2,
                       ),
-                      DropdownMenuItem(
-                          child: Text("Machine 3"),
-                          value: 3
-                      ),
-                      DropdownMenuItem(
-                          child: Text("Machine 4"),
-                          value: 4
-                      )
+                      DropdownMenuItem(child: Text("Machine 3"), value: 3),
+                      DropdownMenuItem(child: Text("Machine 4"), value: 4)
                     ],
                     onChanged: (value) {
                       setState(() {
@@ -79,9 +73,28 @@ class _MachineStepState extends State<MachineStep> {
                   decoration: InputDecoration(labelText: 'Input Quantity'),
                   keyboardType: TextInputType.number,
                 ),
-              ]
-          ),
-        )
+                    CheckboxListTile(
+                        title: Text('ECC Checks'),
+                        subtitle: Text( 'Frequency: Daily'),
+                        secondary: Icon (Icons.alarm_on),
+                        value: _check,
+                        onChanged: (value) {
+                          setState(() {
+                            _check = value;
+                          });
+                        }),
+                    CheckboxListTile(
+                        title: Text('QRAC Checks'),
+                        subtitle: Text( 'Frequency: Hourly'),
+                        secondary: Icon (Icons.alarm_on),
+                        value: _check,
+                        onChanged: (value) {
+                          setState(() {
+                            _check = value;
+                          });
+                        })],
+                ),
+    )
     );
   }
 }

@@ -6,5 +6,6 @@ class WorkOrderStep {
   String stepSubTitle;
   Widget stepContent;
 
-  WorkOrderStep(this.index, this.stepTitle, this.stepSubTitle, this.stepContent);
+  WorkOrderStep(
+      this.index, this.stepTitle, this.stepSubTitle, this.stepContent);
 }

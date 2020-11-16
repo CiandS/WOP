@@ -33,13 +33,12 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
     workOrderSteps.forEach(
       (workOrderStep) => steps.add(
         Step(
-        title: Text(workOrderStep.stepTitle),
-        subtitle: Text(workOrderStep.stepSubTitle),
-        content: workOrderStep.stepContent,
-        state: _getState(workOrderStep.index),
-        isActive: isActive(workOrderStep.index),
-      ),
-
+          title: Text(workOrderStep.stepTitle),
+          subtitle: Text(workOrderStep.stepSubTitle),
+          content: workOrderStep.stepContent,
+          state: _getState(workOrderStep.index),
+          isActive: isActive(workOrderStep.index),
+        ),
       ),
     );
     // steps = <Step>[
@@ -108,8 +107,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-        title: Center(
-            child: Text('Work Order Process')),
+        title: Center(child: Text('Work Order Process')),
       ),
       body: Center(
         child: Column(children: <Widget>[
@@ -143,6 +141,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                       onStepCancel: cancel,
                       onStepTapped: (step) => goTo(step)),
                 ),
+
         ]),
       ),
       floatingActionButton: FloatingActionButton(
