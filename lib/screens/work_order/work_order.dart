@@ -108,7 +108,8 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-        title: Text('Work Order Process'),
+        title: Center(
+            child: Text('Work Order Process')),
       ),
       body: Center(
         child: Column(children: <Widget>[
