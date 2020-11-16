@@ -12,7 +12,7 @@ class GenLabels extends StatelessWidget {
           Text ("Processing Amount test test", style: TextStyle(fontSize: 24)),
           Text ('Test', style: TextStyle(fontSize: 24, color: Colors.redAccent)),
           TextFormField(
-            decoration: InputDecoration(labelText: 'Input Amount'),
+            decoration: InputDecoration(labelText: 'Input Quantity'),
             keyboardType: TextInputType.number,
           )],
       ),
