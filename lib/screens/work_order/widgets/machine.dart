@@ -6,9 +6,10 @@ class MachineStep extends StatefulWidget {
 }
 
 class _MachineStepState extends State<MachineStep> {
-  int _value = 1;
-  int _valuetwo = 1;
-  bool _check = false;
+  int _qualityMachine = 1;
+  int _processMachine = 1;
+  bool _eccCheck = false;
+  bool _qracCheck = false;
 
   @override
   Widget build(BuildContext context) {
@@ -18,47 +19,21 @@ class _MachineStepState extends State<MachineStep> {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text("Machine\n",
-                    style: TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.bold)),
-                Text("Quality Machine", style: TextStyle(fontSize: 20)),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 25.0),
-                  child: DropdownButton(
-                      value: _value,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("Machine 1"),
-                          value: 1,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Machine 2 "),
-                          value: 2,
-                        ),
-                        DropdownMenuItem(child: Text("Machine 3"), value: 3),
-                        DropdownMenuItem(child: Text("Machine 4"), value: 4)
-                      ],
-                      onChanged: (value) {
-                        setState(() {
-                          _value = value;
-                        });
-                      }),
-                ),
-                Text("Process Machine",
-                    style: TextStyle(
-                      fontSize: 20,
-                    )),
-                DropdownButton(
-                    value: _valuetwo,
+            children: <Widget>[
+              Text("Machine\n",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              Text("Quality Machine", style: TextStyle(fontSize: 20)),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 25.0),
+                child: DropdownButton(
+                    value: _qualityMachine,
                     items: [
                       DropdownMenuItem(
-                        child: Text("Machine 1 test"),
+                        child: Text("Machine 1"),
                         value: 1,
                       ),
                       DropdownMenuItem(
-                        child: Text("Machine 2 test"),
+                        child: Text("Machine 2 "),
                         value: 2,
                       ),
                       DropdownMenuItem(child: Text("Machine 3"), value: 3),
@@ -66,35 +41,65 @@ class _MachineStepState extends State<MachineStep> {
                     ],
                     onChanged: (value) {
                       setState(() {
-                        _valuetwo = value;
+                        _qualityMachine = value;
                       });
                     }),
-                TextFormField(
-                  decoration: InputDecoration(labelText: 'Input Quantity'),
-                  keyboardType: TextInputType.number,
-                ),
+              ),
+              Text("Process Machine",
+                  style: TextStyle(
+                    fontSize: 20,
+                  )),
+              DropdownButton(
+                  value: _processMachine,
+                  items: [
+                    DropdownMenuItem(
+                      child: Text("Machine 1 test"),
+                      value: 1,
+                    ),
+                    DropdownMenuItem(
+                      child: Text("Machine 2 test"),
+                      value: 2,
+                    ),
+                    DropdownMenuItem(child: Text("Machine 3"), value: 3),
+                    DropdownMenuItem(child: Text("Machine 4"), value: 4)
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      _processMachine = value;
+                    });
+                  }),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Input Quantity'),
+                keyboardType: TextInputType.number,
+              ),
+              if (_processMachine == 4)
+                Container(
+                    child: Column(
+                    children: [
                     CheckboxListTile(
                         title: Text('ECC Checks'),
-                        subtitle: Text( 'Frequency: Daily'),
-                        secondary: Icon (Icons.alarm_on),
-                        value: _check,
+                        subtitle: Text('Frequency: Daily'),
+                        secondary: Icon(Icons.alarm_on),
+                        value: _eccCheck,
                         onChanged: (value) {
                           setState(() {
-                            _check = value;
+                            _eccCheck = value;
                           });
                         }),
                     CheckboxListTile(
                         title: Text('QRAC Checks'),
-                        subtitle: Text( 'Frequency: Hourly'),
-                        secondary: Icon (Icons.alarm_on),
-                        value: _check,
+                        subtitle: Text('Frequency: Hourly'),
+                        secondary: Icon(Icons.alarm_on),
+                        value: _qracCheck,
                         onChanged: (value) {
                           setState(() {
-                            _check = value;
+                            _qracCheck = value;
                           });
-                        })],
-                ),
-    )
-    );
+                        }),
+                  ],
+                ))
+            ],
+          ),
+        ));
   }
 }
