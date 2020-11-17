@@ -40,11 +40,37 @@ class _CleanlineState extends State<Cleanline> {
               _cleaningMachine = value;
             });
           }),
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Input Amount'),
-            keyboardType: TextInputType.number,
+          if (_cleaningMachine == 2)
+          Container(
+            child: Column(
+              children: [
+                Text ('Q1 Pressure Check Logs'),
+               DataTable(
+                    columns: [
+                      DataColumn(label: Text('Time')),
+                      DataColumn(label: Text('A')),
+                      DataColumn(label: Text('B')),
+                      DataColumn(label: Text('A - B')),
+                      DataColumn(label: Text('C')),
+                      DataColumn(label: Text('Signature')),
+                ],
+                    rows: [
+                  DataRow(cells: [
+                    DataCell(Text('07:00')),
+                    DataCell(Text('15')),
+                    DataCell(Text('3')),
+                    DataCell(Text('12')),
+                    DataCell(Text('3')),
+                    DataCell(Text('a.user')),
+                  ]),
+                ]),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Input Amount'),
+                  keyboardType: TextInputType.number,
+                ),
+              ],
+            ),
           )
-
         ],
       ),
     );

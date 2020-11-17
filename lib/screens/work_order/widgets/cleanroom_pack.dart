@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
+class CleanroomPack extends StatefulWidget {
+  @override
+  _CleanroomPackState createState() => _CleanroomPackState();
+}
 
-class CleanroomPack extends StatelessWidget {
+class _CleanroomPackState extends State<CleanroomPack> {
+  int _qualityMachine = 1;
+  int _processMachine = 1;
+  bool _eccMachineCheck = false;
+  bool _qracMachineCheck = false;
+
   @override
   Widget build(BuildContext context) {
     return Center(
