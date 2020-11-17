@@ -6,53 +6,86 @@ class CutBlocks extends StatefulWidget {
 }
 
 class _CutBlocksState extends State<CutBlocks> {
-  int _value = 1;
+  int cuttingMachine = 1;
+  bool _eccCutCheck = false;
+  bool _qracCutCheck = false;
 
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Container(
-        margin: new EdgeInsets.symmetric(horizontal: 80.0),
-        decoration: BoxDecoration(color: Colors.redAccent[100]),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text("Cut Blocks\n",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-              Text("Cutting Machine", style: TextStyle(fontSize: 20)),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 25.0),
-                child: DropdownButton(
-                    value: _value,
-                    items: [
-                      DropdownMenuItem(
-                        child: Text("Machine 1"),
-                        value: 1,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("Machine 2 "),
-                        value: 2,
-                      ),
-                      DropdownMenuItem(child: Text("Machine 3"), value: 3),
-                      DropdownMenuItem(child: Text("Machine 4"), value: 4)
-                    ],
-                    onChanged: (value) {
-                      setState(() {
-                        _value = value;
-                      });
-                    }),
-              ),
-              Padding(
-                padding: const EdgeInsets.only (left: 250, right: 250),
-                child: TextFormField(
-                  decoration: InputDecoration(labelText: 'Input Quantity'),
-                  keyboardType: TextInputType.number,
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Container(
+          margin: new EdgeInsets.symmetric(horizontal: 80.0),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text("Cut Blocks",
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                Text("Attune Revise Inserts\n",
+                    style: TextStyle(
+                      fontSize: 22,
+                    )),
+                Text("Cutting Machine", style: TextStyle(fontSize: 20)),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 25.0),
+                  child: DropdownButton(
+                      value: cuttingMachine,
+                      items: [
+                        DropdownMenuItem(
+                          child: Text("Please select a cutting machine"),
+                          value: 1,
+                        ),
+                        DropdownMenuItem(
+                          child: Text("Machine 2 "),
+                          value: 2,
+                        ),
+                        DropdownMenuItem(
+                            child: Text("Machine 3"),
+                            value: 3
+                        ),
+                        DropdownMenuItem(
+                            child: Text("Machine 4"),
+                            value: 4
+                        ),
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          cuttingMachine = value;
+                        });
+                      }),
                 ),
-              ),
-            ]),
+                if (cuttingMachine == 2)
+                  Column(children: [
+                    TextFormField(
+                      decoration: InputDecoration(labelText: 'Input Quantity'),
+                      keyboardType: TextInputType.number,
+                    ),
+                    CheckboxListTile(
+                        title: Text('ECC Checks'),
+                        subtitle: Text('Frequency: Daily'),
+                        secondary: Icon(Icons.alarm_on),
+                        value: _eccCutCheck,
+                        onChanged: (value) {
+                          setState(() {
+                            _eccCutCheck = value;
+                          });
+                        }),
+                    CheckboxListTile(
+                        title: Text('QRAC Checks'),
+                        subtitle: Text('Frequency: Hourly'),
+                        secondary: Icon(Icons.alarm_on),
+                        value: _qracCutCheck,
+                        onChanged: (value) {
+                          setState(() {
+                            _qracCutCheck = value;
+                          });
+                        }),
+                  ]),
+              ]),
+        ),
       ),
-    ));
+    );
   }
 }

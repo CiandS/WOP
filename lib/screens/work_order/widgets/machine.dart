@@ -8,8 +8,8 @@ class MachineStep extends StatefulWidget {
 class _MachineStepState extends State<MachineStep> {
   int _qualityMachine = 1;
   int _processMachine = 1;
-  bool _eccCheck = false;
-  bool _qracCheck = false;
+  bool _eccMachineCheck = false;
+  bool _qracMachineCheck = false;
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +20,12 @@ class _MachineStepState extends State<MachineStep> {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: <Widget>[
-              Text("Machine\n",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              Text("Machine",
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+              Text("Attune Revise Inserts\n",
+                  style: TextStyle(
+                    fontSize: 22,
+                  )),
               Text("Quality Machine", style: TextStyle(fontSize: 20)),
               Padding(
                 padding: const EdgeInsets.only(bottom: 25.0),
@@ -36,13 +40,10 @@ class _MachineStepState extends State<MachineStep> {
                         child: Text("Machine 1"),
                         value: 2,
                       ),
-                      DropdownMenuItem(
-                          child: Text("Machine 2"),
-                          value: 3
-                      ),
+                      DropdownMenuItem(child: Text("Machine 2"), value: 3),
                       DropdownMenuItem(
                         child: Text("Machine 3"),
-                          value: 4,
+                        value: 4,
                       ),
                     ],
                     onChanged: (value) {
@@ -51,12 +52,15 @@ class _MachineStepState extends State<MachineStep> {
                       });
                     }),
               ),
-              Text("Process Machine", style: TextStyle(fontSize: 20,)),
+              Text("Process Machine",
+                  style: TextStyle(
+                    fontSize: 20,
+                  )),
               DropdownButton(
                   value: _processMachine,
                   items: [
                     DropdownMenuItem(
-                      child: Text("Machine 1 test"),
+                      child: Text("Please select your machine"),
                       value: 1,
                     ),
                     DropdownMenuItem(
@@ -64,12 +68,12 @@ class _MachineStepState extends State<MachineStep> {
                       value: 2,
                     ),
                     DropdownMenuItem(
-                        child: Text("Machine 3"),
-                        value: 3,
+                      child: Text("Machine 3"),
+                      value: 3,
                     ),
                     DropdownMenuItem(
-                        child: Text("Machine 4"),
-                        value: 4,
+                      child: Text("Machine 4"),
+                      value: 4,
                     )
                   ],
                   onChanged: (value) {
@@ -77,32 +81,33 @@ class _MachineStepState extends State<MachineStep> {
                       _processMachine = value;
                     });
                   }),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Input Quantity'),
-                keyboardType: TextInputType.number,
-              ),
               if (_processMachine == 2)
                 Container(
                     child: Column(
-                    children: [
+                  children: [
+                    TextFormField(
+
+                      decoration: InputDecoration(labelText: 'Input Quantity'),
+                      keyboardType: TextInputType.number,
+                    ),
                     CheckboxListTile(
                         title: Text('ECC Checks'),
                         subtitle: Text('Frequency: Daily'),
                         secondary: Icon(Icons.alarm_on),
-                        value: _eccCheck,
+                        value: _eccMachineCheck,
                         onChanged: (value) {
                           setState(() {
-                            _eccCheck = value;
+                            _eccMachineCheck = value;
                           });
                         }),
                     CheckboxListTile(
                         title: Text('QRAC Checks'),
                         subtitle: Text('Frequency: Hourly'),
                         secondary: Icon(Icons.alarm_on),
-                        value: _qracCheck,
+                        value: _qracMachineCheck,
                         onChanged: (value) {
                           setState(() {
-                            _qracCheck = value;
+                            _qracMachineCheck = value;
                           });
                         }),
                   ],

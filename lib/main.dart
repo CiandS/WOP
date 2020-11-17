@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
         title: 'Operations Management System Test',
         theme: ThemeData(
           primarySwatch: Colors.red,
+
         ),
         home: Login());
   }
