@@ -148,7 +148,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
           child: Icon(Icons.list),
           onPressed: () {
             Navigator.push(context,
-                new MaterialPageRoute(builder: (context) => WO_HistoryPage()));
+                new MaterialPageRoute(builder: (context) => WOHistoryPage()));
           }),
     );
   }

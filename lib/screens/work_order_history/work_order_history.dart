@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:work_order_process/screens/work_order/work_order.dart';
 
-class WO_HistoryPage extends StatefulWidget {
+class WOHistoryPage extends StatefulWidget {
   @override
-  _WO_HistoryState createState() => new _WO_HistoryState();
+  _WOHistoryState createState() => new _WOHistoryState();
 }
 
-class _WO_HistoryState extends State<WO_HistoryPage> {
+class _WOHistoryState extends State<WOHistoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

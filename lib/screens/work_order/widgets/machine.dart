@@ -29,15 +29,21 @@ class _MachineStepState extends State<MachineStep> {
                     value: _qualityMachine,
                     items: [
                       DropdownMenuItem(
-                        child: Text("Machine 1"),
+                        child: Text("Please select your machine"),
                         value: 1,
                       ),
                       DropdownMenuItem(
-                        child: Text("Machine 2 "),
+                        child: Text("Machine 1"),
                         value: 2,
                       ),
-                      DropdownMenuItem(child: Text("Machine 3"), value: 3),
-                      DropdownMenuItem(child: Text("Machine 4"), value: 4)
+                      DropdownMenuItem(
+                          child: Text("Machine 2"),
+                          value: 3
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Machine 3"),
+                          value: 4,
+                      ),
                     ],
                     onChanged: (value) {
                       setState(() {
@@ -45,10 +51,7 @@ class _MachineStepState extends State<MachineStep> {
                       });
                     }),
               ),
-              Text("Process Machine",
-                  style: TextStyle(
-                    fontSize: 20,
-                  )),
+              Text("Process Machine", style: TextStyle(fontSize: 20,)),
               DropdownButton(
                   value: _processMachine,
                   items: [
@@ -60,8 +63,14 @@ class _MachineStepState extends State<MachineStep> {
                       child: Text("Machine 2 test"),
                       value: 2,
                     ),
-                    DropdownMenuItem(child: Text("Machine 3"), value: 3),
-                    DropdownMenuItem(child: Text("Machine 4"), value: 4)
+                    DropdownMenuItem(
+                        child: Text("Machine 3"),
+                        value: 3,
+                    ),
+                    DropdownMenuItem(
+                        child: Text("Machine 4"),
+                        value: 4,
+                    )
                   ],
                   onChanged: (value) {
                     setState(() {
@@ -72,7 +81,7 @@ class _MachineStepState extends State<MachineStep> {
                 decoration: InputDecoration(labelText: 'Input Quantity'),
                 keyboardType: TextInputType.number,
               ),
-              if (_processMachine == 4)
+              if (_processMachine == 2)
                 Container(
                     child: Column(
                     children: [
