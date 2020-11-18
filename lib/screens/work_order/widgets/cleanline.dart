@@ -8,6 +8,8 @@ class Cleanline extends StatefulWidget {
 class _CleanlineState extends State<Cleanline> {
 
   int _cleaningMachine = 1;
+  bool _eccCleanCheck = true;
+  bool _qracCleanCheck = false;
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +17,9 @@ class _CleanlineState extends State<Cleanline> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text("Cleanline\n",
+          Text("Work Order Number: 1245678",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-          Text('Attune Revise Inserts', style: TextStyle(fontSize: 24, color: Colors.redAccent)),
+          Text('Attune PS Inserts\n', style: TextStyle(fontSize: 24, color: Colors.redAccent)),
       DropdownButton(
           value: _cleaningMachine,
           items: [
@@ -44,26 +46,39 @@ class _CleanlineState extends State<Cleanline> {
           Container(
             child: Column(
               children: [
-                Text ('Q1 Pressure Check Logs'),
-               DataTable(
-                    columns: [
-                      DataColumn(label: Text('Time')),
-                      DataColumn(label: Text('A')),
-                      DataColumn(label: Text('B')),
-                      DataColumn(label: Text('A - B')),
-                      DataColumn(label: Text('C')),
-                      DataColumn(label: Text('Signature')),
-                ],
-                    rows: [
-                  DataRow(cells: [
-                    DataCell(Text('07:00')),
-                    DataCell(Text('15')),
-                    DataCell(Text('3')),
-                    DataCell(Text('12')),
-                    DataCell(Text('3')),
-                    DataCell(Text('a.user')),
-                  ]),
-                ]),
+                Container(
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            TextFormField(
+                              decoration: InputDecoration(labelText: 'Input Quantity'),
+                              keyboardType: TextInputType.number,
+                            ),
+                            CheckboxListTile(
+                                title: Text('ECC Checks'),
+                                subtitle: Text('Frequency: Daily'),
+                                secondary: Icon(Icons.alarm_on),
+                                value: _eccCleanCheck,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _eccCleanCheck = value;
+                                  });
+                                }),
+                            CheckboxListTile(
+                                title: Text('QRAC Checks'),
+                                subtitle: Text('Frequency: Hourly'),
+                                secondary: Icon(Icons.alarm_on),
+                                value: _qracCleanCheck,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _qracCleanCheck = value;
+                                  });
+                                }),
+                          ],
+                        ),
+                      ],
+                    )),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Input Amount'),
                   keyboardType: TextInputType.number,

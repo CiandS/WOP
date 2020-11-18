@@ -20,9 +20,9 @@ class _MachineStepState extends State<MachineStep> {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: <Widget>[
-              Text("Machine",
+              Text("Work Order Number: 1245678",
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-              Text("Attune Revise Inserts\n",
+              Text("Attune PS Inserts\n",
                   style: TextStyle(
                     fontSize: 22,
                   )),
@@ -83,35 +83,38 @@ class _MachineStepState extends State<MachineStep> {
                   }),
               if (_processMachine == 2)
                 Container(
-                    child: Column(
+                    child: Row(
+                      children: [
+                        Column(
                   children: [
-                    TextFormField(
-
-                      decoration: InputDecoration(labelText: 'Input Quantity'),
-                      keyboardType: TextInputType.number,
-                    ),
-                    CheckboxListTile(
-                        title: Text('ECC Checks'),
-                        subtitle: Text('Frequency: Daily'),
-                        secondary: Icon(Icons.alarm_on),
-                        value: _eccMachineCheck,
-                        onChanged: (value) {
-                          setState(() {
-                            _eccMachineCheck = value;
-                          });
-                        }),
-                    CheckboxListTile(
-                        title: Text('QRAC Checks'),
-                        subtitle: Text('Frequency: Hourly'),
-                        secondary: Icon(Icons.alarm_on),
-                        value: _qracMachineCheck,
-                        onChanged: (value) {
-                          setState(() {
-                            _qracMachineCheck = value;
-                          });
-                        }),
+                        TextFormField(
+                          decoration: InputDecoration(labelText: 'Input Quantity'),
+                          keyboardType: TextInputType.number,
+                        ),
+                        CheckboxListTile(
+                            title: Text('ECC Checks'),
+                            subtitle: Text('Frequency: Daily'),
+                            secondary: Icon(Icons.alarm_on),
+                            value: _eccMachineCheck,
+                            onChanged: (value) {
+                              setState(() {
+                                _eccMachineCheck = value;
+                              });
+                            }),
+                        CheckboxListTile(
+                            title: Text('QRAC Checks'),
+                            subtitle: Text('Frequency: Hourly'),
+                            secondary: Icon(Icons.alarm_on),
+                            value: _qracMachineCheck,
+                            onChanged: (value) {
+                              setState(() {
+                                _qracMachineCheck = value;
+                              });
+                            }),
                   ],
-                ))
+                ),
+                      ],
+                    ))
             ],
           ),
         ));

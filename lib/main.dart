@@ -14,8 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Operations Management System Test',
         theme: ThemeData(
-          primarySwatch: Colors.red,
-
+          primaryColor: Colors.redAccent[700],
         ),
         home: Login());
   }

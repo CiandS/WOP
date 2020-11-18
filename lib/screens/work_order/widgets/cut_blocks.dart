@@ -13,17 +13,15 @@ class _CutBlocksState extends State<CutBlocks> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
         child: Container(
           margin: new EdgeInsets.symmetric(horizontal: 80.0),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text("Cut Blocks",
+                Text("Work Order Number: 1245678",
                     style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                Text("Attune Revise Inserts\n",
+                    TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                Text("Attune PS Inserts\n",
                     style: TextStyle(
                       fontSize: 22,
                     )),
@@ -84,8 +82,6 @@ class _CutBlocksState extends State<CutBlocks> {
                         }),
                   ]),
               ]),
-        ),
-      ),
-    );
+        ));
   }
 }
