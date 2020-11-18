@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class CutBlocks extends StatefulWidget {
   @override
@@ -14,74 +15,84 @@ class _CutBlocksState extends State<CutBlocks> {
   Widget build(BuildContext context) {
     return Center(
         child: Container(
-          margin: new EdgeInsets.symmetric(horizontal: 80.0),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text("Work Order Number: 1245678",
-                    style:
-                    TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                Text("Attune PS Inserts\n",
-                    style: TextStyle(
-                      fontSize: 22,
-                    )),
-                Text("Cutting Machine", style: TextStyle(fontSize: 20)),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 25.0),
-                  child: DropdownButton(
-                      value: cuttingMachine,
-                      items: [
-                        DropdownMenuItem(
-                          child: Text("Please select a cutting machine"),
-                          value: 1,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Machine 2 "),
-                          value: 2,
-                        ),
-                        DropdownMenuItem(
-                            child: Text("Machine 3"),
-                            value: 3
-                        ),
-                        DropdownMenuItem(
-                            child: Text("Machine 4"),
-                            value: 4
-                        ),
-                      ],
-                      onChanged: (value) {
-                        setState(() {
-                          cuttingMachine = value;
-                        });
-                      }),
-                ),
-                if (cuttingMachine == 2)
-                  Column(children: [
-                    TextFormField(
-                      decoration: InputDecoration(labelText: 'Input Quantity'),
-                      keyboardType: TextInputType.number,
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text("Work Order Number: 1245678",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            Text("Attune PS Inserts\n",
+                style: TextStyle(
+                  fontSize: 22,
+                )),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  new LinearPercentIndicator(
+                    width: 200.0,
+                    lineHeight: 40.0,
+                    percent: 1.0,
+                    center: Text(
+                      "10/10 Remaining QTY",
+                      style: TextStyle(fontSize: 18),
                     ),
-                    CheckboxListTile(
-                        title: Text('ECC Checks'),
-                        subtitle: Text('Frequency: Daily'),
-                        secondary: Icon(Icons.alarm_on),
-                        value: _eccCutCheck,
-                        onChanged: (value) {
-                          setState(() {
-                            _eccCutCheck = value;
-                          });
-                        }),
-                    CheckboxListTile(
-                        title: Text('QRAC Checks'),
-                        subtitle: Text('Frequency: Hourly'),
-                        secondary: Icon(Icons.alarm_on),
-                        value: _qracCutCheck,
-                        onChanged: (value) {
-                          setState(() {
-                            _qracCutCheck = value;
-                          });
-                        }),
-                  ]),
+                    backgroundColor: Colors.grey,
+                    progressColor: Colors.blue,
+                  ),
+                ],
+              ),
+            ),
+            Text("Cutting Machine", style: TextStyle(fontSize: 20)),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 25.0),
+              child: DropdownButton(
+                  value: cuttingMachine,
+                  items: [
+                    DropdownMenuItem(
+                      child: Text("Please select a cutting machine"),
+                      value: 1,
+                    ),
+                    DropdownMenuItem(
+                      child: Text("Machine 2 "),
+                      value: 2,
+                    ),
+                    DropdownMenuItem(child: Text("Machine 3"), value: 3),
+                    DropdownMenuItem(child: Text("Machine 4"), value: 4),
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      cuttingMachine = value;
+                    });
+                  }),
+            ),
+            if (cuttingMachine == 2)
+              Column(children: [
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Input Quantity'),
+                  keyboardType: TextInputType.number,
+                ),
+                CheckboxListTile(
+                    title: Text('ECC Checks'),
+                    subtitle: Text('Frequency: Daily'),
+                    secondary: Icon(Icons.alarm_on),
+                    value: _eccCutCheck,
+                    onChanged: (value) {
+                      setState(() {
+                        _eccCutCheck = value;
+                      });
+                    }),
+                CheckboxListTile(
+                    title: Text('QRAC Checks'),
+                    subtitle: Text('Frequency: Hourly'),
+                    secondary: Icon(Icons.alarm_on),
+                    value: _qracCutCheck,
+                    onChanged: (value) {
+                      setState(() {
+                        _qracCutCheck = value;
+                      });
+                    }),
               ]),
-        ));
+          ]),
+    ));
   }
 }

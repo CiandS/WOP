@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class Cleanline extends StatefulWidget {
   @override
@@ -18,8 +19,30 @@ class _CleanlineState extends State<Cleanline> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text("Work Order Number: 1245678",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-          Text('Attune PS Inserts\n', style: TextStyle(fontSize: 24, color: Colors.redAccent)),
+              style: TextStyle(
+                  fontSize: 22, fontWeight: FontWeight.bold)),
+          Text("Attune PS Inserts\n",
+              style: TextStyle(
+                fontSize: 22,
+              )),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                new LinearPercentIndicator(
+                  width: 200.0,
+                  lineHeight: 40.0,
+                  percent: 1.0,
+                  center: Text(
+                    "10/10 Remaining QTY",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  backgroundColor: Colors.grey,
+                  progressColor: Colors.blue,
+                ),
+              ],
+            ),
+          ),
       DropdownButton(
           value: _cleaningMachine,
           items: [
@@ -46,39 +69,26 @@ class _CleanlineState extends State<Cleanline> {
           Container(
             child: Column(
               children: [
-                Container(
-                    child: Row(
-                      children: [
-                        Column(
-                          children: [
-                            TextFormField(
-                              decoration: InputDecoration(labelText: 'Input Quantity'),
-                              keyboardType: TextInputType.number,
-                            ),
-                            CheckboxListTile(
-                                title: Text('ECC Checks'),
-                                subtitle: Text('Frequency: Daily'),
-                                secondary: Icon(Icons.alarm_on),
-                                value: _eccCleanCheck,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _eccCleanCheck = value;
-                                  });
-                                }),
-                            CheckboxListTile(
-                                title: Text('QRAC Checks'),
-                                subtitle: Text('Frequency: Hourly'),
-                                secondary: Icon(Icons.alarm_on),
-                                value: _qracCleanCheck,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _qracCleanCheck = value;
-                                  });
-                                }),
-                          ],
-                        ),
-                      ],
-                    )),
+                CheckboxListTile(
+                    title: Text('ECC Checks'),
+                    subtitle: Text('Frequency: Daily'),
+                    secondary: Icon(Icons.alarm_on),
+                    value: _eccCleanCheck,
+                    onChanged: (value) {
+                      setState(() {
+                        _eccCleanCheck = value;
+                      });
+                    }),
+                CheckboxListTile(
+                    title: Text('QRAC Checks'),
+                    subtitle: Text('Frequency: Hourly'),
+                    secondary: Icon(Icons.alarm_on),
+                    value: _qracCleanCheck,
+                    onChanged: (value) {
+                      setState(() {
+                        _qracCleanCheck = value;
+                      });
+                    }),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Input Amount'),
                   keyboardType: TextInputType.number,
