@@ -42,6 +42,9 @@ class _CleanroomPackState extends State<CleanroomPack> {
               children: [
                 Expanded(
                   child: Container(
+                    margin: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(20.0 ),
+                    color: Colors.green,
                     child: Column(
                       children: [
                         Text("Quality Machine", style: TextStyle(fontSize: 20)),
@@ -108,26 +111,26 @@ class _CleanroomPackState extends State<CleanroomPack> {
                     color: Colors.green,
                     child: Column(
                       children: [
-                        Text ('Q1 Pressure Check Logs'),
-                        DataTable(
-                            columns: [
-                              DataColumn(label: Text('Time')),
-                              DataColumn(label: Text('A')),
-                              DataColumn(label: Text('B')),
-                              DataColumn(label: Text('A - B')),
-                              DataColumn(label: Text('C')),
-                              DataColumn(label: Text('Signature')),
-                            ],
-                            rows: [
-                              DataRow(cells: [
-                                DataCell(Text('07:00')),
-                                DataCell(Text('15')),
-                                DataCell(Text('3')),
-                                DataCell(Text('12')),
-                                DataCell(Text('3')),
-                                DataCell(Text('a.user')),
-                              ]),
-                            ]),
+                        CheckboxListTile(
+                            title: Text('ECC Checks'),
+                            subtitle: Text('Frequency: Daily'),
+                            secondary: Icon(Icons.alarm_on),
+                            value: _eccMachineCheck,
+                            onChanged: (value) {
+                              setState(() {
+                                _eccMachineCheck = value;
+                              });
+                            }),
+                        CheckboxListTile(
+                            title: Text('QRAC Checks'),
+                            subtitle: Text('Frequency: Hourly'),
+                            secondary: Icon(Icons.alarm_on),
+                            value: _qracMachineCheck,
+                            onChanged: (value) {
+                              setState(() {
+                                _qracMachineCheck = value;
+                              });
+                            }),
                         Container(
                             width: 300.0,
                             child: TextFormField(

@@ -100,11 +100,6 @@ class _MachineStepState extends State<MachineStep> {
               if (_processMachine == 2)
                 Column(
                   children: [
-                    TextFormField(
-                      decoration: InputDecoration(
-                          labelText: 'Input Quantity'),
-                      keyboardType: TextInputType.number,
-                    ),
                     CheckboxListTile(
                         title: Text('ECC Checks'),
                         subtitle: Text('Frequency: Daily'),
@@ -125,6 +120,11 @@ class _MachineStepState extends State<MachineStep> {
                             _qracMachineCheck = value;
                           });
                         }),
+                    TextFormField(
+                      decoration: InputDecoration(
+                          labelText: 'Input Quantity'),
+                      keyboardType: TextInputType.number,
+                    ),
                   ],
                 )
             ])
