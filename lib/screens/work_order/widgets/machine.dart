@@ -18,7 +18,7 @@ class _MachineStepState extends State<MachineStep> {
         child: Column(children: <Widget>[
       Text("Work Order Number: 1245678",
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-      Text("Attune PS Inserts\n",
+      Text("Attune PS Inserts",
           style: TextStyle(
             fontSize: 22,
           )),
