@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class MachineStep extends StatefulWidget {
   @override
@@ -13,19 +14,34 @@ class _MachineStepState extends State<MachineStep> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        alignment: Alignment.centerLeft,
-        margin: new EdgeInsets.symmetric(horizontal: 200.0),
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
+    return Center(
+        child: Column(
             children: <Widget>[
-              Text("Machine",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-              Text("Attune Revise Inserts\n",
+              Text("Work Order Number: 1245678",
+                  style: TextStyle(
+                      fontSize: 22, fontWeight: FontWeight.bold)),
+              Text("Attune PS Inserts\n",
                   style: TextStyle(
                     fontSize: 22,
                   )),
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    new LinearPercentIndicator(
+                      width: 200.0,
+                      lineHeight: 40.0,
+                      percent: 1.0,
+                      center: Text(
+                        "10/10 Remaining QTY",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      backgroundColor: Colors.grey,
+                      progressColor: Colors.blue,
+                    ),
+                  ],
+                ),
+              ),
               Text("Quality Machine", style: TextStyle(fontSize: 20)),
               Padding(
                 padding: const EdgeInsets.only(bottom: 25.0),
@@ -82,14 +98,8 @@ class _MachineStepState extends State<MachineStep> {
                     });
                   }),
               if (_processMachine == 2)
-                Container(
-                    child: Column(
+                Column(
                   children: [
-                    TextFormField(
-
-                      decoration: InputDecoration(labelText: 'Input Quantity'),
-                      keyboardType: TextInputType.number,
-                    ),
                     CheckboxListTile(
                         title: Text('ECC Checks'),
                         subtitle: Text('Frequency: Daily'),
@@ -110,10 +120,15 @@ class _MachineStepState extends State<MachineStep> {
                             _qracMachineCheck = value;
                           });
                         }),
+                    TextFormField(
+                      decoration: InputDecoration(
+                          labelText: 'Input Quantity'),
+                      keyboardType: TextInputType.number,
+                    ),
                   ],
-                ))
-            ],
-          ),
-        ));
+                )
+            ])
+
+    );
   }
 }
