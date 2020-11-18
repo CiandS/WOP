@@ -105,6 +105,27 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                 )
               : Expanded(
                   child: Stepper(
+                      controlsBuilder: (context,
+                          {onStepCancel, onStepContinue}) {
+                        return Container(
+                          width: double.infinity,
+                          alignment: Alignment.centerRight,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              TextButton(
+                                onPressed: onStepContinue,
+                                child: const Text('NEXT'),
+                              ),
+                              TextButton(
+                                onPressed: onStepCancel,
+                                child: const Text('CANCEL'),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
                       steps: _getSteps(context),
                       type: StepperType.horizontal,
                       currentStep: currentStep,
