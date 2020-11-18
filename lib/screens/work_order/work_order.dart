@@ -41,35 +41,6 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
         ),
       ),
     );
-    // steps = <Step>[
-    //   Step(
-    //       title: const Text('Issue Material'),
-    //       subtitle: Text('SubTitle1'),
-    //       content: Column(
-    //         children: <Widget>[
-    //           TextFormField(
-    //             decoration: InputDecoration(labelText: 'Email Address'),
-    //           ),
-    //           TextFormField(
-    //             decoration: InputDecoration(labelText: 'Password'),
-    //           ),
-    //         ],
-    //       ),
-    //       state: _getState(1),
-    //       isActive: isActive(1)),
-    //   Step(
-    //       title: const Text('Hello2'),
-    //       subtitle: Text('SubTitle2'),
-    //       content: const Text('This is Content2'),
-    //       state: _getState(2),
-    //       isActive: isActive(2)),
-    //   Step(
-    //       title: const Text('Hello3'),
-    //       subtitle: Text('SubTitle3'),
-    //       content: const Text('This is Content3'),
-    //       state: _getState(3),
-    //       isActive: isActive(3)),
-    // ];
     return steps;
   }
 
@@ -137,11 +108,25 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                       steps: _getSteps(context),
                       type: StepperType.horizontal,
                       currentStep: currentStep,
+                      controlsBuilder: (context,
+                          {onStepCancel, onStepContinue}) {
+                        return Row(
+                          children: <Widget>[
+                            TextButton(
+                              onPressed: onStepContinue,
+                              child: const Text('NEXT'),
+                            ),
+                            TextButton(
+                              onPressed: onStepCancel,
+                              child: const Text('CANCEL'),
+                            ),
+                          ],
+                        );
+                      },
                       onStepContinue: next,
                       onStepCancel: cancel,
                       onStepTapped: (step) => goTo(step)),
                 ),
-
         ]),
       ),
       floatingActionButton: FloatingActionButton(
