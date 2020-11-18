@@ -8,24 +8,26 @@ class IssueMaterial extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Text("Work Order Number: 1245678",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
           Text("Attune PS Inserts\n",
               style: TextStyle(
                 fontSize: 22,
               )),
-          new CircularPercentIndicator(
-            radius: 150.0,
-            lineWidth: 25.0,
-            percent: 0.5,
-            header: Text('Original QTY: 10 / Remaining QTY: 5',
-                style: TextStyle(
-                  fontSize: 20,
-                )),
-            center: new Icon(
-              Icons.shopping_bag,
-              size: 40.0,
+          Container(
+            child: new CircularPercentIndicator(
+              radius: 150.0,
+              lineWidth: 25.0,
+              percent: 0.5,
+              header: Text('Original QTY: 10 / Remaining QTY: 5',
+                  style: TextStyle(
+                    fontSize: 20,
+                  )),
+              center: new Icon(
+                Icons.shopping_bag,
+                size: 40.0,
+              ),
+              progressColor: Colors.blueAccent,
             ),
-            progressColor: Colors.blueAccent,
           ),
           TextFormField(
             decoration: InputDecoration(labelText: 'Input Quantity Processed'),
