@@ -117,7 +117,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                     child: AlertDialog(
                       title: new Text("Work Order Complete"),
                       content: new Text(
-                        "Tada!",
+                        "Shipping process has begun",
                       ),
                       actions: <Widget>[
                         new FlatButton(
