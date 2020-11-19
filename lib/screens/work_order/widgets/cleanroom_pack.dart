@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:provider/provider.dart';
+import 'package:work_order_process/models/work_order.dart';
+import 'package:work_order_process/providers/work_order_provider.dart';
 
 class CleanroomPack extends StatefulWidget {
   @override
@@ -14,10 +17,12 @@ class _CleanroomPackState extends State<CleanroomPack> {
 
   @override
   Widget build(BuildContext context) {
+    WorkOrder workOrder =
+        Provider.of<WorkOrderProvider>(context, listen: false).getWorkOrder;
     return Center(
         child: Column(
       children: [
-        Text("Work Order Number: 1245678",
+        Text("Work Order Number: ${workOrder.getWorkOrderNumber}",
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
         Text("Attune PS Inserts",
             style: TextStyle(
@@ -30,7 +35,7 @@ class _CleanroomPackState extends State<CleanroomPack> {
                 child: Container(
                     width: 200,
                     child: Center(
-                        child: Text('Quantity Remaining:',
+                        child: Text('Quantity Processed:',
                             style: TextStyle(
                               fontSize: 16,
                             ))))),
@@ -44,7 +49,7 @@ class _CleanroomPackState extends State<CleanroomPack> {
                   lineHeight: 40.0,
                   percent: 1.0,
                   center: Text(
-                    "10/10",
+                    "0/10",
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.white,

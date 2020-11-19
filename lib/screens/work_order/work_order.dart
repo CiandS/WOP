@@ -136,7 +136,8 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                       currentStep: currentStep,
                       onStepContinue: next,
                       onStepCancel: cancel,
-                      onStepTapped: (step) => goTo(step)),
+                    //  onStepTapped: (step) => goTo(step)
+     ),
                 ),
         ]),
       ),

@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-
+import 'package:provider/provider.dart';
+import 'package:work_order_process/models/work_order.dart';
+import 'package:work_order_process/providers/work_order_provider.dart';
 
 class GenLabels extends StatelessWidget {
 
   @override
 
   Widget build(BuildContext context) {
+    WorkOrder workOrder =
+        Provider.of<WorkOrderProvider>(context, listen: false).getWorkOrder;
     return Center(
         child: Column(
           children: [
-            Text ("Work Order Number: 1245678", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+            Text ("Work Order Number: ${workOrder.getWorkOrderNumber}", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
             Text("Attune PS Inserts", style: TextStyle(fontSize: 22,)),
             Column(
               children: <Widget>[
