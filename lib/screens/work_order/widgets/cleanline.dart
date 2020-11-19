@@ -67,14 +67,14 @@ class _CleanlineState extends State<Cleanline> {
                     margin: const EdgeInsets.all(20.0),
                     padding: const EdgeInsets.all(30.0),
                     color: Colors.white,
-                    child: Column(
-                      children: [
-                        Text("Select your Machine\n",
-                            style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.bold)),
-                        Text("Cleaning Machine", style: TextStyle(fontSize: 18)),
-                        Padding(padding: const EdgeInsets.only(bottom: 25.0)),
-                        DropdownButton(
+                    child: Column(children: [
+                      Text("Select your Machine\n",
+                          style: TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold)),
+                      Text("Cleaning Machine", style: TextStyle(fontSize: 18)),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 25.0),
+                        child: DropdownButton(
                             value: _cleaningMachine,
                             items: [
                               DropdownMenuItem(
@@ -97,8 +97,8 @@ class _CleanlineState extends State<Cleanline> {
                                 _cleaningMachine = value;
                               });
                             }),
-                      ],
-                    ),
+                      ),
+                    ]),
                   ),
                 ),
                 if (_cleaningMachine == 2)
