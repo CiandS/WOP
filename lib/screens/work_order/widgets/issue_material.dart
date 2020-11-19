@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:provider/provider.dart';
+import 'package:work_order_process/models/work_order.dart';
+import 'package:work_order_process/providers/work_order_provider.dart';
 
 class IssueMaterial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    WorkOrder workOrder =
+        Provider.of<WorkOrderProvider>(context, listen: false).getWorkOrder;
     return Center(
       child: Column(
         children: <Widget>[
-          Text("Work Order Number: 1245678",
+          Text("Work Order Number: ${workOrder.getWorkOrderNumber}",
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
           Text("Attune PS Inserts",
               style: TextStyle(
@@ -43,9 +48,9 @@ class IssueMaterial extends StatelessWidget {
                             size: 50.0,
                           ),
                           footer: Text('Remaining QTY: 5',
-                            style: TextStyle(
-                            fontSize: 20,
-                            )),
+                              style: TextStyle(
+                                fontSize: 20,
+                              )),
                           progressColor: Colors.blueAccent,
                         ),
                       ],
