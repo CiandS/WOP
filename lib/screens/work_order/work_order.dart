@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:work_order_process/screens/work_order/widgets/cleanline.dart';
 import 'package:work_order_process/screens/work_order/widgets/cleanroom_pack.dart';
 import 'package:work_order_process/screens/work_order/widgets/work_order_input.dart';
+import 'package:work_order_process/widgets/animated_fab.dart';
 import '../../models/work_order_step.dart';
 import '../../screens/work_order_history/work_order_history.dart';
 import 'widgets/cut_blocks.dart';
@@ -18,7 +19,7 @@ class WorkOrderPage extends StatefulWidget {
 
 class _WorkOrderPageState extends State<WorkOrderPage> {
   int currentStep = 0;
-  bool workOrderComplete = false;
+  bool complete = false;
   List<Step> steps = <Step>[];
   List<WorkOrderStep> workOrderSteps = [
     WorkOrderStep(0, 'Work Order Input', 'Q1', WorkOrderIiput()),
@@ -47,14 +48,10 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   }
 
   StepState _getState(int i) {
-    if (currentStep > i) {
+    if (currentStep >= i) {
       return StepState.complete;
-    }
-    // else if (currentStep == i) {
-    //   return StepState.editing;
-    // }
-    else {
-      return StepState.indexed;
+    } else {
+      return StepState.editing;
     }
   }
 
@@ -65,7 +62,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   next() {
     currentStep + 1 != steps.length
         ? setState(() => currentStep++)
-        : setState(() => workOrderComplete = true);
+        : setState(() => complete = true);
   }
 
   cancel() {
@@ -88,7 +85,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
       ),
       body: Center(
         child: Column(children: <Widget>[
-          workOrderComplete
+          complete
               ? Expanded(
                   child: Center(
                     child: AlertDialog(
@@ -101,7 +98,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                           child: new Text("Close"),
                           onPressed: () {
                             setState(() {
-                              workOrderComplete = false;
+                              complete = false;
                             });
                           },
                         ),
@@ -120,13 +117,11 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
-                              ElevatedButton(
+                              TextButton(
                                 onPressed: onStepContinue,
                                 child: const Text('NEXT'),
                               ),
-                              ElevatedButton(
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent),),
+                              TextButton(
                                 onPressed: onStepCancel,
                                 child: const Text('CANCEL'),
                               ),
@@ -139,19 +134,18 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                       currentStep: currentStep,
                       onStepContinue: next,
                       onStepCancel: cancel,
-                     onStepTapped: (step) => goTo(step)
-     ),
+                      onStepTapped: (step) => goTo(step)),
                 ),
         ]),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blue[800],
-          child: Icon(Icons.list),
-          onPressed: () {
-            Navigator.push(context,
-                new MaterialPageRoute(builder: (context) => WOHistoryPage()));
-          }),
+      // floatingActionButton: FloatingActionButton(
+      //     child: Icon(Icons.list),
+      //     onPressed: () {
+      //       Navigator.push(context,
+      //           new MaterialPageRoute(builder: (context) => WOHistoryPage()));
+      //     }),
+      floatingActionButton: AnimatedFab(),
     );
   }
 }
