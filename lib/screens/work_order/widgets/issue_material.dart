@@ -14,24 +14,64 @@ class IssueMaterial extends StatelessWidget {
                 fontSize: 22,
               )),
           Container(
-            child: new CircularPercentIndicator(
-              radius: 150.0,
-              lineWidth: 25.0,
-              percent: 0.5,
-              header: Text('Original QTY: 10 / Remaining QTY: 5',
-                  style: TextStyle(
-                    fontSize: 20,
-                  )),
-              center: new Icon(
-                Icons.shopping_bag,
-                size: 40.0,
-              ),
-              progressColor: Colors.blueAccent,
+            color: Colors.black12,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(30.0),
+                    color: Colors.white,
+                    child: Column(
+                      children: [
+                        CircularProgressIndicator(
+                          value: 0.5,
+                          backgroundColor: Colors.grey,
+                          strokeWidth: 10,
+                        ),
+                        new CircularPercentIndicator(
+                          radius: 150.0,
+                          lineWidth: 30.0,
+                          percent: 0.4,
+                          header: Text('Original QTY: 10',
+                              style: TextStyle(
+                                fontSize: 20,
+                              )),
+                          center: new Icon(
+                            Icons.linear_scale,
+                            size: 50.0,
+                          ),
+                          footer: Text('Remaining QTY: 5',
+                            style: TextStyle(
+                            fontSize: 20,
+                            )),
+                          progressColor: Colors.blueAccent,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(30.0),
+                    color: Colors.white,
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                            width: 300.0,
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                  labelText: 'Input Quantity Processed'),
+                              keyboardType: TextInputType.number,
+                            )),
+                      ],
+                    ),
+                  ),
+                )
+              ],
             ),
-          ),
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Input Quantity Processed'),
-            keyboardType: TextInputType.number,
           ),
         ],
       ),
