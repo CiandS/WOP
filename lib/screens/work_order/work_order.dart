@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:work_order_process/screens/work_order/widgets/cleanline.dart';
 import 'package:work_order_process/screens/work_order/widgets/cleanroom_pack.dart';
+import 'package:work_order_process/screens/work_order/widgets/work_order_input.dart';
 import '../../models/work_order_step.dart';
 import '../../screens/work_order_history/work_order_history.dart';
 import 'widgets/cut_blocks.dart';
@@ -20,12 +21,13 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   bool complete = false;
   List<Step> steps = <Step>[];
   List<WorkOrderStep> workOrderSteps = [
-    WorkOrderStep(0, 'Issue Material', 'Q1', IssueMaterial()),
-    WorkOrderStep(1, 'Cut Blocks', 'Q1', CutBlocks()),
-    WorkOrderStep(2, 'Machine', 'Q1', MachineStep()),
-    WorkOrderStep(3, 'Cleanline', 'Q1', Cleanline()),
-    WorkOrderStep(4, 'Generate Labels', 'Q1', GenLabels()),
-    WorkOrderStep(5, 'Cleanroom Packaging', 'Q1', CleanroomPack()),
+    WorkOrderStep(0, 'Work Order Input', 'Q1', WorkOrderIiput()),
+    WorkOrderStep(1, 'Issue Material', 'Q1', IssueMaterial()),
+    WorkOrderStep(2, 'Cut Blocks', 'Q1', CutBlocks()),
+    WorkOrderStep(3, 'Machine', 'Q1', MachineStep()),
+    WorkOrderStep(4, 'Cleanline', 'Q1', Cleanline()),
+    WorkOrderStep(5, 'Generate Labels', 'Q1', GenLabels()),
+    WorkOrderStep(6, 'Cleanroom Packaging', 'Q1', CleanroomPack()),
   ];
 
   List<Step> _getSteps(BuildContext context) {
@@ -129,27 +131,13 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                       steps: _getSteps(context),
                       type: StepperType.horizontal,
                       currentStep: currentStep,
-                      controlsBuilder: (context,
-                          {onStepCancel, onStepContinue}) {
-                        return Row(
-                          children: <Widget>[
-                            TextButton(
-                              onPressed: onStepContinue,
-                              child: const Text('NEXT'),
-                            ),
-                            TextButton(
-                              onPressed: onStepCancel,
-                              child: const Text('CANCEL'),
-                            ),
-                          ],
-                        );
-                      },
                       onStepContinue: next,
                       onStepCancel: cancel,
                       onStepTapped: (step) => goTo(step)),
                 ),
         ]),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.list),
           onPressed: () {
