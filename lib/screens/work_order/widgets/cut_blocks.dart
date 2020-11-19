@@ -19,7 +19,7 @@ class _CutBlocksState extends State<CutBlocks> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text("Work Order Number: 1245678",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
             Text("Attune PS Inserts",
                 style: TextStyle(
                   fontSize: 22,

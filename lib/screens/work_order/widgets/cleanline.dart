@@ -8,8 +8,9 @@ class Cleanline extends StatefulWidget {
 
 class _CleanlineState extends State<Cleanline> {
   int _cleaningMachine = 1;
-  bool _eccCleanCheck = true;
-  bool _qracCleanCheck = false;
+  bool eccShiftCleanCheck = false;
+  bool eccDailyCleanCheck = false;
+  bool eccWeeklyCleanCheck = true;
 
   @override
   Widget build(BuildContext context) {
@@ -120,22 +121,32 @@ class _CleanlineState extends State<Cleanline> {
                           ),
                           CheckboxListTile(
                               title: Text('ECC Checks'),
-                              subtitle: Text('Frequency: Daily'),
+                              subtitle: Text('Frequency: Shift'),
                               secondary: Icon(Icons.alarm_on),
-                              value: _eccCleanCheck,
+                              value: eccShiftCleanCheck,
                               onChanged: (value) {
                                 setState(() {
-                                  _eccCleanCheck = value;
+                                  eccShiftCleanCheck = value;
                                 });
                               }),
                           CheckboxListTile(
-                              title: Text('QRAC Checks'),
-                              subtitle: Text('Frequency: Hourly'),
+                              title: Text('ECC Checks'),
+                              subtitle: Text('Frequency: Daily'),
                               secondary: Icon(Icons.alarm_on),
-                              value: _qracCleanCheck,
+                              value: eccDailyCleanCheck,
                               onChanged: (value) {
                                 setState(() {
-                                  _qracCleanCheck = value;
+                                  eccDailyCleanCheck = value;
+                                });
+                              }),
+                          CheckboxListTile(
+                              title: Text('ECC Checks'),
+                              subtitle: Text('Frequency: Weekly'),
+                              secondary: Icon(Icons.alarm_on),
+                              value: eccWeeklyCleanCheck,
+                              onChanged: (value) {
+                                setState(() {
+                                  eccWeeklyCleanCheck = value;
                                 });
                               }),
                           Container(

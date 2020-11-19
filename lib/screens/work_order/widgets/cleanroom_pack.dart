@@ -18,28 +18,44 @@ class _CleanroomPackState extends State<CleanroomPack> {
         child: Column(
       children: [
         Text("Work Order Number: 1245678",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-        Text("Attune PS Inserts\n",
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+        Text("Attune PS Inserts",
             style: TextStyle(
               fontSize: 22,
             )),
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              new LinearPercentIndicator(
-                width: 200.0,
-                lineHeight: 40.0,
-                percent: 1.0,
-                center: Text(
-                  "10/10 Remaining QTY",
-                  style: TextStyle(fontSize: 18),
+        Column(
+          children: <Widget>[
+            Align(
+                alignment: Alignment.topRight,
+                child: Container(
+                    width: 200,
+                    child: Center(
+                        child: Text('Quantity Remaining:',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ))))),
+            Align(
+              alignment: Alignment.topRight,
+              child: Container(
+                width: 200,
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: new LinearPercentIndicator(
+                  width: 200.0,
+                  lineHeight: 40.0,
+                  percent: 1.0,
+                  center: Text(
+                    "10/10",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                  backgroundColor: Colors.grey,
+                  progressColor: Colors.blue[800],
                 ),
-                backgroundColor: Colors.grey,
-                progressColor: Colors.blue,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         Container(
           color: Colors.black12,

@@ -9,7 +9,7 @@ class IssueMaterial extends StatelessWidget {
         children: <Widget>[
           Text("Work Order Number: 1245678",
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-          Text("Attune PS Inserts\n",
+          Text("Attune PS Inserts",
               style: TextStyle(
                 fontSize: 22,
               )),
@@ -55,7 +55,7 @@ class IssueMaterial extends StatelessWidget {
                 Expanded(
                   child: Container(
                     margin: const EdgeInsets.all(20.0),
-                    padding: const EdgeInsets.all(30.0),
+                    padding: const EdgeInsets.all(120.0),
                     color: Colors.white,
                     child: Column(
                       children: <Widget>[

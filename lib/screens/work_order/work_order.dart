@@ -143,11 +143,14 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
-                              TextButton(
+                              ElevatedButton(
+                                style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(Colors.blue[800]),),
                                 onPressed: onStepContinue,
                                 child: const Text('NEXT'),
                               ),
-                              TextButton(
+                              ElevatedButton(
+
                                 onPressed: onStepCancel,
                                 child: const Text('CANCEL'),
                               ),
