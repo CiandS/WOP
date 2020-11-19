@@ -20,7 +20,7 @@ class _CutBlocksState extends State<CutBlocks> {
           children: <Widget>[
             Text("Work Order Number: 1245678",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            Text("Attune PS Inserts\n",
+            Text("Attune PS Inserts",
                 style: TextStyle(
                   fontSize: 22,
                 )),
