@@ -10,13 +10,6 @@ class _WOHistoryState extends State<WOHistoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.list),
-        onPressed: () {
-          Navigator.push(context,
-              new MaterialPageRoute(builder: (context) => WorkOrderPage()));
-        },
-      ),
       appBar: AppBar(
           title: new Center(
         child: Text("Work Order History"),

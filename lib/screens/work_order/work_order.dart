@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:work_order_process/screens/work_order/widgets/cleanline.dart';
 import 'package:work_order_process/screens/work_order/widgets/cleanroom_pack.dart';
 import 'package:work_order_process/screens/work_order/widgets/work_order_input.dart';
+import 'package:work_order_process/widgets/animated_fab.dart';
 import '../../models/work_order_step.dart';
 import '../../screens/work_order_history/work_order_history.dart';
 import 'widgets/cut_blocks.dart';
@@ -138,12 +139,13 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
         ]),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.list),
-          onPressed: () {
-            Navigator.push(context,
-                new MaterialPageRoute(builder: (context) => WOHistoryPage()));
-          }),
+      // floatingActionButton: FloatingActionButton(
+      //     child: Icon(Icons.list),
+      //     onPressed: () {
+      //       Navigator.push(context,
+      //           new MaterialPageRoute(builder: (context) => WOHistoryPage()));
+      //     }),
+      floatingActionButton: AnimatedFab(),
     );
   }
 }
