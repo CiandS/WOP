@@ -147,7 +147,7 @@ class _GenLabelsState extends State<GenLabels> {
                                         ),
                                       ),
                                       FlatButton(
-                                        color: Colors.blueAccent,
+                                        color: Colors.redAccent,
                                           onPressed: (){
                                         setState(() {
                                           quantityProcessed += double.parse(quantityProcessedTextController.text) / 10;

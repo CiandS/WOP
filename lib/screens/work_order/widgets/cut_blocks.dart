@@ -123,7 +123,7 @@ class _CutBlocksState extends State<CutBlocks> {
                       ),
                     ),
                   ),
-                  if (cuttingMachine == 2)
+                  if (cuttingMachine == 2 || cuttingMachine == 3 || cuttingMachine == 4)
                     Expanded(
                       child: Container(
                         margin: const EdgeInsets.all(20.0),

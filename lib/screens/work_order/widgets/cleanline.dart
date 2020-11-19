@@ -126,7 +126,7 @@ class _CleanlineState extends State<Cleanline> {
                     ]),
                   ),
                 ),
-                if (_cleaningMachine == 2)
+                if (_cleaningMachine == 2 || _cleaningMachine == 3 || _cleaningMachine == 4 )
                   Expanded(
                     child: Container(
                       margin: const EdgeInsets.all(20.0),
@@ -187,7 +187,9 @@ class _CleanlineState extends State<Cleanline> {
                                         keyboardType: TextInputType.number,
                                       ),
                                     ),
-                                    FlatButton(onPressed: (){
+                                    FlatButton(
+                                        color: Colors.redAccent,
+                                        onPressed: (){
                                       setState(() {
                                         quantityProcessed += double.parse(quantityProcessedTextController.text) / 10;
                                       });

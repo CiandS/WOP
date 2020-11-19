@@ -151,7 +151,7 @@ class _MachineStepState extends State<MachineStep> {
                 ),
               ),
             ),
-            if (_processMachine == 2)
+            if (_processMachine == 2 || _processMachine == 3 || _processMachine == 4)
               Expanded(
                 child: Container(
                   margin: const EdgeInsets.all(20.0),
@@ -193,6 +193,7 @@ class _MachineStepState extends State<MachineStep> {
                           child: Expanded(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Flexible(
                                   child: TextFormField(
@@ -202,7 +203,9 @@ class _MachineStepState extends State<MachineStep> {
                                     keyboardType: TextInputType.number,
                                   ),
                                 ),
-                                FlatButton(onPressed: (){
+                                FlatButton(
+                                    color: Colors.redAccent,
+                                    onPressed: (){
                                   setState(() {
                                     quantityProcessed += double.parse(quantityProcessedTextController.text) / 10;
                                   });

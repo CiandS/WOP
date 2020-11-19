@@ -16,6 +16,21 @@ class _IssueMaterialState extends State<IssueMaterial> {
   double quantityProcessed = 0.0;
   final quantityProcessedTextController = TextEditingController();
 
+  String getQuantityProcessedPercentage (double quantityProcessedValue) {
+    int quantityParsed = (quantityProcessedValue * 10).toInt();
+    return quantityParsed.toString();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    quantityProcessedTextController.dispose();
+    super.dispose();
+  }
 
   Widget build(BuildContext context) {
     WorkOrder workOrder =
@@ -41,16 +56,16 @@ class _IssueMaterialState extends State<IssueMaterial> {
                     color: Colors.white,
                     child: Column(
                       children: [
-                        CircularProgressIndicator(
-                          value: 0.5,
-                          backgroundColor: Colors.grey,
-                          strokeWidth: 10,
-                        ),
+                        // CircularProgressIndicator(
+                        //   value: quantityProcessed,
+                        //   backgroundColor: Colors.grey,
+                        //   strokeWidth: 10,
+                        // ),
                         new CircularPercentIndicator(
                           radius: 150.0,
                           lineWidth: 30.0,
-                          percent: 0.4,
-                          header: Text('Original QTY: 10',
+                          percent: quantityProcessed,
+                          header: Text('Original Quantity: 10',
                               style: TextStyle(
                                 fontSize: 20,
                               )),
@@ -58,11 +73,11 @@ class _IssueMaterialState extends State<IssueMaterial> {
                             Icons.linear_scale,
                             size: 50.0,
                           ),
-                          footer: Text('QTY Processed: 5',
+                          footer: Text('Quantity Processed: ${getQuantityProcessedPercentage(quantityProcessed) }',
                               style: TextStyle(
                                 fontSize: 20,
                               )),
-                          progressColor: Colors.blueAccent,
+                          progressColor: quantityProcessed == 1.0 ? Colors.green : Colors.blue[800],
                         ),
                       ],
                     ),
@@ -89,7 +104,9 @@ class _IssueMaterialState extends State<IssueMaterial> {
                                       keyboardType: TextInputType.number,
                                     ),
                                   ),
-                                  FlatButton(onPressed: (){
+                                  FlatButton(
+                                      color: Colors.redAccent,
+                                      onPressed: (){
                                     setState(() {
                                       quantityProcessed += double.parse(quantityProcessedTextController.text) / 10;
                                     });

@@ -193,7 +193,7 @@ class _CleanroomPackState extends State<CleanroomPack> {
                                   ),
                                 ),
                                 FlatButton(
-                                    color: Colors.blueAccent,
+                                    color: Colors.redAccent,
                                     onPressed: (){
                                       setState(() {
                                         quantityProcessed += double.parse(quantityProcessedTextController.text) / 10;

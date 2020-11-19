@@ -48,10 +48,13 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   }
 
   StepState _getState(int i) {
-    if (currentStep >= i) {
+    if (currentStep > i) {
       return StepState.complete;
-    } else {
-      return StepState.editing;
+    }  else if (currentStep == i) {
+      return StepState.editing; }
+    else
+      {
+      return StepState.indexed;
     }
   }
 
@@ -117,11 +120,15 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
-                              TextButton(
+                              RaisedButton(
+                                color: Colors.blue,
                                 onPressed: onStepContinue,
                                 child: const Text('NEXT'),
                               ),
-                              TextButton(
+                              SizedBox(
+                                width: 20,
+                              ),
+                              RaisedButton(
                                 onPressed: onStepCancel,
                                 child: const Text('CANCEL'),
                               ),
