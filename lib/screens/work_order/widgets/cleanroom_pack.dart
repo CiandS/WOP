@@ -14,6 +14,24 @@ class _CleanroomPackState extends State<CleanroomPack> {
   int _sealingMachine = 1;
   bool _eccMachineCheck = false;
   bool _qracMachineCheck = false;
+  double quantityProcessed = 0.0;
+  final quantityProcessedTextController = TextEditingController();
+
+  String getQuantityProcessedPercentage (double quantityProcessedValue) {
+    int quantityParsed = (quantityProcessedValue * 10).toInt();
+    return quantityParsed.toString();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    quantityProcessedTextController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +65,9 @@ class _CleanroomPackState extends State<CleanroomPack> {
                 child: new LinearPercentIndicator(
                   width: 200.0,
                   lineHeight: 40.0,
-                  percent: 1.0,
+                  percent: quantityProcessed,
                   center: Text(
-                    "0/10",
+                    "${getQuantityProcessedPercentage(quantityProcessed) }/10",
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.white,
@@ -135,7 +153,9 @@ class _CleanroomPackState extends State<CleanroomPack> {
               if(_sealingMachine == 2)
               Expanded(
                 child: Container(
-                  color: Colors.green,
+                  margin: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(30.0),
+                  color: Colors.white,
                   child: Column(
                     children: [
                       CheckboxListTile(
@@ -160,10 +180,27 @@ class _CleanroomPackState extends State<CleanroomPack> {
                           }),
                       Container(
                           width: 300.0,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                                labelText: 'Input Quantity Processed'),
-                            keyboardType: TextInputType.number,
+                          child: Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Flexible(
+                                  child: TextFormField(
+                                    controller: quantityProcessedTextController,
+                                    decoration: InputDecoration(
+                                        labelText: 'Input Quantity Processed'),
+                                    keyboardType: TextInputType.number,
+                                  ),
+                                ),
+                                FlatButton(
+                                    color: Colors.blueAccent,
+                                    onPressed: (){
+                                      setState(() {
+                                        quantityProcessed += double.parse(quantityProcessedTextController.text) / 10;
+                                      });
+                                    }, child: Text('Process'))
+                              ],
+                            ),
                           )),
                     ],
                   ),

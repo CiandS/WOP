@@ -52,7 +52,7 @@ class _MachineStepState extends State<MachineStep> {
               child: Container(
                   width: 200,
                   child: Center(
-                      child: Text('Quantity Remaining:',
+                      child: Text('Quantity Processed:',
                           style: TextStyle(
                             fontSize: 16,
                           ))))),

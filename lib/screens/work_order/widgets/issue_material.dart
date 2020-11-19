@@ -4,8 +4,19 @@ import 'package:provider/provider.dart';
 import 'package:work_order_process/models/work_order.dart';
 import 'package:work_order_process/providers/work_order_provider.dart';
 
-class IssueMaterial extends StatelessWidget {
+class IssueMaterial extends StatefulWidget {
   @override
+  _IssueMaterialState createState() => _IssueMaterialState();
+}
+
+class _IssueMaterialState extends State<IssueMaterial> {
+  @override
+
+  int cuttingMachine = 1;
+  double quantityProcessed = 0.0;
+  final quantityProcessedTextController = TextEditingController();
+
+
   Widget build(BuildContext context) {
     WorkOrder workOrder =
         Provider.of<WorkOrderProvider>(context, listen: false).getWorkOrder;
@@ -47,7 +58,7 @@ class IssueMaterial extends StatelessWidget {
                             Icons.linear_scale,
                             size: 50.0,
                           ),
-                          footer: Text('Remaining QTY: 5',
+                          footer: Text('QTY Processed: 5',
                               style: TextStyle(
                                 fontSize: 20,
                               )),
@@ -66,10 +77,25 @@ class IssueMaterial extends StatelessWidget {
                       children: <Widget>[
                         Container(
                             width: 300.0,
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                  labelText: 'Input Quantity Processed'),
-                              keyboardType: TextInputType.number,
+                            child: Expanded(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Flexible(
+                                    child: TextFormField(
+                                      controller: quantityProcessedTextController,
+                                      decoration: InputDecoration(
+                                          labelText: 'Input Quantity Processed'),
+                                      keyboardType: TextInputType.number,
+                                    ),
+                                  ),
+                                  FlatButton(onPressed: (){
+                                    setState(() {
+                                      quantityProcessed += double.parse(quantityProcessedTextController.text) / 10;
+                                    });
+                                  }, child: Text('Process'))
+                                ],
+                              ),
                             )),
                       ],
                     ),

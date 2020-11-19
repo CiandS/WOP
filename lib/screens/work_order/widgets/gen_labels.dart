@@ -4,8 +4,31 @@ import 'package:provider/provider.dart';
 import 'package:work_order_process/models/work_order.dart';
 import 'package:work_order_process/providers/work_order_provider.dart';
 
-class GenLabels extends StatelessWidget {
+class GenLabels extends StatefulWidget {
 
+  _GenLabelsState createState() => _GenLabelsState();
+}
+
+class _GenLabelsState extends State<GenLabels> {
+
+  double quantityProcessed = 0.0;
+  final quantityProcessedTextController = TextEditingController();
+
+  String getQuantityProcessedPercentage (double quantityProcessedValue) {
+    int quantityParsed = (quantityProcessedValue * 10).toInt();
+    return quantityParsed.toString();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    quantityProcessedTextController.dispose();
+    super.dispose();
+  }
   @override
 
   Widget build(BuildContext context) {
@@ -23,7 +46,7 @@ class GenLabels extends StatelessWidget {
                     child: Container(
                         width: 200,
                         child: Center(
-                            child: Text('Quantity Remaining:',
+                            child: Text('Quantity Processed:',
                                 style: TextStyle(
                                   fontSize: 16,
                                 ))))),
@@ -35,9 +58,9 @@ class GenLabels extends StatelessWidget {
                     child: new LinearPercentIndicator(
                       width: 200.0,
                       lineHeight: 40.0,
-                      percent: 1.0,
+                      percent: quantityProcessed,
                       center: Text(
-                        "10/10",
+                        "${getQuantityProcessedPercentage(quantityProcessed) }/10",
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.white,
@@ -61,10 +84,10 @@ class GenLabels extends StatelessWidget {
                       padding: const EdgeInsets.all(30.0),
                       color: Colors.white,
                       child: Column(children: [
-                        Text("Select your Machine\n",
+                        Text("Q1 Pressure Logs Checks: 18-NOV-2020",
                             style: TextStyle(
                                 fontSize: 22, fontWeight: FontWeight.bold)),
-                        Text("Q1 Pressure Logs Checks: 18-NOV-2020", style: TextStyle(fontSize: 16,)),
+                        Text("Day Logs", style: TextStyle(fontSize: 16,)),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 25.0),
                           child:
@@ -111,10 +134,27 @@ class GenLabels extends StatelessWidget {
                             ),
                             Container(
                                 width: 300.0,
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                      labelText: 'Input Quantity Processed'),
-                                  keyboardType: TextInputType.number,
+                                child: Expanded(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Flexible(
+                                        child: TextFormField(
+                                          controller: quantityProcessedTextController,
+                                          decoration: InputDecoration(
+                                              labelText: 'Input Quantity Processed'),
+                                          keyboardType: TextInputType.number,
+                                        ),
+                                      ),
+                                      FlatButton(
+                                        color: Colors.blueAccent,
+                                          onPressed: (){
+                                        setState(() {
+                                          quantityProcessed += double.parse(quantityProcessedTextController.text) / 10;
+                                        });
+                                      }, child: Text('Process'))
+                                    ],
+                                  ),
                                 )),
                           ],
                         ),

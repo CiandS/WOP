@@ -13,6 +13,24 @@ class _CutBlocksState extends State<CutBlocks> {
   int cuttingMachine = 1;
   bool _eccCutCheck = false;
   bool _qracCutCheck = false;
+  double quantityProcessed = 0.0;
+  final quantityProcessedTextController = TextEditingController();
+
+  String getQuantityProcessedPercentage (double quantityProcessedValue) {
+    int quantityParsed = (quantityProcessedValue * 10).toInt();
+    return quantityParsed.toString();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    quantityProcessedTextController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +54,7 @@ class _CutBlocksState extends State<CutBlocks> {
                     child: Container(
                         width: 200,
                         child: Center(
-                            child: Text('Quantity Remaining:',
+                            child: Text('Quantity Processed:',
                                 style: TextStyle(
                                   fontSize: 16,
                                 ))))),
@@ -48,16 +66,16 @@ class _CutBlocksState extends State<CutBlocks> {
                     child: new LinearPercentIndicator(
                       width: 200.0,
                       lineHeight: 40.0,
-                      percent: 1.0,
+                      percent: quantityProcessed,
                       center: Text(
-                        "10/10",
+                        "${getQuantityProcessedPercentage(quantityProcessed) }/10",
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.white,
                         ),
                       ),
                       backgroundColor: Colors.grey,
-                      progressColor: Colors.blue[800],
+                      progressColor: quantityProcessed == 1.0 ? Colors.green : Colors.blue[800],
                     ),
                   ),
                 ),
@@ -144,10 +162,25 @@ class _CutBlocksState extends State<CutBlocks> {
                                 }),
                             Container(
                                 width: 300.0,
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                      labelText: 'Input Quantity Processed'),
-                                  keyboardType: TextInputType.number,
+                                child: Expanded(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Flexible(
+                                        child: TextFormField(
+                                          controller: quantityProcessedTextController,
+                                          decoration: InputDecoration(
+                                              labelText: 'Input Quantity Processed'),
+                                          keyboardType: TextInputType.number,
+                                        ),
+                                      ),
+                                      FlatButton(onPressed: (){
+                                        setState(() {
+                                          quantityProcessed += double.parse(quantityProcessedTextController.text) / 10;
+                                        });
+                                      }, child: Text('Process'))
+                                    ],
+                                  ),
                                 )),
                           ],
                         ),
