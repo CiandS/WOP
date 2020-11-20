@@ -86,7 +86,7 @@ class _IssueMaterialState extends State<IssueMaterial> {
                 Expanded(
                   child: Container(
                     margin: const EdgeInsets.all(20.0),
-                    padding: const EdgeInsets.all(120.0),
+                    padding: const EdgeInsets.all(100.0),
                     color: Colors.white,
                     child: Column(
                       children: <Widget>[
@@ -95,6 +95,7 @@ class _IssueMaterialState extends State<IssueMaterial> {
                             child: Expanded(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Flexible(
                                     child: TextFormField(

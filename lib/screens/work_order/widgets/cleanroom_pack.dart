@@ -74,7 +74,7 @@ class _CleanroomPackState extends State<CleanroomPack> {
                     ),
                   ),
                   backgroundColor: Colors.grey,
-                  progressColor: Colors.blue[800],
+                  progressColor: quantityProcessed == 1.0 ? Colors.green : Colors.blue[800],
                 ),
               ),
             ),

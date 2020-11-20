@@ -67,7 +67,7 @@ class _GenLabelsState extends State<GenLabels> {
                         ),
                       ),
                       backgroundColor: Colors.grey,
-                      progressColor: Colors.blue[800],
+                      progressColor: quantityProcessed == 1.0 ? Colors.green : Colors.blue[800],
                     ),
                   ),
                 ),
@@ -119,19 +119,11 @@ class _GenLabelsState extends State<GenLabels> {
                     Expanded(
                       child: Container(
                         margin: const EdgeInsets.all(20.0),
-                        padding: const EdgeInsets.all(30.0),
+                        padding: const EdgeInsets.all(100.0),
                         color: Colors.white,
                         child: Column(
                           children: <Widget>[
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Container(
-                                  child: Text(
-                                    'Condition Checks',
-                                    style: TextStyle(fontWeight: FontWeight.bold),
-                                    textAlign: TextAlign.left,
-                                  )),
-                            ),
+
                             Container(
                                 width: 300.0,
                                 child: Expanded(

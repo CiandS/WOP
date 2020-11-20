@@ -22,8 +22,8 @@ class _WOHistoryState extends State<WOHistoryPage> {
             DataColumn(label: Text('Date / Time'))
           ], rows: [
             DataRow(cells: [
-              DataCell(Text('Lot Traveller/BOM. Rev 1 printed.')),
-              DataCell(Text('10-OCT-2020 12:30'))
+              DataCell(Text('FOLDER=BLUE')),
+              DataCell(Text('08-OCT-2020 16:17'))
             ]),
             DataRow(cells: [
               DataCell(Text('Lot Traveller/BOM. Rev 1 printed.')),

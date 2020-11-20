@@ -19,7 +19,8 @@ class WorkOrderPage extends StatefulWidget {
 
 class _WorkOrderPageState extends State<WorkOrderPage> {
   int currentStep = 0;
-  bool complete = false;
+
+  bool workOrderComplete = false;
   List<Step> steps = <Step>[];
   List<WorkOrderStep> workOrderSteps = [
     WorkOrderStep(0, 'Work Order Input', 'Q1', WorkOrderIiput()),
@@ -65,7 +66,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   next() {
     currentStep + 1 != steps.length
         ? setState(() => currentStep++)
-        : setState(() => complete = true);
+        : setState(() => workOrderComplete = true);
   }
 
   cancel() {
@@ -88,7 +89,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
       ),
       body: Center(
         child: Column(children: <Widget>[
-          complete
+          workOrderComplete
               ? Expanded(
                   child: Center(
                     child: AlertDialog(
@@ -101,7 +102,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                           child: new Text("Close"),
                           onPressed: () {
                             setState(() {
-                              complete = false;
+                              workOrderComplete = false;
                             });
                           },
                         ),
@@ -121,7 +122,6 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
                               RaisedButton(
-                                color: Colors.blue,
                                 onPressed: onStepContinue,
                                 child: const Text('NEXT'),
                               ),

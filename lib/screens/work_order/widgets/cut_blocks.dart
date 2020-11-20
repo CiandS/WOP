@@ -174,7 +174,9 @@ class _CutBlocksState extends State<CutBlocks> {
                                           keyboardType: TextInputType.number,
                                         ),
                                       ),
-                                      FlatButton(onPressed: (){
+                                      FlatButton(
+                                          color: Colors.redAccent,
+                                          onPressed: (){
                                         setState(() {
                                           quantityProcessed += double.parse(quantityProcessedTextController.text) / 10;
                                         });
