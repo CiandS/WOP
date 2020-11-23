@@ -84,7 +84,13 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
       setNextStep();
     } else {
       debugPrint('Qty not set yet');
-    }
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Quantity not complete"),
+            );} );
+    };
   }
 
   cancel() {
@@ -140,7 +146,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
                               RaisedButton(
-                                color: Colors.blue,
+                                color: Colors.blue[800],
                                 onPressed: onStepContinue,
                                 child: const Text('NEXT'),
                               ),
