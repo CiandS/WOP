@@ -15,11 +15,15 @@ import 'widgets/cleanroom_pack.dart';
 class WorkOrderPage extends StatefulWidget {
   @override
   _WorkOrderPageState createState() => new _WorkOrderPageState();
+
+
 }
+
+
 
 class _WorkOrderPageState extends State<WorkOrderPage> {
   int currentStep = 0;
-
+  double quantityProcessed;
   bool workOrderComplete = false;
   List<Step> steps = <Step>[];
   List<WorkOrderStep> workOrderSteps = [
@@ -64,6 +68,8 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   }
 
   next() {
+    steps[currentStep + 1];
+
     currentStep + 1 != steps.length
         ? setState(() => currentStep++)
         : setState(() => workOrderComplete = true);
@@ -116,21 +122,37 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                           {onStepCancel, onStepContinue}) {
                         return Container(
                           width: double.infinity,
+                          padding: const EdgeInsets.all(10.0),
                           alignment: Alignment.centerRight,
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
-                              RaisedButton(
-                                onPressed: onStepContinue,
-                                child: const Text('NEXT'),
+                              SizedBox(
+                                width: 125,
+                                height: 40,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.blue[800],
+                                  ),
+                                  onPressed: onStepCancel,
+                                  // quantityProcessed == 1.0 ? onStepCancel : null,
+                                  child: const Text('NEXT'),
+                                ),
                               ),
                               SizedBox(
                                 width: 20,
                               ),
-                              RaisedButton(
-                                onPressed: onStepCancel,
-                                child: const Text('CANCEL'),
+                              SizedBox(
+                                width: 125,
+                                height: 40,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.grey[400],
+                                  ),
+                                  onPressed: onStepCancel,
+                                  child: const Text('CANCEL'),
+                                ),
                               ),
                             ],
                           ),
@@ -141,7 +163,8 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                       currentStep: currentStep,
                       onStepContinue: next,
                       onStepCancel: cancel,
-                      onStepTapped: (step) => goTo(step)),
+                    onStepTapped: (step) => goTo(step)
+            ),
                 ),
         ]),
       ),

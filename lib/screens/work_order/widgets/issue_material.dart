@@ -11,7 +11,6 @@ class IssueMaterial extends StatefulWidget {
 
 class _IssueMaterialState extends State<IssueMaterial> {
   @override
-
   int cuttingMachine = 1;
   double quantityProcessed = 0.0;
   final quantityProcessedTextController = TextEditingController();
@@ -19,6 +18,10 @@ class _IssueMaterialState extends State<IssueMaterial> {
   String getQuantityProcessedPercentage (double quantityProcessedValue) {
     int quantityParsed = (quantityProcessedValue * 10).toInt();
     return quantityParsed.toString();
+  }
+
+  double get getQuantityProcessed {
+    return quantityProcessed;
   }
 
   @override
@@ -105,8 +108,10 @@ class _IssueMaterialState extends State<IssueMaterial> {
                                       keyboardType: TextInputType.number,
                                     ),
                                   ),
-                                  FlatButton(
-                                      color: Colors.redAccent,
+                                  OutlinedButton(
+                                      style: OutlinedButton.styleFrom(
+                                        primary: Colors.redAccent[400],
+                                      ),
                                       onPressed: (){
                                     setState(() {
                                       quantityProcessed += double.parse(quantityProcessedTextController.text) / 10;

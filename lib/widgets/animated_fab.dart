@@ -34,7 +34,7 @@ class _AnimatedFabState extends State<AnimatedFab>
     _animateIcon =
         Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
     _buttonColor = ColorTween(
-      begin: Colors.blue,
+      begin: Colors.blue[800],
       end: Colors.red,
     ).animate(CurvedAnimation(
       parent: _animationController,
