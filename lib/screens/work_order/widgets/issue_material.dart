@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:work_order_process/models/work_order.dart';
+import 'package:work_order_process/models/work_order_history.dart';
+import 'package:work_order_process/providers/work_order_history_provider.dart';
 import 'package:work_order_process/providers/work_order_provider.dart';
+import 'package:work_order_process/utils/work_order_util.dart';
+
+import '../../../constants.dart';
 
 class IssueMaterial extends StatefulWidget {
   @override
@@ -14,15 +19,6 @@ class _IssueMaterialState extends State<IssueMaterial> {
   int cuttingMachine = 1;
   double quantityProcessed = 0.0;
   final quantityProcessedTextController = TextEditingController();
-
-  String getQuantityProcessedPercentage (double quantityProcessedValue) {
-    int quantityParsed = (quantityProcessedValue * 10).toInt();
-    return quantityParsed.toString();
-  }
-
-  double get getQuantityProcessed {
-    return quantityProcessed;
-  }
 
   @override
   void initState() {
@@ -64,7 +60,7 @@ class _IssueMaterialState extends State<IssueMaterial> {
                         //   backgroundColor: Colors.grey,
                         //   strokeWidth: 10,
                         // ),
-                        new CircularPercentIndicator(
+                        CircularPercentIndicator(
                           radius: 150.0,
                           lineWidth: 30.0,
                           percent: quantityProcessed,
@@ -76,11 +72,14 @@ class _IssueMaterialState extends State<IssueMaterial> {
                             Icons.linear_scale,
                             size: 50.0,
                           ),
-                          footer: Text('Quantity Processed: ${getQuantityProcessedPercentage(quantityProcessed) }',
+                          footer: Text(
+                              'Quantity Processed: ${WorkOrderUtil.getInstance.getQuantityProcessedPercentage(quantityProcessed)}',
                               style: TextStyle(
                                 fontSize: 20,
                               )),
-                          progressColor: quantityProcessed == 1.0 ? Colors.green : Colors.blue[800],
+                          progressColor: quantityProcessed == 1.0
+                              ? Colors.green
+                              : Colors.blue[800],
                         ),
                       ],
                     ),
@@ -89,7 +88,7 @@ class _IssueMaterialState extends State<IssueMaterial> {
                 Expanded(
                   child: Container(
                     margin: const EdgeInsets.all(20.0),
-                    padding: const EdgeInsets.all(100.0),
+                    padding: const EdgeInsets.all(120.0),
                     color: Colors.white,
                     child: Column(
                       children: <Widget>[
@@ -97,26 +96,44 @@ class _IssueMaterialState extends State<IssueMaterial> {
                             width: 300.0,
                             child: Expanded(
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Flexible(
                                     child: TextFormField(
-                                      controller: quantityProcessedTextController,
+                                      controller:
+                                          quantityProcessedTextController,
                                       decoration: InputDecoration(
-                                          labelText: 'Input Quantity Processed'),
+                                          labelText:
+                                              'Input Quantity Processed'),
                                       keyboardType: TextInputType.number,
                                     ),
                                   ),
-                                  OutlinedButton(
-                                      style: OutlinedButton.styleFrom(
-                                        primary: Colors.redAccent[400],
-                                      ),
-                                      onPressed: (){
-                                    setState(() {
-                                      quantityProcessed += double.parse(quantityProcessedTextController.text) / 10;
-                                    });
-                                  }, child: Text('Process'))
+                                  FlatButton(
+                                      color: Colors.redAccent,
+                                      onPressed: () {
+                                        setState(() {
+                                          quantityProcessed += double.parse(
+                                                  quantityProcessedTextController
+                                                      .text) /
+                                              10;
+                                          if (quantityProcessed == 1.0) {
+                                            Provider.of<WorkOrderHistoryProvider>(
+                                                    context)
+                                                .addWorkOrderHistory(
+                                              WorkOrderHistory(
+                                                  Constants.ISSUE_MATERIAL,
+                                                  DateTime.now(),
+                                                  "test1234",
+                                                  WorkOrderUtil.getInstance
+                                                      .getQuantityProcessedPercentage(
+                                                          quantityProcessed),
+                                                  null),
+                                            );
+                                          }
+                                        });
+                                      },
+                                      child: Text('Process'))
                                 ],
                               ),
                             )),
