@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:work_order_process/models/work_order_history.dart';
+import 'package:work_order_process/providers/work_order_history_provider.dart';
 import 'package:work_order_process/screens/work_order/widgets/cleanline.dart';
 import 'package:work_order_process/screens/work_order/widgets/cleanroom_pack.dart';
 import 'package:work_order_process/screens/work_order/widgets/work_order_input.dart';
 import 'package:work_order_process/widgets/animated_fab.dart';
+import '../../constants.dart';
 import '../../models/work_order_step.dart';
 import '../../screens/work_order_history/work_order_history.dart';
 import 'widgets/cut_blocks.dart';
@@ -50,10 +54,9 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   StepState _getState(int i) {
     if (currentStep > i) {
       return StepState.complete;
-    }  else if (currentStep == i) {
-      return StepState.editing; }
-    else
-      {
+    } else if (currentStep == i) {
+      return StepState.editing;
+    } else {
       return StepState.indexed;
     }
   }
@@ -62,10 +65,26 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
     return _getState(i) == StepState.complete;
   }
 
-  next() {
+  void setNextStep() {
     currentStep + 1 != steps.length
         ? setState(() => currentStep++)
         : setState(() => complete = true);
+  }
+
+  void next() {
+    WorkOrderStep currentWorkOrderStep = workOrderSteps[currentStep];
+
+    bool isWorkOrderStepProcessed =
+        Provider.of<WorkOrderHistoryProvider>(context)
+            .isWorkOrderStepProcessed(currentWorkOrderStep.stepTitle);
+
+    if (isWorkOrderStepProcessed) {
+      setNextStep();
+    } else if (currentWorkOrderStep.stepTitle == Constants.WORK_ORDER_INPUT) {
+      setNextStep();
+    } else {
+      debugPrint('Qty not set yet');
+    }
   }
 
   cancel() {

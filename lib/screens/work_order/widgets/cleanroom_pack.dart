@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:work_order_process/constants.dart';
 import 'package:work_order_process/models/work_order.dart';
+import 'package:work_order_process/models/work_order_history.dart';
+import 'package:work_order_process/providers/work_order_history_provider.dart';
 import 'package:work_order_process/providers/work_order_provider.dart';
+import 'package:work_order_process/utils/work_order_util.dart';
 
 class CleanroomPack extends StatefulWidget {
   @override
@@ -16,11 +20,6 @@ class _CleanroomPackState extends State<CleanroomPack> {
   bool _qracMachineCheck = false;
   double quantityProcessed = 0.0;
   final quantityProcessedTextController = TextEditingController();
-
-  String getQuantityProcessedPercentage (double quantityProcessedValue) {
-    int quantityParsed = (quantityProcessedValue * 10).toInt();
-    return quantityParsed.toString();
-  }
 
   @override
   void initState() {
@@ -67,7 +66,7 @@ class _CleanroomPackState extends State<CleanroomPack> {
                   lineHeight: 40.0,
                   percent: quantityProcessed,
                   center: Text(
-                    "${getQuantityProcessedPercentage(quantityProcessed) }/10",
+                    "${WorkOrderUtil.getInstance.getQuantityProcessedPercentage(quantityProcessed)}/10",
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.white,
@@ -103,13 +102,14 @@ class _CleanroomPackState extends State<CleanroomPack> {
                                 value: 1,
                               ),
                               DropdownMenuItem(
-                                child: Text("VACS0015 - MultiVac C400TC Vacuum Sealer"),
+                                child: Text(
+                                    "VACS0015 - MultiVac C400TC Vacuum Sealer"),
                                 value: 2,
                               ),
                               DropdownMenuItem(
-                                  child: Text("VACS0018 - MultiVac C400TC Vacuum Sealer"),
-                                  value: 3
-                              ),
+                                  child: Text(
+                                      "VACS0018 - MultiVac C400TC Vacuum Sealer"),
+                                  value: 3),
                             ],
                             onChanged: (value) {
                               setState(() {
@@ -129,7 +129,8 @@ class _CleanroomPackState extends State<CleanroomPack> {
                               value: 1,
                             ),
                             DropdownMenuItem(
-                              child: Text("SEAL0001 - Atlas Vac Tray-Lid Sealer"),
+                              child:
+                                  Text("SEAL0001 - Atlas Vac Tray-Lid Sealer"),
                               value: 2,
                             ),
                             DropdownMenuItem(
@@ -150,62 +151,84 @@ class _CleanroomPackState extends State<CleanroomPack> {
                   ),
                 ),
               ),
-              if(_sealingMachine == 2)
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.all(20.0),
-                  padding: const EdgeInsets.all(30.0),
-                  color: Colors.white,
-                  child: Column(
-                    children: [
-                      CheckboxListTile(
-                          title: Text('ECC Checks'),
-                          subtitle: Text('Frequency: Daily'),
-                          secondary: Icon(Icons.alarm_on),
-                          value: _eccMachineCheck,
-                          onChanged: (value) {
-                            setState(() {
-                              _eccMachineCheck = value;
-                            });
-                          }),
-                      CheckboxListTile(
-                          title: Text('QRAC Checks'),
-                          subtitle: Text('Frequency: Hourly'),
-                          secondary: Icon(Icons.alarm_on),
-                          value: _qracMachineCheck,
-                          onChanged: (value) {
-                            setState(() {
-                              _qracMachineCheck = value;
-                            });
-                          }),
-                      Container(
-                          width: 300.0,
-                          child: Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Flexible(
-                                  child: TextFormField(
-                                    controller: quantityProcessedTextController,
-                                    decoration: InputDecoration(
-                                        labelText: 'Input Quantity Processed'),
-                                    keyboardType: TextInputType.number,
+              if (_sealingMachine == 2)
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(30.0),
+                    color: Colors.white,
+                    child: Column(
+                      children: [
+                        CheckboxListTile(
+                            title: Text('ECC Checks'),
+                            subtitle: Text('Frequency: Daily'),
+                            secondary: Icon(Icons.alarm_on),
+                            value: _eccMachineCheck,
+                            onChanged: (value) {
+                              setState(() {
+                                _eccMachineCheck = value;
+                              });
+                            }),
+                        CheckboxListTile(
+                            title: Text('QRAC Checks'),
+                            subtitle: Text('Frequency: Hourly'),
+                            secondary: Icon(Icons.alarm_on),
+                            value: _qracMachineCheck,
+                            onChanged: (value) {
+                              setState(() {
+                                _qracMachineCheck = value;
+                              });
+                            }),
+                        Container(
+                            width: 300.0,
+                            child: Expanded(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Flexible(
+                                    child: TextFormField(
+                                      controller:
+                                          quantityProcessedTextController,
+                                      decoration: InputDecoration(
+                                          labelText:
+                                              'Input Quantity Processed'),
+                                      keyboardType: TextInputType.number,
+                                    ),
                                   ),
-                                ),
-                                FlatButton(
-                                    color: Colors.redAccent,
-                                    onPressed: (){
-                                      setState(() {
-                                        quantityProcessed += double.parse(quantityProcessedTextController.text) / 10;
-                                      });
-                                    }, child: Text('Process'))
-                              ],
-                            ),
-                          )),
-                    ],
+                                  FlatButton(
+                                      color: Colors.redAccent,
+                                      onPressed: () {
+                                        setState(() {
+                                          quantityProcessed += double.parse(
+                                                  quantityProcessedTextController
+                                                      .text) /
+                                              10;
+                                        });
+
+                                        if (quantityProcessed == 1.0) {
+                                          Provider.of<WorkOrderHistoryProvider>(
+                                                  context)
+                                              .addWorkOrderHistory(
+                                            WorkOrderHistory(
+                                                Constants.CLEANROOM_PACK,
+                                                DateTime.now(),
+                                                "test1234",
+                                                WorkOrderUtil.getInstance
+                                                    .getQuantityProcessedPercentage(
+                                                        quantityProcessed),
+                                                null),
+                                          );
+                                        }
+                                      },
+                                      child: Text('Process'))
+                                ],
+                              ),
+                            )),
+                      ],
+                    ),
                   ),
-                ),
-              )
+                )
             ],
           ),
         ),

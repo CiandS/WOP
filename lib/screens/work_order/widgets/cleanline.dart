@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:work_order_process/models/work_order.dart';
+import 'package:work_order_process/models/work_order_history.dart';
+import 'package:work_order_process/providers/work_order_history_provider.dart';
 import 'package:work_order_process/providers/work_order_provider.dart';
+import 'package:work_order_process/utils/work_order_util.dart';
 
 class Cleanline extends StatefulWidget {
   @override
@@ -17,11 +20,6 @@ class _CleanlineState extends State<Cleanline> {
   double quantityProcessed = 0.0;
   final quantityProcessedTextController = TextEditingController();
 
-  String getQuantityProcessedPercentage (double quantityProcessedValue) {
-    int quantityParsed = (quantityProcessedValue * 10).toInt();
-    return quantityParsed.toString();
-  }
-
   @override
   void initState() {
     super.initState();
@@ -32,7 +30,6 @@ class _CleanlineState extends State<Cleanline> {
     quantityProcessedTextController.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -69,14 +66,16 @@ class _CleanlineState extends State<Cleanline> {
                     lineHeight: 40.0,
                     percent: quantityProcessed,
                     center: Text(
-                      "${getQuantityProcessedPercentage(quantityProcessed) }/10",
+                      "${WorkOrderUtil.getInstance.getQuantityProcessedPercentage(quantityProcessed)}/10",
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.white,
                       ),
                     ),
                     backgroundColor: Colors.grey,
-                    progressColor: quantityProcessed == 1.0 ? Colors.green : Colors.blue[800],
+                    progressColor: quantityProcessed == 1.0
+                        ? Colors.green
+                        : Colors.blue[800],
                   ),
                 ),
               ),
@@ -126,7 +125,9 @@ class _CleanlineState extends State<Cleanline> {
                     ]),
                   ),
                 ),
-                if (_cleaningMachine == 2 || _cleaningMachine == 3 || _cleaningMachine == 4 )
+                if (_cleaningMachine == 2 ||
+                    _cleaningMachine == 3 ||
+                    _cleaningMachine == 4)
                   Expanded(
                     child: Container(
                       margin: const EdgeInsets.all(20.0),
@@ -177,23 +178,45 @@ class _CleanlineState extends State<Cleanline> {
                               width: 300.0,
                               child: Expanded(
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   children: [
                                     Flexible(
                                       child: TextFormField(
-                                        controller: quantityProcessedTextController,
+                                        controller:
+                                            quantityProcessedTextController,
                                         decoration: InputDecoration(
-                                            labelText: 'Input Quantity Processed'),
+                                            labelText:
+                                                'Input Quantity Processed'),
                                         keyboardType: TextInputType.number,
                                       ),
                                     ),
                                     FlatButton(
                                         color: Colors.redAccent,
-                                        onPressed: (){
-                                      setState(() {
-                                        quantityProcessed += double.parse(quantityProcessedTextController.text) / 10;
-                                      });
-                                    }, child: Text('Process'))
+                                        onPressed: () {
+                                          setState(() {
+                                            quantityProcessed += double.parse(
+                                                    quantityProcessedTextController
+                                                        .text) /
+                                                10;
+                                          });
+
+                                          if (quantityProcessed == 1.0) {
+                                            Provider.of<WorkOrderHistoryProvider>(
+                                                    context)
+                                                .addWorkOrderHistory(
+                                              WorkOrderHistory(
+                                                  "Cleanline",
+                                                  DateTime.now(),
+                                                  "test1234",
+                                                  WorkOrderUtil.getInstance
+                                                      .getQuantityProcessedPercentage(
+                                                          quantityProcessed),
+                                                  null),
+                                            );
+                                          }
+                                        },
+                                        child: Text('Process'))
                                   ],
                                 ),
                               )),

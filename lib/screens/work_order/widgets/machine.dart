@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:work_order_process/models/work_order.dart';
+import 'package:work_order_process/models/work_order_history.dart';
+import 'package:work_order_process/providers/work_order_history_provider.dart';
 import 'package:work_order_process/providers/work_order_provider.dart';
+import 'package:work_order_process/utils/work_order_util.dart';
 
 class MachineStep extends StatefulWidget {
   @override
@@ -16,11 +19,6 @@ class _MachineStepState extends State<MachineStep> {
   bool _qracMachineCheck = false;
   double quantityProcessed = 0.0;
   final quantityProcessedTextController = TextEditingController();
-
-  String getQuantityProcessedPercentage (double quantityProcessedValue) {
-    int quantityParsed = (quantityProcessedValue * 10).toInt();
-    return quantityParsed.toString();
-  }
 
   @override
   void initState() {
@@ -66,14 +64,15 @@ class _MachineStepState extends State<MachineStep> {
                 lineHeight: 40.0,
                 percent: quantityProcessed,
                 center: Text(
-                  "${getQuantityProcessedPercentage(quantityProcessed) }/10",
+                  "${WorkOrderUtil.getInstance.getQuantityProcessedPercentage(quantityProcessed)}/10",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.white,
                   ),
                 ),
                 backgroundColor: Colors.grey,
-                progressColor: quantityProcessed == 1.0 ? Colors.green : Colors.blue[800],
+                progressColor:
+                    quantityProcessed == 1.0 ? Colors.green : Colors.blue[800],
               ),
             ),
           ),
@@ -151,7 +150,9 @@ class _MachineStepState extends State<MachineStep> {
                 ),
               ),
             ),
-            if (_processMachine == 2 || _processMachine == 3 || _processMachine == 4)
+            if (_processMachine == 2 ||
+                _processMachine == 3 ||
+                _processMachine == 4)
               Expanded(
                 child: Container(
                   margin: const EdgeInsets.all(20.0),
@@ -205,11 +206,30 @@ class _MachineStepState extends State<MachineStep> {
                                 ),
                                 FlatButton(
                                     color: Colors.redAccent,
-                                    onPressed: (){
-                                  setState(() {
-                                    quantityProcessed += double.parse(quantityProcessedTextController.text) / 10;
-                                  });
-                                }, child: Text('Process'))
+                                    onPressed: () {
+                                      setState(() {
+                                        quantityProcessed += double.parse(
+                                                quantityProcessedTextController
+                                                    .text) /
+                                            10;
+                                      });
+
+                                      if (quantityProcessed == 1.0) {
+                                        Provider.of<WorkOrderHistoryProvider>(
+                                                context)
+                                            .addWorkOrderHistory(
+                                          WorkOrderHistory(
+                                              "Machine",
+                                              DateTime.now(),
+                                              "test1234",
+                                              WorkOrderUtil.getInstance
+                                                  .getQuantityProcessedPercentage(
+                                                      quantityProcessed),
+                                              null),
+                                        );
+                                      }
+                                    },
+                                    child: Text('Process'))
                               ],
                             ),
                           )),
