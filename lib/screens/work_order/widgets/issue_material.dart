@@ -7,6 +7,8 @@ import 'package:work_order_process/providers/work_order_history_provider.dart';
 import 'package:work_order_process/providers/work_order_provider.dart';
 import 'package:work_order_process/utils/work_order_util.dart';
 
+import '../../../constants.dart';
+
 class IssueMaterial extends StatefulWidget {
   @override
   _IssueMaterialState createState() => _IssueMaterialState();
@@ -120,7 +122,7 @@ class _IssueMaterialState extends State<IssueMaterial> {
                                                     context)
                                                 .addWorkOrderHistory(
                                               WorkOrderHistory(
-                                                  "Issue Material",
+                                                  Constants.ISSUE_MATERIAL,
                                                   DateTime.now(),
                                                   "test1234",
                                                   WorkOrderUtil.getInstance

@@ -7,6 +7,8 @@ import 'package:work_order_process/providers/work_order_history_provider.dart';
 import 'package:work_order_process/providers/work_order_provider.dart';
 import 'package:work_order_process/utils/work_order_util.dart';
 
+import '../../../constants.dart';
+
 class CutBlocks extends StatefulWidget {
   @override
   _CutBlocksState createState() => _CutBlocksState();
@@ -194,7 +196,7 @@ class _CutBlocksState extends State<CutBlocks> {
                                                   context)
                                               .addWorkOrderHistory(
                                             WorkOrderHistory(
-                                                "Cut Blocks",
+                                                Constants.CUT_BLOCKS,
                                                 DateTime.now(),
                                                 "test1234",
                                                 WorkOrderUtil.getInstance

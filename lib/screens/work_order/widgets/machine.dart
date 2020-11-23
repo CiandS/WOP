@@ -7,6 +7,8 @@ import 'package:work_order_process/providers/work_order_history_provider.dart';
 import 'package:work_order_process/providers/work_order_provider.dart';
 import 'package:work_order_process/utils/work_order_util.dart';
 
+import '../../../constants.dart';
+
 class MachineStep extends StatefulWidget {
   @override
   _MachineStepState createState() => _MachineStepState();
@@ -219,7 +221,7 @@ class _MachineStepState extends State<MachineStep> {
                                                 context)
                                             .addWorkOrderHistory(
                                           WorkOrderHistory(
-                                              "Machine",
+                                              Constants.MACHINE,
                                               DateTime.now(),
                                               "test1234",
                                               WorkOrderUtil.getInstance

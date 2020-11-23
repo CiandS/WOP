@@ -7,6 +7,8 @@ import 'package:work_order_process/providers/work_order_history_provider.dart';
 import 'package:work_order_process/providers/work_order_provider.dart';
 import 'package:work_order_process/utils/work_order_util.dart';
 
+import '../../../constants.dart';
+
 class Cleanline extends StatefulWidget {
   @override
   _CleanlineState createState() => _CleanlineState();
@@ -206,7 +208,7 @@ class _CleanlineState extends State<Cleanline> {
                                                     context)
                                                 .addWorkOrderHistory(
                                               WorkOrderHistory(
-                                                  "Cleanline",
+                                                  Constants.CLEANLINE,
                                                   DateTime.now(),
                                                   "test1234",
                                                   WorkOrderUtil.getInstance
