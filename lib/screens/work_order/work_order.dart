@@ -26,23 +26,10 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   int currentStep = 0;
   bool complete = false;
   bool isWorkOrderStepProcessed = false;
-
   List<Step> steps = <Step>[];
-  processClicked() {
-    WorkOrderStep currentWorkOrderStep = workOrderSteps[currentStep];
-
-    setState(() {
-      isWorkOrderStepProcessed =
-          Provider.of<WorkOrderHistoryProvider>(context)
-              .isWorkOrderStepProcessed(currentWorkOrderStep.stepTitle);
-    });
-
-
-  }
-  IssueMaterial issueMaterial = IssueMaterial(processClicked);
   List<WorkOrderStep> workOrderSteps = [
     WorkOrderStep(0, 'Work Order Input', 'Q1', WorkOrderIiput()),
-    WorkOrderStep(1, 'Issue Material', 'Q1', ),
+    WorkOrderStep(1, 'Issue Material', 'Q1', IssueMaterial()),
     WorkOrderStep(2, 'Cut Blocks', 'Q1', CutBlocks()),
     WorkOrderStep(3, 'Machine', 'Q1', MachineStep()),
     WorkOrderStep(4, 'Cleanline', 'Q1', Cleanline()),

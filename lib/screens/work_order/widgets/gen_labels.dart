@@ -14,6 +14,8 @@ class GenLabels extends StatefulWidget {
 
 class _GenLabelsState extends State<GenLabels> {
   double quantityProcessed = 0.0;
+  String userComment = 'Sign here';
+  final userCommentController = TextEditingController();
   final quantityProcessedTextController = TextEditingController();
 
   @override
@@ -114,7 +116,8 @@ class _GenLabelsState extends State<GenLabels> {
                               Text('3')),
                           DataCell(Text('12')),
                           DataCell(Text('3')),
-                          DataCell(Text('a.user'), showEditIcon: true, ),
+                          DataCell(Text(
+                              userComment), showEditIcon: true, ),
                         ]),
                       ]),
 
@@ -129,6 +132,16 @@ class _GenLabelsState extends State<GenLabels> {
                   color: Colors.white,
                   child: Column(
                     children: <Widget>[
+                      TextFormField(
+                        controller: userCommentController,
+                      ),
+                      FlatButton(onPressed: () {
+                        setState(() {
+                          userComment = userCommentController.text;
+                        });
+                      }, child: Text(
+                        'press'
+                      ),),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Container(
