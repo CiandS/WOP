@@ -25,15 +25,13 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   int currentStep = 0;
   bool complete = false;
   List<Step> steps = <Step>[];
-  List<WorkOrderStep> workOrderSteps = [
-    WorkOrderStep(0, 'Work Order Input', 'Q1', WorkOrderIiput()),
-    WorkOrderStep(1, 'Issue Material', 'Q1', IssueMaterial()),
-    WorkOrderStep(2, 'Cut Blocks', 'Q1', CutBlocks()),
-    WorkOrderStep(3, 'Machine', 'Q1', MachineStep()),
-    WorkOrderStep(4, 'Cleanline', 'Q1', Cleanline()),
-    WorkOrderStep(5, 'Generate Labels', 'Q1', GenLabels()),
-    WorkOrderStep(6, 'Cleanroom Packaging', 'Q1', CleanroomPack()),
-  ];
+  List<WorkOrderStep> workOrderSteps;
+  bool isWorkOrderStepProcessed = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   List<Step> _getSteps(BuildContext context) {
     steps = [];
@@ -74,9 +72,8 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   void next() {
     WorkOrderStep currentWorkOrderStep = workOrderSteps[currentStep];
 
-    bool isWorkOrderStepProcessed =
-        Provider.of<WorkOrderHistoryProvider>(context)
-            .isWorkOrderStepProcessed(currentWorkOrderStep.stepTitle);
+    isWorkOrderStepProcessed = Provider.of<WorkOrderHistoryProvider>(context)
+        .isWorkOrderStepProcessed(currentWorkOrderStep.stepTitle);
 
     if (isWorkOrderStepProcessed) {
       setNextStep();
@@ -99,8 +96,27 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
     setState(() => currentStep = step);
   }
 
+  processClicked() {
+    WorkOrderStep currentWorkOrderStep = workOrderSteps[currentStep];
+
+    setState(() {
+      isWorkOrderStepProcessed = Provider.of<WorkOrderHistoryProvider>(context)
+          .isWorkOrderStepProcessed(currentWorkOrderStep.stepTitle);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    workOrderSteps = [
+      WorkOrderStep(0, 'Work Order Input', 'Q1', WorkOrderIiput()),
+      WorkOrderStep(1, 'Issue Material', 'Q1', IssueMaterial(processClicked)),
+      WorkOrderStep(2, 'Cut Blocks', 'Q1', CutBlocks()),
+      WorkOrderStep(3, 'Machine', 'Q1', MachineStep()),
+      WorkOrderStep(4, 'Cleanline', 'Q1', Cleanline()),
+      WorkOrderStep(5, 'Generate Labels', 'Q1', GenLabels()),
+      WorkOrderStep(6, 'Cleanroom Packaging', 'Q1', CleanroomPack()),
+    ];
+
     return new Scaffold(
       appBar: AppBar(
         title: Center(child: Text('Work Order Process')),
@@ -141,7 +157,9 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                             children: <Widget>[
                               RaisedButton(
                                 color: Colors.blue,
-                                onPressed: onStepContinue,
+                                onPressed: isWorkOrderStepProcessed
+                                    ? onStepContinue
+                                    : null,
                                 child: const Text('NEXT'),
                               ),
                               SizedBox(
@@ -165,12 +183,6 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
         ]),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      // floatingActionButton: FloatingActionButton(
-      //     child: Icon(Icons.list),
-      //     onPressed: () {
-      //       Navigator.push(context,
-      //           new MaterialPageRoute(builder: (context) => WOHistoryPage()));
-      //     }),
       floatingActionButton: AnimatedFab(),
     );
   }
