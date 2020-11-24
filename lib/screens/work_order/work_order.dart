@@ -177,7 +177,8 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                               OutlinedButton(
                                 style: ButtonStyle(),
                                 onPressed: onStepCancel,
-                                child: const Text('CANCEL'),
+                                child: const Text('CANCEL',
+                                  style: TextStyle(color: Colors.black54,)),
                               ),
                             ],
                           ),

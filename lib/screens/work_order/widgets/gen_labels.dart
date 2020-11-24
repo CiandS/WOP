@@ -20,7 +20,9 @@ class GenLabels extends StatefulWidget {
 
 class _GenLabelsState extends State<GenLabels> {
   double quantityProcessed = 0.0;
-  String userComment = 'Sign here';
+  String userComment = 'Insert Comment';
+  String userSignature = 'Sign here';
+  final userSignatureController = TextEditingController();
   final userCommentController = TextEditingController();
   final quantityProcessedTextController = TextEditingController();
 
@@ -35,10 +37,41 @@ class _GenLabelsState extends State<GenLabels> {
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
     WorkOrder workOrder =
         Provider.of<WorkOrderProvider>(context, listen: false).getWorkOrder;
+
+    AlertDialog inputComment = AlertDialog(
+      title: Text("Pressure Comment"),
+      content: TextFormField(
+        controller: userCommentController,
+      ),
+      actions: [
+        FlatButton(onPressed: (){
+          setState(() {
+            userComment = userCommentController.text;
+          });
+        }, child: Text('Enter'))
+      ],
+    );
+
+    AlertDialog inputSignature = AlertDialog(
+      title: Text("Please insert e-Signature"),
+      content: TextFormField(
+        controller: userSignatureController,
+      ),
+      actions: [
+        FlatButton(onPressed: (){
+          setState(() {
+            userSignature = userSignatureController.text;
+          });
+        }, child: Text('Enter'))
+      ],
+    );
+
+
     return Center(
         child: Column(
       children: [
@@ -123,11 +156,11 @@ class _GenLabelsState extends State<GenLabels> {
                           DataCell(Text('12')),
                           DataCell(Text('3')),
                           DataCell(Text(
-                              userComment), showEditIcon: true, ),
+                              userSignature), showEditIcon: true, ),
                         ]),
                       ]),
-
                     ),
+
                   ]),
                 ),
               ),
@@ -138,66 +171,107 @@ class _GenLabelsState extends State<GenLabels> {
                   color: Colors.white,
                   child: Column(
                     children: <Widget>[
-                      TextFormField(
-                        controller: userCommentController,
-                      ),
-                      FlatButton(onPressed: () {
-                        setState(() {
-                          userComment = userCommentController.text;
-                        });
-                      }, child: Text(
-                        'press'
-                      ),),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Container(
-                            child: Text(
-                          'Condition Checks',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.left,
-                        )),
-                      ),
+                      DataTable(showCheckboxColumn: true, columns: [
+                        DataColumn(label: Text('Time')),
+                        DataColumn(label: Text('Pressure Comment')),
+                        DataColumn(label: Text('Signature')),
+                      ], rows: [
+                        DataRow(cells: [
+                          DataCell(Text('07:00')),
+                          DataCell(Text(userComment),
+                            onTap: () => showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return inputComment;
+                            },
+                          ), ),
+                          DataCell(Text(
+                              userSignature),
+                            onTap: () => showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return inputSignature;
+                              },
+                            ),
+                            showEditIcon: true, ),
+                        ]),
+                      ]),
+
+
+                      // TextFormField(
+                      //   controller: userCommentController,
+                      // ),
+                      // FlatButton(onPressed: () {
+                      //   setState(() {
+                      //     userComment = userCommentController.text;
+                      //   });
+                      // }, child: Text(
+                      //   'press'
+                      // ),),
+                      // Align(
+                      //   alignment: Alignment.centerLeft,
+                      //   child: Container(
+                      //       child: Text(
+                      //     'Condition Checks',
+                      //     style: TextStyle(fontWeight: FontWeight.bold),
+                      //     textAlign: TextAlign.left,
+                      //   )),
+                      // ),
                       Container(
-                          width: 300.0,
+                        padding: const EdgeInsets.only(top: 20),
+                          width: 450.0,
                           child: Expanded(
                             child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Flexible(
-                                  child: TextFormField(
-                                    controller: quantityProcessedTextController,
-                                    decoration: InputDecoration(
-                                        labelText: 'Input Quantity Processed'),
-                                    keyboardType: TextInputType.number,
+                                  child: SizedBox(
+                                    width: 200,
+                                    child: TextFormField(
+                                      controller: quantityProcessedTextController,
+                                      decoration: InputDecoration(
+                                          labelText: 'Input Quantity Processed'),
+                                      keyboardType: TextInputType.number,
+                                    ),
                                   ),
                                 ),
-                                FlatButton(
-                                    color: Colors.redAccent,
-                                    onPressed: () {
-                                      setState(() {
-                                        quantityProcessed += double.parse(
-                                                quantityProcessedTextController
-                                                    .text) /
-                                            10;
-                                      });
+                                SizedBox(
+                                  height: 40,
+                                  child: OutlinedButton.icon(
+                                      label: Text(
+                                          'Process', style: TextStyle(color: Colors.redAccent[700], fontSize: 16), ),
+                                      icon: Icon(
+                                        Icons.settings,
+                                        color: Colors.redAccent[700],
+                                        size: 28,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          quantityProcessed += double.parse(
+                                                  quantityProcessedTextController
+                                                      .text) /
+                                              10;
+                                        });
 
-                                      if (quantityProcessed == 1.0) {
-                                        Provider.of<WorkOrderHistoryProvider>(
-                                                context)
-                                            .addWorkOrderHistory(
-                                          WorkOrderHistory(
-                                              Constants.GENERATE_LABELS,
-                                              DateTime.now(),
-                                              "test1234",
-                                              WorkOrderUtil.getInstance
-                                                  .getQuantityProcessedPercentage(
-                                                      quantityProcessed),
-                                              null),
-                                        );
-                                        widget.callback();
-                                      }
-                                    },
-                                    child: Text('Process'))
+                                        if (quantityProcessed == 1.0) {
+                                          Provider.of<WorkOrderHistoryProvider>(
+                                                  context)
+                                              .addWorkOrderHistory(
+                                            WorkOrderHistory(
+                                                Constants.GENERATE_LABELS,
+                                                DateTime.now(),
+                                                "test1234",
+                                                WorkOrderUtil.getInstance
+                                                    .getQuantityProcessedPercentage(
+                                                        quantityProcessed),
+                                                null),
+                                          );
+                                          widget.callback();
+                                        }
+                                      },
+                                  ),
+                                )
                               ],
                             ),
                           )),
@@ -206,6 +280,7 @@ class _GenLabelsState extends State<GenLabels> {
                 ),
               )
             ],
+
           ),
         ),
         //       Row(

@@ -197,22 +197,33 @@ class _MachineStepState extends State<MachineStep> {
                             });
                           }),
                       Container(
-                          width: 300.0,
+                          width: 400.0,
                           child: Expanded(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Flexible(
-                                  child: TextFormField(
-                                    controller: quantityProcessedTextController,
-                                    decoration: InputDecoration(
-                                        labelText: 'Input Quantity Processed'),
-                                    keyboardType: TextInputType.number,
+                                  child: SizedBox(
+                                    width: 200,
+                                    child: TextFormField(
+                                      controller: quantityProcessedTextController,
+                                      decoration: InputDecoration(
+                                          labelText: 'Input Quantity Processed'),
+                                      keyboardType: TextInputType.number,
+                                    ),
                                   ),
                                 ),
-                                FlatButton(
-                                    color: Colors.redAccent,
+                                SizedBox(
+                                    height: 40,
+                                    child: OutlinedButton.icon(
+                                      label: Text(
+                                        'Process', style: TextStyle(color: Colors.redAccent[700], fontSize: 16), ),
+                                      icon: Icon(
+                                        Icons.settings,
+                                        color: Colors.redAccent[700],
+                                        size: 28,
+                                      ),
                                     onPressed: () {
                                       setState(() {
                                         quantityProcessed += double.parse(
@@ -238,7 +249,7 @@ class _MachineStepState extends State<MachineStep> {
 
                                       }
                                     },
-                                    child: Text('Process'))
+                                ))
                               ],
                             ),
                           )),
