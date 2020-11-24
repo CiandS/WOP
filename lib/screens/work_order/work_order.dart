@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:work_order_process/models/work_order_history.dart';
@@ -105,16 +107,21 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
     });
   }
 
+  bool isCurrentStepButtonEnabled() {
+    WorkOrderStep currentWorkOrderStep = workOrderSteps[currentStep];
+    return currentWorkOrderStep.stepTitle == Constants.WORK_ORDER_INPUT || isWorkOrderStepProcessed;
+  }
+
   @override
   Widget build(BuildContext context) {
     workOrderSteps = [
-      WorkOrderStep(0, 'Work Order Input', 'Q1', WorkOrderIiput()),
+      WorkOrderStep(0, 'Work Order Input', 'Q1', WorkOrderInput()),
       WorkOrderStep(1, 'Issue Material', 'Q1', IssueMaterial(processClicked)),
-      WorkOrderStep(2, 'Cut Blocks', 'Q1', CutBlocks()),
-      WorkOrderStep(3, 'Machine', 'Q1', MachineStep()),
-      WorkOrderStep(4, 'Cleanline', 'Q1', Cleanline()),
-      WorkOrderStep(5, 'Generate Labels', 'Q1', GenLabels()),
-      WorkOrderStep(6, 'Cleanroom Packaging', 'Q1', CleanroomPack()),
+      WorkOrderStep(2, 'Cut Blocks', 'Q1', CutBlocks(processClicked)),
+      WorkOrderStep(3, 'Machine', 'Q1', MachineStep(processClicked)),
+      WorkOrderStep(4, 'Cleanline', 'Q1', Cleanline(processClicked)),
+      WorkOrderStep(5, 'Generate Labels', 'Q1', GenLabels(processClicked)),
+      WorkOrderStep(6, 'Cleanroom Packaging', 'Q1', CleanroomPack(processClicked)),
     ];
 
     return new Scaffold(
@@ -156,16 +163,19 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
                               RaisedButton(
-                                color: Colors.blue,
-                                onPressed: isWorkOrderStepProcessed
+                                color: Colors.blue[800],
+                                onPressed: isCurrentStepButtonEnabled()
                                     ? onStepContinue
                                     : null,
-                                child: const Text('NEXT'),
+                                child: const Text(
+                                    'NEXT',
+                                  style: TextStyle(color: Colors.white,)),
                               ),
                               SizedBox(
                                 width: 20,
                               ),
-                              RaisedButton(
+                              OutlinedButton(
+                                style: ButtonStyle(),
                                 onPressed: onStepCancel,
                                 child: const Text('CANCEL'),
                               ),

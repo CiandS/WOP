@@ -9,6 +9,12 @@ import 'package:work_order_process/providers/work_order_provider.dart';
 import 'package:work_order_process/utils/work_order_util.dart';
 
 class GenLabels extends StatefulWidget {
+  final VoidCallback callback;
+
+  GenLabels(this.callback);
+  @override
+
+
   _GenLabelsState createState() => _GenLabelsState();
 }
 
@@ -188,6 +194,7 @@ class _GenLabelsState extends State<GenLabels> {
                                                       quantityProcessed),
                                               null),
                                         );
+                                        widget.callback();
                                       }
                                     },
                                     child: Text('Process'))

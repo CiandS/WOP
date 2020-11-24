@@ -10,6 +10,11 @@ import 'package:work_order_process/utils/work_order_util.dart';
 import '../../../constants.dart';
 
 class MachineStep extends StatefulWidget {
+
+  final VoidCallback callback;
+
+  MachineStep(this.callback);
+
   @override
   _MachineStepState createState() => _MachineStepState();
 }
@@ -229,6 +234,8 @@ class _MachineStepState extends State<MachineStep> {
                                                       quantityProcessed),
                                               null),
                                         );
+                                        widget.callback();
+
                                       }
                                     },
                                     child: Text('Process'))

@@ -10,6 +10,9 @@ import 'package:work_order_process/utils/work_order_util.dart';
 import '../../../constants.dart';
 
 class CutBlocks extends StatefulWidget {
+  final VoidCallback callback;
+
+  CutBlocks(this.callback);
   @override
   _CutBlocksState createState() => _CutBlocksState();
 }
@@ -189,7 +192,6 @@ class _CutBlocksState extends State<CutBlocks> {
                                                   quantityProcessedTextController
                                                       .text) /
                                               10;
-                                        });
 
                                         if (quantityProcessed == 1.0) {
                                           Provider.of<WorkOrderHistoryProvider>(
@@ -204,7 +206,9 @@ class _CutBlocksState extends State<CutBlocks> {
                                                         quantityProcessed),
                                                 null),
                                           );
+                                          widget.callback();
                                         }
+                                        });
                                       },
                                       child: Text('Process'))
                                 ],

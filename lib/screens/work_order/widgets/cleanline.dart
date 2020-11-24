@@ -10,6 +10,11 @@ import 'package:work_order_process/utils/work_order_util.dart';
 import '../../../constants.dart';
 
 class Cleanline extends StatefulWidget {
+
+  final VoidCallback callback;
+
+  Cleanline(this.callback);
+
   @override
   _CleanlineState createState() => _CleanlineState();
 }
@@ -216,6 +221,7 @@ class _CleanlineState extends State<Cleanline> {
                                                           quantityProcessed),
                                                   null),
                                             );
+                                            widget.callback();
                                           }
                                         },
                                         child: Text('Process'))

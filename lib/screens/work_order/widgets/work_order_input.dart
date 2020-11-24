@@ -3,12 +3,12 @@ import 'package:pinput/pin_put/pin_put.dart';
 import 'package:provider/provider.dart';
 import 'package:work_order_process/providers/work_order_provider.dart';
 
-class WorkOrderIiput extends StatefulWidget {
+class WorkOrderInput extends StatefulWidget {
   @override
-  _WorkOrderIiputState createState() => _WorkOrderIiputState();
+  _WorkOrderInputState createState() => _WorkOrderInputState();
 }
 
-class _WorkOrderIiputState extends State<WorkOrderIiput> {
+class _WorkOrderInputState extends State<WorkOrderInput> {
   int cuttingMachine = 1;
   bool _eccCutCheck = false;
   bool _qracCutCheck = false;

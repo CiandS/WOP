@@ -9,6 +9,11 @@ import 'package:work_order_process/providers/work_order_provider.dart';
 import 'package:work_order_process/utils/work_order_util.dart';
 
 class CleanroomPack extends StatefulWidget {
+
+  final VoidCallback callback;
+
+  CleanroomPack(this.callback);
+
   @override
   _CleanroomPackState createState() => _CleanroomPackState();
 }
@@ -219,6 +224,7 @@ class _CleanroomPackState extends State<CleanroomPack> {
                                                         quantityProcessed),
                                                 null),
                                           );
+                                          widget.callback();
                                         }
                                       },
                                       child: Text('Process'))
