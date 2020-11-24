@@ -10,7 +10,9 @@ import 'package:work_order_process/utils/work_order_util.dart';
 import '../../../constants.dart';
 
 class IssueMaterial extends StatefulWidget {
+  final VoidCallback callback;
 
+  IssueMaterial(this.callback);
   @override
   _IssueMaterialState createState() => _IssueMaterialState();
 }
@@ -131,9 +133,10 @@ class _IssueMaterialState extends State<IssueMaterial> {
                                                           quantityProcessed),
                                                   null),
                                             );
+
+                                            widget.callback();
                                           }
                                         });
-
                                       },
                                       child: Text('Process'))
                                 ],
