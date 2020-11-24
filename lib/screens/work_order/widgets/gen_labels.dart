@@ -68,7 +68,9 @@ class _GenLabelsState extends State<GenLabels> {
                     ),
                   ),
                   backgroundColor: Colors.grey,
-                  progressColor: Colors.blue[800],
+                  progressColor: quantityProcessed == 1.0
+                      ? Colors.green
+                      : Colors.blue[800],
                 ),
               ),
             ),
@@ -101,16 +103,21 @@ class _GenLabelsState extends State<GenLabels> {
                         DataColumn(label: Text('A - B')),
                         DataColumn(label: Text('C')),
                         DataColumn(label: Text('Signature')),
-                      ], rows: [
+                      ], rows:
+
+
+                      [
                         DataRow(cells: [
                           DataCell(Text('07:00')),
                           DataCell(Text('15')),
-                          DataCell(Text('3')),
+                          DataCell(
+                              Text('3')),
                           DataCell(Text('12')),
                           DataCell(Text('3')),
-                          DataCell(Text('a.user'), showEditIcon: true),
+                          DataCell(Text('a.user'), showEditIcon: true, ),
                         ]),
                       ]),
+
                     ),
                   ]),
                 ),

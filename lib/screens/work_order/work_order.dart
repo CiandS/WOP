@@ -21,13 +21,28 @@ class WorkOrderPage extends StatefulWidget {
   _WorkOrderPageState createState() => new _WorkOrderPageState();
 }
 
+
 class _WorkOrderPageState extends State<WorkOrderPage> {
   int currentStep = 0;
   bool complete = false;
+  bool isWorkOrderStepProcessed = false;
+
   List<Step> steps = <Step>[];
+  processClicked() {
+    WorkOrderStep currentWorkOrderStep = workOrderSteps[currentStep];
+
+    setState(() {
+      isWorkOrderStepProcessed =
+          Provider.of<WorkOrderHistoryProvider>(context)
+              .isWorkOrderStepProcessed(currentWorkOrderStep.stepTitle);
+    });
+
+
+  }
+  IssueMaterial issueMaterial = IssueMaterial(processClicked);
   List<WorkOrderStep> workOrderSteps = [
     WorkOrderStep(0, 'Work Order Input', 'Q1', WorkOrderIiput()),
-    WorkOrderStep(1, 'Issue Material', 'Q1', IssueMaterial()),
+    WorkOrderStep(1, 'Issue Material', 'Q1', ),
     WorkOrderStep(2, 'Cut Blocks', 'Q1', CutBlocks()),
     WorkOrderStep(3, 'Machine', 'Q1', MachineStep()),
     WorkOrderStep(4, 'Cleanline', 'Q1', Cleanline()),
@@ -74,12 +89,15 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   void next() {
     WorkOrderStep currentWorkOrderStep = workOrderSteps[currentStep];
 
-    bool isWorkOrderStepProcessed =
+   isWorkOrderStepProcessed =
         Provider.of<WorkOrderHistoryProvider>(context)
             .isWorkOrderStepProcessed(currentWorkOrderStep.stepTitle);
 
     if (isWorkOrderStepProcessed) {
       setNextStep();
+      setState(() {
+        isWorkOrderStepProcessed = isWorkOrderStepProcessed;
+      });
     } else if (currentWorkOrderStep.stepTitle == Constants.WORK_ORDER_INPUT) {
       setNextStep();
     } else {
@@ -99,6 +117,18 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
         currentStep = 0;
       });
     }
+  }
+
+  processClicked() {
+    WorkOrderStep currentWorkOrderStep = workOrderSteps[currentStep];
+
+setState(() {
+  isWorkOrderStepProcessed =
+      Provider.of<WorkOrderHistoryProvider>(context)
+          .isWorkOrderStepProcessed(currentWorkOrderStep.stepTitle);
+});
+
+
   }
 
   goTo(int step) {
@@ -147,13 +177,13 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                             children: <Widget>[
                               RaisedButton(
                                 color: Colors.blue[800],
-                                onPressed: onStepContinue,
+                                onPressed: isWorkOrderStepProcessed ? onStepContinue : null,
                                 child: const Text('NEXT'),
                               ),
                               SizedBox(
                                 width: 20,
                               ),
-                              RaisedButton(
+                              OutlinedButton(
                                 onPressed: onStepCancel,
                                 child: const Text('CANCEL'),
                               ),
