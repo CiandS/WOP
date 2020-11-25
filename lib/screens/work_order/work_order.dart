@@ -67,7 +67,10 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
 
   void setNextStep() {
     currentStep + 1 != steps.length
-        ? setState(() => currentStep++)
+        ? setState(() {
+            isWorkOrderStepProcessed = false;
+            currentStep++;
+          })
         : setState(() => complete = true);
   }
 
@@ -109,7 +112,8 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
 
   bool isCurrentStepButtonEnabled() {
     WorkOrderStep currentWorkOrderStep = workOrderSteps[currentStep];
-    return currentWorkOrderStep.stepTitle == Constants.WORK_ORDER_INPUT || isWorkOrderStepProcessed;
+    return currentWorkOrderStep.stepTitle == Constants.WORK_ORDER_INPUT ||
+        isWorkOrderStepProcessed;
   }
 
   @override
@@ -122,7 +126,8 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
       WorkOrderStep(3, 'Machine', 'Q1', MachineStep(processClicked)),
       WorkOrderStep(4, 'Cleanline', 'Q1', Cleanline(processClicked)),
       WorkOrderStep(5, 'Generate Labels', 'Q1', GenLabels(processClicked)),
-      WorkOrderStep(6, 'Cleanroom Packaging', 'Q1', CleanroomPack(processClicked)),
+      WorkOrderStep(
+          6, 'Cleanroom Packaging', 'Q1', CleanroomPack(processClicked)),
     ];
 
     return new Scaffold(
@@ -168,9 +173,10 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                                 onPressed: isCurrentStepButtonEnabled()
                                     ? onStepContinue
                                     : null,
-                                child: const Text(
-                                    'NEXT',
-                                  style: TextStyle(color: Colors.white,)),
+                                child: const Text('NEXT',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    )),
                               ),
                               SizedBox(
                                 width: 20,
@@ -179,7 +185,9 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                                 style: ButtonStyle(),
                                 onPressed: onStepCancel,
                                 child: const Text('CANCEL',
-                                  style: TextStyle(color: Colors.black54,)),
+                                    style: TextStyle(
+                                      color: Colors.black54,
+                                    )),
                               ),
                             ],
                           ),
