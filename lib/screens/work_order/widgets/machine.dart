@@ -10,7 +10,6 @@ import 'package:work_order_process/utils/work_order_util.dart';
 import '../../../constants.dart';
 
 class MachineStep extends StatefulWidget {
-
   final VoidCallback callback;
 
   MachineStep(this.callback);
@@ -42,6 +41,28 @@ class _MachineStepState extends State<MachineStep> {
   Widget build(BuildContext context) {
     WorkOrder workOrder =
         Provider.of<WorkOrderProvider>(context, listen: false).getWorkOrder;
+
+    AlertDialog overQuantity = AlertDialog(
+      title: Icon(
+        Icons.info_outline,
+      ),
+      content: SingleChildScrollView(
+        child: ListBody(
+          children: <Widget>[
+            Text('Exceeded remaining Quantity'),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        TextButton(
+          child: Text('Close'),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
+
     return Center(
         child: Column(children: <Widget>[
       Text("Work Order Number: ${workOrder.getWorkOrderNumber}",
@@ -67,6 +88,7 @@ class _MachineStepState extends State<MachineStep> {
               width: 200,
               padding: const EdgeInsets.only(bottom: 10.0),
               child: new LinearPercentIndicator(
+                animation: true,
                 width: 200.0,
                 lineHeight: 40.0,
                 percent: quantityProcessed,
@@ -207,9 +229,11 @@ class _MachineStepState extends State<MachineStep> {
                                   child: SizedBox(
                                     width: 200,
                                     child: TextFormField(
-                                      controller: quantityProcessedTextController,
+                                      controller:
+                                          quantityProcessedTextController,
                                       decoration: InputDecoration(
-                                          labelText: 'Input Quantity Processed'),
+                                          labelText:
+                                              'Input Quantity Processed'),
                                       keyboardType: TextInputType.number,
                                     ),
                                   ),
@@ -218,38 +242,48 @@ class _MachineStepState extends State<MachineStep> {
                                     height: 40,
                                     child: OutlinedButton.icon(
                                       label: Text(
-                                        'Process', style: TextStyle(color: Colors.redAccent[700], fontSize: 16), ),
+                                        'Process',
+                                        style: TextStyle(
+                                            color: Colors.redAccent[700],
+                                            fontSize: 16),
+                                      ),
                                       icon: Icon(
                                         Icons.settings,
                                         color: Colors.redAccent[700],
                                         size: 28,
                                       ),
-                                    onPressed: () {
-                                      setState(() {
-                                        quantityProcessed += double.parse(
-                                                quantityProcessedTextController
-                                                    .text) /
-                                            10;
-                                      });
-
-                                      if (quantityProcessed == 1.0) {
-                                        Provider.of<WorkOrderHistoryProvider>(
-                                                context)
-                                            .addWorkOrderHistory(
-                                          WorkOrderHistory(
-                                              Constants.MACHINE,
-                                              DateTime.now(),
-                                              "test1234",
-                                              WorkOrderUtil.getInstance
-                                                  .getQuantityProcessedPercentage(
-                                                      quantityProcessed),
-                                              null),
-                                        );
-                                        widget.callback();
-
-                                      }
-                                    },
-                                ))
+                                      onPressed: () {
+                                        setState(() {
+                                          (double.parse(quantityProcessedTextController.text) / 10 + quantityProcessed  > 1.0)
+                                              ? showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return overQuantity;
+                                            },
+                                          )
+                                              :
+                                          quantityProcessed += double.parse(
+                                              quantityProcessedTextController
+                                                  .text) /
+                                              10;
+                                        });
+                                        if (quantityProcessed == 1.0) {
+                                          Provider.of<WorkOrderHistoryProvider>(
+                                                  context)
+                                              .addWorkOrderHistory(
+                                            WorkOrderHistory(
+                                                Constants.MACHINE,
+                                                DateTime.now(),
+                                                "test1234",
+                                                WorkOrderUtil.getInstance
+                                                    .getQuantityProcessedPercentage(
+                                                        quantityProcessed),
+                                                null),
+                                          );
+                                          widget.callback();
+                                        }
+                                      },
+                                    ))
                               ],
                             ),
                           )),

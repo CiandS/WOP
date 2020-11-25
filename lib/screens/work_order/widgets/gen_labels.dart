@@ -57,6 +57,28 @@ class _GenLabelsState extends State<GenLabels> {
       ],
     );
 
+    AlertDialog overQuantity = AlertDialog(
+      title: Icon(
+        Icons.info_outline,
+      ),
+      content: SingleChildScrollView(
+        child: ListBody(
+          children: <Widget>[
+            Text('Exceeded remaining Quantity'),
+          ],
+        ),
+      ),
+        actions: <Widget>[
+          TextButton(
+            child: Text('Close'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+    );
+
+
     AlertDialog inputSignature = AlertDialog(
       title: Text("Please insert e-Signature"),
       content: TextFormField(
@@ -95,9 +117,10 @@ class _GenLabelsState extends State<GenLabels> {
             Align(
               alignment: Alignment.topRight,
               child: Container(
-                width: 200,
+                width: 250,
                 padding: const EdgeInsets.only(bottom: 10.0),
                 child: new LinearPercentIndicator(
+                  animation: true,
                   width: 200.0,
                   lineHeight: 40.0,
                   percent: quantityProcessed,
@@ -248,6 +271,14 @@ class _GenLabelsState extends State<GenLabels> {
                                       ),
                                       onPressed: () {
                                         setState(() {
+                                          (double.parse(quantityProcessedTextController.text) / 10 + quantityProcessed  > 1.0)
+                                              ? showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return overQuantity;
+                                            },
+                                          )
+                                          :
                                           quantityProcessed += double.parse(
                                                   quantityProcessedTextController
                                                       .text) /
@@ -269,6 +300,14 @@ class _GenLabelsState extends State<GenLabels> {
                                           );
                                           widget.callback();
                                         }
+                                        // else if (quantityProcessed > 1.0) {
+                                        //   showDialog(
+                                        //     context: context,
+                                        //     builder: (BuildContext context) {
+                                        //       return overQuantity;
+                                        //     },
+                                        //   );
+                                        // }
                                       },
                                   ),
                                 )
