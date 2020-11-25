@@ -121,30 +121,37 @@ class _LoginState extends State<Login> {
                                       return null;
                                     },
                                   ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      String user = "test1234";
-                                      String password = "test1234";
-                                      // Validate returns true if the form is valid, otherwise false.
-                                      if (_formKey.currentState.validate()) {
-                                        _formKey.currentState.save();
-                                        debugPrint(
-                                            '${usernameController.text} ${passwordController.text}');
-                                        // Scaffold.of(context).showSnackBar(
-                                        //     SnackBar(content: Text('Processing Data')));
-                                        if (usernameController.text == user &&
-                                            passwordController.text ==
-                                                password) {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    WorkOrderPage()),
-                                          );
+                                  SizedBox(
+                                    height: 30,
+                                  ),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: ElevatedButton(
+                                      style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.blue[800]),),
+                                      onPressed: () {
+                                        String user = "test1234";
+                                        String password = "test1234";
+                                        // Validate returns true if the form is valid, otherwise false.
+                                        if (_formKey.currentState.validate()) {
+                                          _formKey.currentState.save();
+                                          debugPrint(
+                                              '${usernameController.text} ${passwordController.text}');
+                                          // Scaffold.of(context).showSnackBar(
+                                          //     SnackBar(content: Text('Processing Data')));
+                                          if (usernameController.text == user &&
+                                              passwordController.text ==
+                                                  password) {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      WorkOrderPage()),
+                                            );
+                                          }
                                         }
-                                      }
-                                    },
-                                    child: Text('Login'),
+                                      },
+                                      child: Text('Login'),
+                                    ),
                                   )
                                 ],
                               ),

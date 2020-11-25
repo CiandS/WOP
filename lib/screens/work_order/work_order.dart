@@ -114,6 +114,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
 
   @override
   Widget build(BuildContext context) {
+    isWorkOrderStepProcessed = false;
     workOrderSteps = [
       WorkOrderStep(0, 'Work Order Input', 'Q1', WorkOrderInput()),
       WorkOrderStep(1, 'Issue Material', 'Q1', IssueMaterial(processClicked)),
