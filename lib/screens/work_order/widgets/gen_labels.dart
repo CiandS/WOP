@@ -262,15 +262,20 @@ class _GenLabelsState extends State<GenLabels> {
                                 SizedBox(
                                   height: 40,
                                   child: OutlinedButton.icon(
+                                    style: ButtonStyle(
+
+                                      overlayColor: MaterialStateProperty.all(Colors.red)
+                                    ),
                                       label: Text(
-                                          'Process', style: TextStyle(color: Colors.redAccent[700], fontSize: 16), ),
+                                          'Process', style: TextStyle( fontSize: 16), ),
                                       icon: Icon(
                                         Icons.settings,
-                                        color: Colors.redAccent[700],
                                         size: 28,
                                       ),
-                                      onPressed: () {
-                                        setState(() {
+                                      onPressed: quantityProcessed == 1.0 ?  null  :  () {
+
+
+                                         setState(() {
                                           (double.parse(quantityProcessedTextController.text) / 10 + quantityProcessed  > 1.0)
                                               ? showDialog(
                                             context: context,
@@ -284,6 +289,7 @@ class _GenLabelsState extends State<GenLabels> {
                                                       .text) /
                                               10;
                                         });
+
 
                                         if (quantityProcessed == 1.0) {
                                           Provider.of<WorkOrderHistoryProvider>(
@@ -300,6 +306,7 @@ class _GenLabelsState extends State<GenLabels> {
                                           );
                                           widget.callback();
                                         }
+
                                         // else if (quantityProcessed > 1.0) {
                                         //   showDialog(
                                         //     context: context,
@@ -308,7 +315,9 @@ class _GenLabelsState extends State<GenLabels> {
                                         //     },
                                         //   );
                                         // }
-                                      },
+
+                                      }
+
                                   ),
                                 )
                               ],
