@@ -213,8 +213,8 @@ class _CutBlocksState extends State<CutBlocks> {
                                     ),
                                   ),
                                   SizedBox(
-                                      height: 40,
-                                      child: OutlinedButton.icon(
+                                    height: 40,
+                                    child: OutlinedButton.icon(
                                         label: Text(
                                           'Process',
                                           style: TextStyle(
@@ -226,40 +226,43 @@ class _CutBlocksState extends State<CutBlocks> {
                                           color: Colors.redAccent[700],
                                           size: 28,
                                         ),
-                                        onPressed: () {
+                                        onPressed:  quantityProcessed == 1.0 ?  null  : () {
                                           setState(() {
-    (double.parse(quantityProcessedTextController.text) / 10 + quantityProcessed  > 1.0)
-    ? showDialog(
-    context: context,
-    builder: (BuildContext context) {
-    return overQuantity;
-    },
-    )
-        :
-    quantityProcessed += double.parse(
-    quantityProcessedTextController
-        .text) /
-    10;
-    });
+                                            (double.parse(quantityProcessedTextController
+                                                                .text) /
+                                                            10 +
+                                                        quantityProcessed >
+                                                    1.0)
+                                                ? showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return overQuantity;
+                                                    },
+                                                  )
+                                                : quantityProcessed += double.parse(
+                                                        quantityProcessedTextController
+                                                            .text) /
+                                                    10;
+                                          });
 
-                                            if (quantityProcessed == 1.0) {
-                                              Provider.of<WorkOrderHistoryProvider>(
-                                                      context)
-                                                  .addWorkOrderHistory(
-                                                WorkOrderHistory(
-                                                    Constants.CUT_BLOCKS,
-                                                    DateTime.now(),
-                                                    "test1234",
-                                                    WorkOrderUtil.getInstance
-                                                        .getQuantityProcessedPercentage(
-                                                            quantityProcessed),
-                                                    null),
-                                              );
-                                              widget.callback();
-                                            }
-                                          })
-                                        ,
-                                      )
+                                          if (quantityProcessed == 1.0) {
+                                            Provider.of<WorkOrderHistoryProvider>(
+                                                    context)
+                                                .addWorkOrderHistory(
+                                              WorkOrderHistory(
+                                                  Constants.CUT_BLOCKS,
+                                                  DateTime.now(),
+                                                  "test1234",
+                                                  WorkOrderUtil.getInstance
+                                                      .getQuantityProcessedPercentage(
+                                                          quantityProcessed),
+                                                  null),
+                                            );
+                                            widget.callback();
+                                          }
+                                        }),
+                                  )
                                 ],
                               ),
                             )),

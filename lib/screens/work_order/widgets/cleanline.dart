@@ -237,7 +237,7 @@ class _CleanlineState extends State<Cleanline> {
                                             color: Colors.redAccent[700],
                                             size: 28,
                                           ),
-                                          onPressed: () {
+                                          onPressed:  quantityProcessed == 1.0 ?  null  : () {
                                             setState(() {
                                               quantityProcessed += double.parse(
                                                       quantityProcessedTextController

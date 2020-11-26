@@ -263,7 +263,7 @@ class _GenLabelsState extends State<GenLabels> {
                                   height: 40,
                                   child: OutlinedButton.icon(
                                     style: ButtonStyle(
-
+                                      foregroundColor: MaterialStateProperty.all(Colors.red),
                                       overlayColor: MaterialStateProperty.all(Colors.red)
                                     ),
                                       label: Text(

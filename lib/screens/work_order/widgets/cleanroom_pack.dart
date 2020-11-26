@@ -242,7 +242,7 @@ class _CleanroomPackState extends State<CleanroomPack> {
                                           color: Colors.redAccent[700],
                                           size: 28,
                                         ),
-                                        onPressed: () {
+                                        onPressed:  quantityProcessed == 1.0 ?  null  : () {
                                           setState(() {
                                             (double.parse(quantityProcessedTextController.text) / 10 + quantityProcessed  > 1.0)
                                                 ? showDialog(
