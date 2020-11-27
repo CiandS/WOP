@@ -138,10 +138,6 @@ class _CutBlocksState extends State<CutBlocks> {
                                 child: Text("CSAW0004 - Kastro Circular Saw"),
                                 value: 2,
                               ),
-                              DropdownMenuItem(
-                                  child: Text("Machine 3"), value: 3),
-                              DropdownMenuItem(
-                                  child: Text("Machine 4"), value: 4),
                             ],
                             onChanged: (value) {
                               setState(() {
@@ -226,42 +222,46 @@ class _CutBlocksState extends State<CutBlocks> {
                                           color: Colors.redAccent[700],
                                           size: 28,
                                         ),
-                                        onPressed:  quantityProcessed == 1.0 ?  null  : () {
-                                          setState(() {
-                                            (double.parse(quantityProcessedTextController
-                                                                .text) /
-                                                            10 +
-                                                        quantityProcessed >
-                                                    1.0)
-                                                ? showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return overQuantity;
-                                                    },
-                                                  )
-                                                : quantityProcessed += double.parse(
-                                                        quantityProcessedTextController
-                                                            .text) /
-                                                    10;
-                                          });
+                                        onPressed: quantityProcessed == 1.0
+                                            ? null
+                                            : () {
+                                                setState(() {
+                                                  (double.parse(quantityProcessedTextController
+                                                                      .text) /
+                                                                  10 +
+                                                              quantityProcessed >
+                                                          1.0)
+                                                      ? showDialog(
+                                                          context: context,
+                                                          builder: (BuildContext
+                                                              context) {
+                                                            return overQuantity;
+                                                          },
+                                                        )
+                                                      : quantityProcessed +=
+                                                          double.parse(
+                                                                  quantityProcessedTextController
+                                                                      .text) /
+                                                              10;
+                                                });
 
-                                          if (quantityProcessed == 1.0) {
-                                            Provider.of<WorkOrderHistoryProvider>(
-                                                    context)
-                                                .addWorkOrderHistory(
-                                              WorkOrderHistory(
-                                                  Constants.CUT_BLOCKS,
-                                                  DateTime.now(),
-                                                  "test1234",
-                                                  WorkOrderUtil.getInstance
-                                                      .getQuantityProcessedPercentage(
-                                                          quantityProcessed),
-                                                  null),
-                                            );
-                                            widget.callback();
-                                          }
-                                        }),
+                                                if (quantityProcessed == 1.0) {
+                                                  Provider.of<WorkOrderHistoryProvider>(
+                                                          context)
+                                                      .addWorkOrderHistory(
+                                                    WorkOrderHistory(
+                                                        Constants.CUT_BLOCKS,
+                                                        DateTime.now(),
+                                                        "test1234",
+                                                        WorkOrderUtil
+                                                            .getInstance
+                                                            .getQuantityProcessedPercentage(
+                                                                quantityProcessed),
+                                                        null),
+                                                  );
+                                                  widget.callback();
+                                                }
+                                              }),
                                   )
                                 ],
                               ),
