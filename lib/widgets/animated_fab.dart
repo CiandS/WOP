@@ -92,7 +92,7 @@ class _AnimatedFabState extends State<AnimatedFab>
           context, new MaterialPageRoute(builder: (context) => ScrapScreen())),
       tooltip: 'Image',
       child: Icon(
-        Icons.auto_delete,
+        Icons.delete_forever,
       ),
     ));
   }
