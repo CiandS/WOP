@@ -37,7 +37,7 @@ class _WorkOrderInputState extends State<WorkOrderInput> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image.asset(
-              'j&j.jpg',
+              'j&j.png',
               height: 150,
               fit: BoxFit.cover,
             ),
