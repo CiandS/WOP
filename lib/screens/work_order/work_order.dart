@@ -29,6 +29,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   List<Step> steps = <Step>[];
   List<WorkOrderStep> workOrderSteps;
   bool isWorkOrderStepProcessed = false;
+  bool allStepsCompleted = false;
 
   @override
   void initState() {
@@ -52,11 +53,17 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   }
 
   StepState _getState(int i) {
+    if(allStepsCompleted == true)
+    {
+      return StepState.complete;
+    }
     if (currentStep > i) {
       return StepState.complete;
     } else if (currentStep == i) {
       return StepState.editing;
-    } else {
+    }
+
+    else {
       return StepState.indexed;
     }
   }
@@ -72,6 +79,12 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
             currentStep++;
           })
         : setState(() => complete = true);
+  }
+
+  void setAllStepsCompleted() {
+    setState(() {
+      allStepsCompleted = true;
+    });
   }
 
   void next() {
@@ -93,6 +106,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
     if (currentStep > 0) {
       setState(() {
         currentStep = 0;
+        allStepsCompleted = false;
       });
     }
   }
@@ -125,8 +139,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
       WorkOrderStep(3, 'Machine', 'Q1', MachineStep(processClicked)),
       WorkOrderStep(4, 'Cleanline', 'Q1', Cleanline(processClicked)),
       WorkOrderStep(5, 'Generate Labels', 'Q1', GenLabels(processClicked)),
-      WorkOrderStep(
-          6, 'Cleanroom Packaging', 'Q1', CleanroomPack(processClicked)),
+      WorkOrderStep(6, 'Cleanroom Packaging', 'Q1', CleanroomPack(processClicked, allStepsCompleted)),
     ];
 
     return new Scaffold(
@@ -149,6 +162,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                           onPressed: () {
                             setState(() {
                               complete = false;
+                              setAllStepsCompleted();
                             });
                           },
                         ),

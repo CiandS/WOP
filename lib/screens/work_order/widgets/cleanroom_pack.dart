@@ -10,8 +10,9 @@ import 'package:work_order_process/utils/work_order_util.dart';
 
 class CleanroomPack extends StatefulWidget {
   final VoidCallback callback;
+  final bool allStepsCompleted;
 
-  CleanroomPack(this.callback);
+  CleanroomPack(this.callback, this.allStepsCompleted);
 
   @override
   _CleanroomPackState createState() => _CleanroomPackState();
@@ -40,6 +41,11 @@ class _CleanroomPackState extends State<CleanroomPack> {
   Widget build(BuildContext context) {
     WorkOrder workOrder =
         Provider.of<WorkOrderProvider>(context, listen: false).getWorkOrder;
+
+    if(widget.allStepsCompleted)
+    {
+      quantityProcessed = 1.0;
+    }
 
     AlertDialog overQuantity = AlertDialog(
       title: Icon(

@@ -1,6 +1,11 @@
+<<<<<<< HEAD
+# Work Order Process (WOP) Application
+=======
+>>>>>>> dev
+
 # Work Order Process (WOP) Application
 
-A new Flutter application.
+A new Flutter application. 
 
 ## Getting Started
 
@@ -15,7 +20,10 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
 ## Login Screen
 
 When you open the app, you are presented with the OMS Login Screen. The Username and password to open the WOP application are:
@@ -47,3 +55,8 @@ Select your machine from the Dropdown menu. Check the checkboxes for the conditi
 Tap in the Insert Comment cell to confirm the pressure log check. Tap one of the Signature cells to add your signature to the check. Process the work order quantity to active the Next button.
 
 ### Repeat the process of Machine/Cleanline for Cleanroom Packaging
+<<<<<<< HEAD
+=======
+
+The Cancel Button will cancel the entire work order and ask to re-enter your number
+>>>>>>> dev
