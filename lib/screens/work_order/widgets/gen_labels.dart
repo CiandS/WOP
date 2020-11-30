@@ -13,8 +13,6 @@ class GenLabels extends StatefulWidget {
 
   GenLabels(this.callback);
   @override
-
-
   _GenLabelsState createState() => _GenLabelsState();
 }
 
@@ -37,7 +35,6 @@ class _GenLabelsState extends State<GenLabels> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     WorkOrder workOrder =
@@ -49,11 +46,13 @@ class _GenLabelsState extends State<GenLabels> {
         controller: userCommentController,
       ),
       actions: [
-        FlatButton(onPressed: (){
-          setState(() {
-            userComment = userCommentController.text;
-          });
-        }, child: Text('Enter'))
+        FlatButton(
+            onPressed: () {
+              setState(() {
+                userComment = userCommentController.text;
+              });
+            },
+            child: Text('Enter'))
       ],
     );
 
@@ -68,16 +67,15 @@ class _GenLabelsState extends State<GenLabels> {
           ],
         ),
       ),
-        actions: <Widget>[
-          TextButton(
-            child: Text('Close'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
+      actions: <Widget>[
+        TextButton(
+          child: Text('Close'),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
     );
-
 
     AlertDialog inputSignature = AlertDialog(
       title: Text("Please insert e-Signature"),
@@ -85,14 +83,15 @@ class _GenLabelsState extends State<GenLabels> {
         controller: userSignatureController,
       ),
       actions: [
-        FlatButton(onPressed: (){
-          setState(() {
-            userSignature = userSignatureController.text;
-          });
-        }, child: Text('Enter'))
+        FlatButton(
+            onPressed: () {
+              setState(() {
+                userSignature = userSignatureController.text;
+              });
+            },
+            child: Text('Enter'))
       ],
     );
-
 
     return Center(
         child: Column(
@@ -117,7 +116,7 @@ class _GenLabelsState extends State<GenLabels> {
             Align(
               alignment: Alignment.topRight,
               child: Container(
-                width: 250,
+                width: 200,
                 padding: const EdgeInsets.only(bottom: 10.0),
                 child: new LinearPercentIndicator(
                   animation: true,
@@ -167,23 +166,26 @@ class _GenLabelsState extends State<GenLabels> {
                         DataColumn(label: Text('A - B')),
                         DataColumn(label: Text('C')),
                         DataColumn(label: Text('Signature')),
-                      ], rows:
-
-
-                      [
+                      ], rows: [
                         DataRow(cells: [
                           DataCell(Text('07:00')),
                           DataCell(Text('15')),
-                          DataCell(
-                              Text('3')),
+                          DataCell(Text('3')),
                           DataCell(Text('12')),
                           DataCell(Text('3')),
-                          DataCell(Text(
-                              userSignature), showEditIcon: true, ),
+                          DataCell(
+                            Text(userSignature),
+                            onTap: () => showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return inputSignature;
+                              },
+                            ),
+                            showEditIcon: true,
+                          ),
                         ]),
                       ]),
                     ),
-
                   ]),
                 ),
               ),
@@ -201,25 +203,27 @@ class _GenLabelsState extends State<GenLabels> {
                       ], rows: [
                         DataRow(cells: [
                           DataCell(Text('07:00')),
-                          DataCell(Text(userComment),
+                          DataCell(
+                            Text(userComment),
                             onTap: () => showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return inputComment;
-                            },
-                          ), ),
-                          DataCell(Text(
-                              userSignature),
+                              context: context,
+                              builder: (BuildContext context) {
+                                return inputComment;
+                              },
+                            ),
+                          ),
+                          DataCell(
+                            Text(userSignature),
                             onTap: () => showDialog(
                               context: context,
                               builder: (BuildContext context) {
                                 return inputSignature;
                               },
                             ),
-                            showEditIcon: true, ),
+                            showEditIcon: true,
+                          ),
                         ]),
                       ]),
-
 
                       // TextFormField(
                       //   controller: userCommentController,
@@ -241,7 +245,7 @@ class _GenLabelsState extends State<GenLabels> {
                       //   )),
                       // ),
                       Container(
-                        padding: const EdgeInsets.only(top: 20),
+                          padding: const EdgeInsets.only(top: 20),
                           width: 450.0,
                           child: Expanded(
                             child: Row(
@@ -252,9 +256,11 @@ class _GenLabelsState extends State<GenLabels> {
                                   child: SizedBox(
                                     width: 200,
                                     child: TextFormField(
-                                      controller: quantityProcessedTextController,
+                                      controller:
+                                          quantityProcessedTextController,
                                       decoration: InputDecoration(
-                                          labelText: 'Input Quantity Processed'),
+                                          labelText:
+                                              'Input Quantity Processed'),
                                       keyboardType: TextInputType.number,
                                     ),
                                   ),
@@ -262,63 +268,69 @@ class _GenLabelsState extends State<GenLabels> {
                                 SizedBox(
                                   height: 40,
                                   child: OutlinedButton.icon(
-                                    style: ButtonStyle(
-                                      foregroundColor: MaterialStateProperty.all(Colors.red),
-                                      overlayColor: MaterialStateProperty.all(Colors.red)
-                                    ),
+                                      style: ButtonStyle(
+                                          foregroundColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.red),
+                                          overlayColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.red)),
                                       label: Text(
-                                          'Process', style: TextStyle( fontSize: 16), ),
+                                        'Process',
+                                        style: TextStyle(fontSize: 16),
+                                      ),
                                       icon: Icon(
                                         Icons.settings,
                                         size: 28,
                                       ),
-                                      onPressed: quantityProcessed == 1.0 ?  null  :  () {
+                                      onPressed: quantityProcessed == 1.0
+                                          ? null
+                                          : () {
+                                              setState(() {
+                                                (double.parse(quantityProcessedTextController
+                                                                    .text) /
+                                                                10 +
+                                                            quantityProcessed >
+                                                        1.0)
+                                                    ? showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return overQuantity;
+                                                        },
+                                                      )
+                                                    : quantityProcessed +=
+                                                        double.parse(
+                                                                quantityProcessedTextController
+                                                                    .text) /
+                                                            10;
+                                              });
 
+                                              if (quantityProcessed == 1.0) {
+                                                Provider.of<WorkOrderHistoryProvider>(
+                                                        context)
+                                                    .addWorkOrderHistory(
+                                                  WorkOrderHistory(
+                                                      Constants.GENERATE_LABELS,
+                                                      DateTime.now(),
+                                                      "test1234",
+                                                      WorkOrderUtil.getInstance
+                                                          .getQuantityProcessedPercentage(
+                                                              quantityProcessed),
+                                                      null),
+                                                );
+                                                widget.callback();
+                                              }
 
-                                         setState(() {
-                                          (double.parse(quantityProcessedTextController.text) / 10 + quantityProcessed  > 1.0)
-                                              ? showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return overQuantity;
-                                            },
-                                          )
-                                          :
-                                          quantityProcessed += double.parse(
-                                                  quantityProcessedTextController
-                                                      .text) /
-                                              10;
-                                        });
-
-
-                                        if (quantityProcessed == 1.0) {
-                                          Provider.of<WorkOrderHistoryProvider>(
-                                                  context)
-                                              .addWorkOrderHistory(
-                                            WorkOrderHistory(
-                                                Constants.GENERATE_LABELS,
-                                                DateTime.now(),
-                                                "test1234",
-                                                WorkOrderUtil.getInstance
-                                                    .getQuantityProcessedPercentage(
-                                                        quantityProcessed),
-                                                null),
-                                          );
-                                          widget.callback();
-                                        }
-
-                                        // else if (quantityProcessed > 1.0) {
-                                        //   showDialog(
-                                        //     context: context,
-                                        //     builder: (BuildContext context) {
-                                        //       return overQuantity;
-                                        //     },
-                                        //   );
-                                        // }
-
-                                      }
-
-                                  ),
+                                              // else if (quantityProcessed > 1.0) {
+                                              //   showDialog(
+                                              //     context: context,
+                                              //     builder: (BuildContext context) {
+                                              //       return overQuantity;
+                                              //     },
+                                              //   );
+                                              // }
+                                            }),
                                 )
                               ],
                             ),
@@ -328,7 +340,6 @@ class _GenLabelsState extends State<GenLabels> {
                 ),
               )
             ],
-
           ),
         ),
         //       Row(
