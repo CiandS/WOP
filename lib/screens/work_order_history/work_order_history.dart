@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:work_order_process/models/work_order_history.dart';
 import 'package:work_order_process/providers/work_order_history_provider.dart';
@@ -14,6 +15,7 @@ class _WOHistoryState extends State<WOHistoryPage> {
   List<DataColumn> _buildColumnData(BuildContext context) {
     return [
       DataColumn(label: Text('Description')),
+      DataColumn(label: Text('Qty')),
       DataColumn(label: Text('Date / Time'))
     ];
   }
@@ -29,7 +31,13 @@ class _WOHistoryState extends State<WOHistoryPage> {
         DataRow(
           cells: <DataCell>[
             DataCell(Text(workOrderHistory.workOrderHistoryTask)),
-            DataCell(Text(workOrderHistory.workOrderHistoryDt.toString())),
+            DataCell(Text(workOrderHistory.workOrderHistoryQty.toString())),
+            DataCell(Text(DateFormat('MM-dd-yyyy hh:mm').format(workOrderHistory.workOrderHistoryDt).toString())),
+
+
+
+
+
           ],
         ),
       );

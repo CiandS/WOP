@@ -126,8 +126,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
       WorkOrderStep(3, 'Machine', 'Q1', MachineStep(processClicked)),
       WorkOrderStep(4, 'Cleanline', 'Q1', Cleanline(processClicked)),
       WorkOrderStep(5, 'Generate Labels', 'Q1', GenLabels(processClicked)),
-      WorkOrderStep(
-          6, 'Cleanroom Packaging', 'Q1', CleanroomPack(processClicked)),
+      WorkOrderStep(6, 'Cleanroom Packaging', 'Q1', CleanroomPack(processClicked)),
     ];
 
     return new Scaffold(
