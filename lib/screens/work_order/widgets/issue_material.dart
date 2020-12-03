@@ -144,47 +144,54 @@ class _IssueMaterialState extends State<IssueMaterial> {
                                       child: OutlinedButton.icon(
                                         label: Text(
                                           'Process',
-                                          style: TextStyle(
-                                              color: Colors.redAccent[700],
-                                              fontSize: 16),
+                                          style: TextStyle(fontSize: 16),
                                         ),
                                         icon: Icon(
                                           Icons.settings,
-                                          color: Colors.redAccent[700],
                                           size: 28,
                                         ),
-                                        onPressed:  quantityProcessed == 1.0 ?  null  : () {
-                                          setState(() {
-                                            (double.parse(quantityProcessedTextController.text) / 10 + quantityProcessed  > 1.0)
-                                                ? showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return overQuantity;
-                                              },
-                                            )
-                                                :
-                                            quantityProcessed += double.parse(
-                                                quantityProcessedTextController
-                                                    .text) /
-                                                10;
-                                            if (quantityProcessed == 1.0) {
-                                              Provider.of<WorkOrderHistoryProvider>(
-                                                      context)
-                                                  .addWorkOrderHistory(
-                                                WorkOrderHistory(
-                                                    Constants.ISSUE_MATERIAL,
-                                                    DateTime.now(),
-                                                    "test1234",
-                                                    WorkOrderUtil.getInstance
-                                                        .getQuantityProcessedPercentage(
-                                                            quantityProcessed),
-                                                    null),
-                                              );
+                                        onPressed: quantityProcessed == 1.0
+                                            ? null
+                                            : () {
+                                                setState(() {
+                                                  (double.parse(quantityProcessedTextController
+                                                                      .text) /
+                                                                  10 +
+                                                              quantityProcessed >
+                                                          1.0)
+                                                      ? showDialog(
+                                                          context: context,
+                                                          builder: (BuildContext
+                                                              context) {
+                                                            return overQuantity;
+                                                          },
+                                                        )
+                                                      : quantityProcessed +=
+                                                          double.parse(
+                                                                  quantityProcessedTextController
+                                                                      .text) /
+                                                              10;
+                                                  if (quantityProcessed ==
+                                                      1.0) {
+                                                    Provider.of<WorkOrderHistoryProvider>(
+                                                            context)
+                                                        .addWorkOrderHistory(
+                                                      WorkOrderHistory(
+                                                          Constants
+                                                              .ISSUE_MATERIAL,
+                                                          DateTime.now(),
+                                                          "test1234",
+                                                          WorkOrderUtil
+                                                              .getInstance
+                                                              .getQuantityProcessedPercentage(
+                                                                  quantityProcessed),
+                                                          null),
+                                                    );
 
-                                              widget.callback();
-                                            }
-                                          });
-                                        },
+                                                    widget.callback();
+                                                  }
+                                                });
+                                              },
                                       ))
                                 ],
                               ),

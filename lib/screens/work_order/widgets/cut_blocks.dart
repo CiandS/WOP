@@ -213,13 +213,9 @@ class _CutBlocksState extends State<CutBlocks> {
                                     child: OutlinedButton.icon(
                                         label: Text(
                                           'Process',
-                                          style: TextStyle(
-                                              color: Colors.redAccent[700],
-                                              fontSize: 16),
                                         ),
                                         icon: Icon(
                                           Icons.settings,
-                                          color: Colors.redAccent[700],
                                           size: 28,
                                         ),
                                         onPressed: quantityProcessed == 1.0

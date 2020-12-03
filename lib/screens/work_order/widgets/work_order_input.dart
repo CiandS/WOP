@@ -67,7 +67,7 @@ class _WorkOrderInputState extends State<WorkOrderInput> {
                                 eachFieldMargin: EdgeInsets.all(2.5),
                                 eachFieldWidth: 20,
                                 eachFieldHeight: 55,
-                                fieldsCount: 10,
+                                fieldsCount: 9,
                                 fieldsAlignment: MainAxisAlignment.center,
                                 onSubmit: (String workOrderNumber) =>
                                     Provider.of<WorkOrderProvider>(context,

@@ -53,17 +53,14 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   }
 
   StepState _getState(int i) {
-    if(allStepsCompleted == true)
-    {
+    if (allStepsCompleted == true) {
       return StepState.complete;
     }
     if (currentStep > i) {
       return StepState.complete;
     } else if (currentStep == i) {
       return StepState.editing;
-    }
-
-    else {
+    } else {
       return StepState.indexed;
     }
   }
@@ -139,8 +136,26 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
       WorkOrderStep(3, 'Machine', 'Q1', MachineStep(processClicked)),
       WorkOrderStep(4, 'Cleanline', 'Q1', Cleanline(processClicked)),
       WorkOrderStep(5, 'Generate Labels', 'Q1', GenLabels(processClicked)),
-      WorkOrderStep(6, 'Cleanroom Packaging', 'Q1', CleanroomPack(processClicked, allStepsCompleted)),
+      WorkOrderStep(6, 'Cleanroom Packaging', 'Q1',
+          CleanroomPack(processClicked, allStepsCompleted)),
     ];
+
+    AlertDialog cancelConfirmation = AlertDialog(
+      title: new Text("Do you wish to Cancel?"),
+      content: new Text(
+        "This will cancel the entire work order",
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          child: Text("Cancel"),
+          onPressed: cancel,
+        ),
+        FlatButton(
+          child: Text("Close"),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ],
+    );
 
     return new Scaffold(
       appBar: AppBar(
@@ -195,10 +210,17 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                             ),
                             OutlinedButton(
                               style: ButtonStyle(),
-                              onPressed: onStepCancel,
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext contextCancel) {
+                                    return cancelConfirmation;
+                                  },
+                                );
+                              },
                               child: const Text('CANCEL',
                                   style: TextStyle(
-                                    color: Colors.black54,
+                                    color: Colors.black,
                                   )),
                             ),
                           ],

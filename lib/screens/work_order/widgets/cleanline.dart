@@ -139,7 +139,9 @@ class _CleanlineState extends State<Cleanline> {
                                 value: 2,
                               ),
                               DropdownMenuItem(
-                                  child: Text("CPSS0010 - Branson Ultrasonic Tank"), value: 3),
+                                  child: Text(
+                                      "CPSS0010 - Branson Ultrasonic Tank"),
+                                  value: 3),
                               DropdownMenuItem(
                                 child: Text("CPSS0012 - 5 Stage Cleanline"),
                                 value: 4,
@@ -196,7 +198,9 @@ class _CleanlineState extends State<Cleanline> {
                           CheckboxListTile(
                               title: Text('ECC Checks'),
                               subtitle: Text('Frequency: Weekly'),
-                              secondary: Icon(Icons.alarm_on),
+                              secondary: Icon(
+                                Icons.alarm_on,
+                              ),
                               value: eccWeeklyCleanCheck,
                               onChanged: (value) {
                                 setState(() {
@@ -237,30 +241,48 @@ class _CleanlineState extends State<Cleanline> {
                                             color: Colors.redAccent[700],
                                             size: 28,
                                           ),
-                                          onPressed:  quantityProcessed == 1.0 ?  null  : () {
-                                            setState(() {
-                                              quantityProcessed += double.parse(
-                                                      quantityProcessedTextController
-                                                          .text) /
-                                                  10;
-                                            });
+                                          onPressed: quantityProcessed == 1.0
+                                              ? null
+                                              : () {
+                                                  setState(() {
+                                                    (double.parse(quantityProcessedTextController
+                                                                        .text) /
+                                                                    10 +
+                                                                quantityProcessed >
+                                                            1.0)
+                                                        ? showDialog(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return overQuantity;
+                                                            },
+                                                          )
+                                                        : quantityProcessed +=
+                                                            double.parse(
+                                                                    quantityProcessedTextController
+                                                                        .text) /
+                                                                10;
+                                                  });
 
-                                            if (quantityProcessed == 1.0) {
-                                              Provider.of<WorkOrderHistoryProvider>(
-                                                      context)
-                                                  .addWorkOrderHistory(
-                                                WorkOrderHistory(
-                                                    Constants.CLEANLINE,
-                                                    DateTime.now(),
-                                                    "test1234",
-                                                    WorkOrderUtil.getInstance
-                                                        .getQuantityProcessedPercentage(
-                                                            quantityProcessed),
-                                                    null),
-                                              );
-                                              widget.callback();
-                                            }
-                                          },
+                                                  if (quantityProcessed ==
+                                                      1.0) {
+                                                    Provider.of<WorkOrderHistoryProvider>(
+                                                            context)
+                                                        .addWorkOrderHistory(
+                                                      WorkOrderHistory(
+                                                          Constants.CLEANLINE,
+                                                          DateTime.now(),
+                                                          "test1234",
+                                                          WorkOrderUtil
+                                                              .getInstance
+                                                              .getQuantityProcessedPercentage(
+                                                                  quantityProcessed),
+                                                          null),
+                                                    );
+                                                    widget.callback();
+                                                  }
+                                                },
                                         ))
                                   ],
                                 ),

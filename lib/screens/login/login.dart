@@ -127,7 +127,11 @@ class _LoginState extends State<Login> {
                                   SizedBox(
                                     width: double.infinity,
                                     child: ElevatedButton(
-                                      style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.blue[800]),),
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.blue[800]),
+                                      ),
                                       onPressed: () {
                                         String user = "test1234";
                                         String password = "test1234";
@@ -152,7 +156,19 @@ class _LoginState extends State<Login> {
                                       },
                                       child: Text('Login'),
                                     ),
-                                  )
+                                  ),
+                                  SizedBox(
+                                    height: 40,
+                                  ),
+                                  Text(
+                                      'Place finger for biometric authentication'),
+                                  Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Icon(
+                                      Icons.fingerprint,
+                                      size: 100,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
