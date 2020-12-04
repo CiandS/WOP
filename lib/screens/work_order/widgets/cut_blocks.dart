@@ -66,12 +66,21 @@ class _CutBlocksState extends State<CutBlocks> {
         child: Container(
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
           Widget>[
-        Text("Work Order Number: ${workOrder.getWorkOrderNumber}",
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-        Text("Attune PS Inserts",
-            style: TextStyle(
-              fontSize: 22,
-            )),
+        Text(
+          "Work Order Number: ${workOrder.getWorkOrderNumber}",
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+        ),
+        Text(
+          "Attune PS Inserts",
+          style: TextStyle(
+            fontSize: 22,
+          ),
+        ),
+        Divider(
+          indent: 250,
+          endIndent: 250,
+          thickness: 2,
+        ),
         Column(
           children: <Widget>[
             Align(
@@ -118,7 +127,16 @@ class _CutBlocksState extends State<CutBlocks> {
                 child: Container(
                   margin: const EdgeInsets.all(20.0),
                   padding: const EdgeInsets.all(30.0),
-                  color: Colors.white,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black54,
+                        blurRadius: 5.0,
+                        spreadRadius: 1.0,
+                      )
+                    ],
+                  ),
                   child: Column(
                     children: [
                       Text("Select your Machine\n",
@@ -156,7 +174,16 @@ class _CutBlocksState extends State<CutBlocks> {
                   child: Container(
                     margin: const EdgeInsets.all(20.0),
                     padding: const EdgeInsets.all(30.0),
-                    color: Colors.white,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black54,
+                          blurRadius: 5.0,
+                          spreadRadius: 1.0,
+                        )
+                      ],
+                    ),
                     child: Column(
                       children: <Widget>[
                         Align(

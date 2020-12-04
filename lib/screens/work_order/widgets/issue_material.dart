@@ -78,14 +78,11 @@ class _IssueMaterialState extends State<IssueMaterial> {
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      // shape: BoxShape.circle,
-                      // borderRadius: BorderRadius.circular(4),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black54,
                           blurRadius: 5.0,
                           spreadRadius: 1.0,
-                          // offset: Offset(2.0, 2.0),
                         )
                       ],
                     ),
@@ -150,15 +147,15 @@ class _IssueMaterialState extends State<IssueMaterial> {
                                 children: [
                                   SizedBox(
                                     // width: 200,
-                                      child: TextFormField(
-                                        controller:
-                                            quantityProcessedTextController,
-                                        decoration: InputDecoration(
-                                            labelText:
-                                                'Input Quantity Processed'),
-                                        keyboardType: TextInputType.number,
-                                      ),
+                                    child: TextFormField(
+                                      controller:
+                                          quantityProcessedTextController,
+                                      decoration: InputDecoration(
+                                          labelText:
+                                              'Input Quantity Processed'),
+                                      keyboardType: TextInputType.number,
                                     ),
+                                  ),
                                   SizedBox(
                                     height: 25,
                                   ),
