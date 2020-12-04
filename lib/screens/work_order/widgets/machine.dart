@@ -247,7 +247,7 @@ class _MachineStepState extends State<MachineStep> {
                               });
                             }),
                       ),
-                      if (_qracMachineCheck == true)
+                      if (_qracMachineCheck == true || _eccMachineCheck == true)
                         Container(
                             width: 400.0,
                             child: Expanded(
