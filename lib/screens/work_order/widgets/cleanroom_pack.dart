@@ -185,7 +185,9 @@ class _CleanroomPackState extends State<CleanroomPack> {
                   ),
                 ),
               ),
-              if (_sealingMachine == 2)
+              if (_sealingMachine == 2 ||
+                  _sealingMachine == 3 ||
+                  _sealingMachine == 4)
                 Expanded(
                   child: Container(
                     margin: const EdgeInsets.all(20.0),

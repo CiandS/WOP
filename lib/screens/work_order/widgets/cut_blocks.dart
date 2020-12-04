@@ -171,7 +171,7 @@ class _CutBlocksState extends State<CutBlocks> {
                         CheckboxListTile(
                             title: Text('ECC Checks'),
                             subtitle: Text('Frequency: Daily'),
-                            secondary: Icon(Icons.alarm_on),
+                            secondary: Icon(Icons.assignment),
                             value: _eccCutCheck,
                             onChanged: (value) {
                               setState(() {
@@ -181,7 +181,7 @@ class _CutBlocksState extends State<CutBlocks> {
                         CheckboxListTile(
                             title: Text('QRAC Checks'),
                             subtitle: Text('Frequency: Hourly'),
-                            secondary: Icon(Icons.alarm_on),
+                            secondary: Icon(Icons.assignment),
                             value: _qracCutCheck,
                             onChanged: (value) {
                               setState(() {

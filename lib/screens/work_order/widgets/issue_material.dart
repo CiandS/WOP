@@ -76,9 +76,21 @@ class _IssueMaterialState extends State<IssueMaterial> {
               children: [
                 Expanded(
                   child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      // shape: BoxShape.circle,
+                      // borderRadius: BorderRadius.circular(4),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black54,
+                          blurRadius: 5.0,
+                          spreadRadius: 1.0,
+                          // offset: Offset(2.0, 2.0),
+                        )
+                      ],
+                    ),
                     margin: const EdgeInsets.all(20.0),
                     padding: const EdgeInsets.all(30.0),
-                    color: Colors.white,
                     child: Column(
                       children: [
                         // CircularProgressIndicator(
@@ -96,7 +108,7 @@ class _IssueMaterialState extends State<IssueMaterial> {
                                 fontSize: 20,
                               )),
                           center: new Icon(
-                            Icons.linear_scale,
+                            Icons.pending_actions,
                             size: 50.0,
                           ),
                           footer: Text(
@@ -114,21 +126,30 @@ class _IssueMaterialState extends State<IssueMaterial> {
                 ),
                 Expanded(
                   child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      // shape: BoxShape.circle,
+                      // borderRadius: BorderRadius.circular(4),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black54,
+                          blurRadius: 5.0,
+                          spreadRadius: 1.0,
+                          // offset: Offset(2.0, 2.0),
+                        )
+                      ],
+                    ),
                     margin: const EdgeInsets.all(20.0),
-                    padding: const EdgeInsets.all(120.0),
-                    color: Colors.white,
+                    padding: const EdgeInsets.all(60.0),
                     child: Column(
                       children: <Widget>[
                         Container(
-                            width: 400.0,
+                            width: 200.0,
                             child: Expanded(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                              child: Column(
                                 children: [
-                                  Flexible(
-                                    child: SizedBox(
-                                      width: 200,
+                                  SizedBox(
+                                    // width: 200,
                                       child: TextFormField(
                                         controller:
                                             quantityProcessedTextController,
@@ -138,8 +159,11 @@ class _IssueMaterialState extends State<IssueMaterial> {
                                         keyboardType: TextInputType.number,
                                       ),
                                     ),
+                                  SizedBox(
+                                    height: 25,
                                   ),
                                   SizedBox(
+                                      width: double.infinity,
                                       height: 40,
                                       child: OutlinedButton.icon(
                                         label: Text(
@@ -147,7 +171,7 @@ class _IssueMaterialState extends State<IssueMaterial> {
                                           style: TextStyle(fontSize: 16),
                                         ),
                                         icon: Icon(
-                                          Icons.settings,
+                                          Icons.miscellaneous_services,
                                           size: 28,
                                         ),
                                         onPressed: quantityProcessed == 1.0
