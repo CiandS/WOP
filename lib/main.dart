@@ -28,20 +28,13 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
+
     return MaterialApp(
         title: 'Operations Management System Test',
         theme: ThemeData(
           primarySwatch: Colors.red,
           primaryColor: Colors.redAccent[700],
           accentColor: Colors.blue[800],
-          buttonTheme: ButtonThemeData(
-            buttonColor:
-                Color(0xffff914d), // Background color (orange in my case).
-            textTheme: ButtonTextTheme.primary,
-            colorScheme: Theme.of(context)
-                .colorScheme
-                .copyWith(secondary: Colors.white), // Text color
-          ),
         ),
         home: Login());
   }

@@ -143,7 +143,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
     AlertDialog cancelConfirmation = AlertDialog(
       title: new Text("Do you wish to Cancel?"),
       content: new Text(
-        "This will cancel the entire work order",
+        "This will cancel the entire work order.",
       ),
       actions: <Widget>[
         new FlatButton(
@@ -151,7 +151,10 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
           onPressed: cancel,
         ),
         FlatButton(
-          child: Text("Close"),
+          child: Text(
+            "Close",
+            style: TextStyle(color: Colors.blue[800]),
+          ),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ],
@@ -169,7 +172,7 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                     child: AlertDialog(
                       title: new Text("Work Order Complete"),
                       content: new Text(
-                        "Shipping process has begun",
+                        "Shipping process has begun.",
                       ),
                       actions: <Widget>[
                         new FlatButton(
@@ -201,10 +204,12 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                                 onPressed: isCurrentStepButtonEnabled()
                                     ? onStepContinue
                                     : null,
-                                child: const Text('NEXT',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    )),
+                                child: const Text(
+                                  'NEXT',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
                               SizedBox(
                                 width: 20,
@@ -219,10 +224,12 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                                     },
                                   );
                                 },
-                                child: const Text('CANCEL',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                    )),
+                                child: const Text(
+                                  'CANCEL',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                  ),
+                                ),
                               ),
                             ],
                           ),

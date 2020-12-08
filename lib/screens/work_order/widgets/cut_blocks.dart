@@ -198,7 +198,8 @@ class _CutBlocksState extends State<CutBlocks> {
                         Container(
                           margin: EdgeInsets.all(2),
                           decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey)),
+                            border: Border.all(color: Colors.grey),
+                          ),
                           child: CheckboxListTile(
                               title: Text('ECC Checks'),
                               subtitle: Text('Frequency: Daily'),

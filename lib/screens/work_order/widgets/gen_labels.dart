@@ -199,55 +199,64 @@ class _GenLabelsState extends State<GenLabels> {
                             fontSize: 16,
                           )),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 25.0),
-                        child: DataTable(showCheckboxColumn: true, columns: [
-                          DataColumn(
-                            label: Text('Time'),
+                        padding: const EdgeInsets.only(
+                          bottom: 20.0,
+                          top: 20.0,
+                        ),
+                        child: Container(
+                          margin: EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
                           ),
-                          DataColumn(
-                            label: Text('A'),
-                          ),
-                          DataColumn(
-                            label: Text('B'),
-                          ),
-                          DataColumn(
-                            label: Text('A - B'),
-                          ),
-                          DataColumn(
-                            label: Text('C'),
-                          ),
-                          DataColumn(
-                            label: Text('Signature'),
-                          ),
-                        ], rows: [
-                          DataRow(cells: [
-                            DataCell(
-                              Text('07:00'),
+                          child: DataTable(showCheckboxColumn: true, columns: [
+                            DataColumn(
+                              label: Text('Time'),
                             ),
-                            DataCell(
-                              Text('15'),
+                            DataColumn(
+                              label: Text('A'),
                             ),
-                            DataCell(
-                              Text('3'),
+                            DataColumn(
+                              label: Text('B'),
                             ),
-                            DataCell(
-                              Text('12'),
+                            DataColumn(
+                              label: Text('A - B'),
                             ),
-                            DataCell(
-                              Text('3'),
+                            DataColumn(
+                              label: Text('C'),
                             ),
-                            DataCell(
-                              Text(userSignature),
-                              onTap: () => showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return inputSignature;
-                                },
+                            DataColumn(
+                              label: Text('Signature'),
+                            ),
+                          ], rows: [
+                            DataRow(cells: [
+                              DataCell(
+                                Text('07:00'),
                               ),
-                              showEditIcon: true,
-                            ),
+                              DataCell(
+                                Text('15'),
+                              ),
+                              DataCell(
+                                Text('3'),
+                              ),
+                              DataCell(
+                                Text('12'),
+                              ),
+                              DataCell(
+                                Text('3'),
+                              ),
+                              DataCell(
+                                Text(userSignature),
+                                onTap: () => showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return inputSignature;
+                                  },
+                                ),
+                                showEditIcon: true,
+                              ),
+                            ]),
                           ]),
-                        ]),
+                        ),
                       ),
                     ]),
                   ),
@@ -268,42 +277,48 @@ class _GenLabelsState extends State<GenLabels> {
                     ),
                     child: Column(
                       children: <Widget>[
-                        DataTable(showCheckboxColumn: true, columns: [
-                          DataColumn(
-                            label: Text('Time'),
+                        Container(
+                          margin: EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
                           ),
-                          DataColumn(
-                            label: Text('Pressure Comment'),
-                          ),
-                          DataColumn(
-                            label: Text('Signature'),
-                          ),
-                        ], rows: [
-                          DataRow(cells: [
-                            DataCell(
-                              Text('07:00'),
+                          child: DataTable(showCheckboxColumn: true, columns: [
+                            DataColumn(
+                              label: Text('Time'),
                             ),
-                            DataCell(
-                              Text(userComment),
-                              onTap: () => showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return inputComment;
-                                },
+                            DataColumn(
+                              label: Text('Pressure Comment'),
+                            ),
+                            DataColumn(
+                              label: Text('Signature'),
+                            ),
+                          ], rows: [
+                            DataRow(cells: [
+                              DataCell(
+                                Text('07:00'),
                               ),
-                            ),
-                            DataCell(
-                              Text(userSignature),
-                              onTap: () => showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return inputSignature;
-                                },
+                              DataCell(
+                                Text(userComment),
+                                onTap: () => showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return inputComment;
+                                  },
+                                ),
                               ),
-                              showEditIcon: true,
-                            ),
+                              DataCell(
+                                Text(userSignature),
+                                onTap: () => showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return inputSignature;
+                                  },
+                                ),
+                                showEditIcon: true,
+                              ),
+                            ]),
                           ]),
-                        ]),
+                        ),
 
                         // TextFormField(
                         //   controller: userCommentController,
@@ -348,13 +363,6 @@ class _GenLabelsState extends State<GenLabels> {
                                 SizedBox(
                                   height: 40,
                                   child: OutlinedButton.icon(
-                                      style: ButtonStyle(
-                                          foregroundColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.red),
-                                          overlayColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.red)),
                                       label: Text(
                                         'Process',
                                         style: TextStyle(fontSize: 16),
