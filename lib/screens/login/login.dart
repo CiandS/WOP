@@ -14,6 +14,10 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    final _height = MediaQuery.of(context).size.height -
+        MediaQuery.of(context).padding.top -
+        kToolbarHeight;
+    final _width = MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomInset: true,
       drawer: Container(
@@ -44,19 +48,23 @@ class _LoginState extends State<Login> {
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10),
-                  child: Text('Heading 2',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold)),
+                  child: Text(
+                    'Heading 2',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10),
-                  child: Text('Heading 3',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold)),
+                  child: Text(
+                    'Heading 3',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold),
+                  ),
                 )
               ],
             ),
@@ -130,7 +138,8 @@ class _LoginState extends State<Login> {
                                       style: ButtonStyle(
                                         backgroundColor:
                                             MaterialStateProperty.all(
-                                                Colors.blue[800]),
+                                          Colors.blue[800],
+                                        ),
                                       ),
                                       onPressed: () {
                                         String user = "test1234";
@@ -148,8 +157,9 @@ class _LoginState extends State<Login> {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      WorkOrderPage()),
+                                                builder: (context) =>
+                                                    WorkOrderPage(),
+                                              ),
                                             );
                                           }
                                         }

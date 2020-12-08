@@ -52,7 +52,16 @@ class _WorkOrderInputState extends State<WorkOrderInput> {
                     child: Container(
                       margin: const EdgeInsets.all(20.0),
                       padding: const EdgeInsets.all(30.0),
-                      color: Colors.white,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black54,
+                            blurRadius: 5.0,
+                            spreadRadius: 1.0,
+                          )
+                        ],
+                      ),
                       child: Column(
                         children: [
                           Text("Enter your Work Order\n",
