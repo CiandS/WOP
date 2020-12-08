@@ -24,11 +24,16 @@ void main() => runApp(MultiProvider(
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
-
+    final double screenWidth =
+        MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width;
+    if (screenWidth < 500) {
+      SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    } else {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+    }
     return MaterialApp(
         title: 'Operations Management System Test',
         theme: ThemeData(
