@@ -195,100 +195,113 @@ class _CutBlocksState extends State<CutBlocks> {
                             textAlign: TextAlign.left,
                           )),
                         ),
-                        CheckboxListTile(
-                            title: Text('ECC Checks'),
-                            subtitle: Text('Frequency: Daily'),
-                            secondary: Icon(Icons.assignment),
-                            value: _eccCutCheck,
-                            onChanged: (value) {
-                              setState(() {
-                                _eccCutCheck = value;
-                              });
-                            }),
-                        CheckboxListTile(
-                            title: Text('QRAC Checks'),
-                            subtitle: Text('Frequency: Hourly'),
-                            secondary: Icon(Icons.assignment),
-                            value: _qracCutCheck,
-                            onChanged: (value) {
-                              setState(() {
-                                _qracCutCheck = value;
-                              });
-                            }),
                         Container(
-                            width: 400.0,
-                            child: Expanded(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Flexible(
-                                    child: SizedBox(
-                                      width: 200,
-                                      child: TextFormField(
-                                        controller:
-                                            quantityProcessedTextController,
-                                        decoration: InputDecoration(
-                                            labelText:
-                                                'Input Quantity Processed'),
-                                        keyboardType: TextInputType.number,
+                          margin: EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey)),
+                          child: CheckboxListTile(
+                              title: Text('ECC Checks'),
+                              subtitle: Text('Frequency: Daily'),
+                              secondary: Icon(Icons.assignment),
+                              value: _eccCutCheck,
+                              onChanged: (value) {
+                                setState(() {
+                                  _eccCutCheck = value;
+                                });
+                              }),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey)),
+                          child: CheckboxListTile(
+                              title: Text('QRAC Checks'),
+                              subtitle: Text('Frequency: Hourly'),
+                              secondary: Icon(Icons.assignment),
+                              value: _qracCutCheck,
+                              onChanged: (value) {
+                                setState(() {
+                                  _qracCutCheck = value;
+                                });
+                              }),
+                        ),
+                        if (_eccCutCheck == true && _qracCutCheck == true)
+                          Container(
+                              width: 400.0,
+                              child: Expanded(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Flexible(
+                                      child: SizedBox(
+                                        width: 200,
+                                        child: TextFormField(
+                                          controller:
+                                              quantityProcessedTextController,
+                                          decoration: InputDecoration(
+                                              labelText:
+                                                  'Input Quantity Processed'),
+                                          keyboardType: TextInputType.number,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 40,
-                                    child: OutlinedButton.icon(
-                                        label: Text(
-                                          'Process',
-                                        ),
-                                        icon: Icon(
-                                          Icons.settings,
-                                          size: 28,
-                                        ),
-                                        onPressed: quantityProcessed == 1.0
-                                            ? null
-                                            : () {
-                                                setState(() {
-                                                  (double.parse(quantityProcessedTextController
-                                                                      .text) /
-                                                                  10 +
-                                                              quantityProcessed >
-                                                          1.0)
-                                                      ? showDialog(
-                                                          context: context,
-                                                          builder: (BuildContext
-                                                              context) {
-                                                            return overQuantity;
-                                                          },
-                                                        )
-                                                      : quantityProcessed +=
-                                                          double.parse(
-                                                                  quantityProcessedTextController
-                                                                      .text) /
-                                                              10;
-                                                });
+                                    SizedBox(
+                                      height: 40,
+                                      child: OutlinedButton.icon(
+                                          label: Text(
+                                            'Process',
+                                          ),
+                                          icon: Icon(
+                                            Icons.miscellaneous_services,
+                                            size: 28,
+                                          ),
+                                          onPressed: quantityProcessed == 1.0
+                                              ? null
+                                              : () {
+                                                  setState(() {
+                                                    (double.parse(quantityProcessedTextController
+                                                                        .text) /
+                                                                    10 +
+                                                                quantityProcessed >
+                                                            1.0)
+                                                        ? showDialog(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return overQuantity;
+                                                            },
+                                                          )
+                                                        : quantityProcessed +=
+                                                            double.parse(
+                                                                    quantityProcessedTextController
+                                                                        .text) /
+                                                                10;
+                                                  });
 
-                                                if (quantityProcessed == 1.0) {
-                                                  Provider.of<WorkOrderHistoryProvider>(
-                                                          context)
-                                                      .addWorkOrderHistory(
-                                                    WorkOrderHistory(
-                                                        Constants.CUT_BLOCKS,
-                                                        DateTime.now(),
-                                                        "test1234",
-                                                        WorkOrderUtil
-                                                            .getInstance
-                                                            .getQuantityProcessedPercentage(
-                                                                quantityProcessed),
-                                                        null),
-                                                  );
-                                                  widget.callback();
-                                                }
-                                              }),
-                                  )
-                                ],
-                              ),
-                            )),
+                                                  if (quantityProcessed ==
+                                                      1.0) {
+                                                    Provider.of<WorkOrderHistoryProvider>(
+                                                            context)
+                                                        .addWorkOrderHistory(
+                                                      WorkOrderHistory(
+                                                          Constants.CUT_BLOCKS,
+                                                          DateTime.now(),
+                                                          "test1234",
+                                                          WorkOrderUtil
+                                                              .getInstance
+                                                              .getQuantityProcessedPercentage(
+                                                                  quantityProcessed),
+                                                          null),
+                                                    );
+                                                    widget.callback();
+                                                  }
+                                                }),
+                                    )
+                                  ],
+                                ),
+                              )),
                       ],
                     ),
                   ),

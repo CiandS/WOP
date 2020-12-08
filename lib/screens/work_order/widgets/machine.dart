@@ -247,7 +247,7 @@ class _MachineStepState extends State<MachineStep> {
                               });
                             }),
                       ),
-                      if (_qracMachineCheck == true || _eccMachineCheck == true)
+                      if (_qracMachineCheck == true && _eccMachineCheck == true)
                         Container(
                             width: 400.0,
                             child: Expanded(
@@ -277,7 +277,7 @@ class _MachineStepState extends State<MachineStep> {
                                           style: TextStyle(fontSize: 16),
                                         ),
                                         icon: Icon(
-                                          Icons.settings,
+                                          Icons.miscellaneous_services,
                                           size: 28,
                                         ),
                                         onPressed: quantityProcessed == 1.0

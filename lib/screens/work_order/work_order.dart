@@ -187,53 +187,53 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                 )
               : Expanded(
                   child: Stepper(
-                    controlsBuilder: (context, {onStepCancel, onStepContinue}) {
-                      return Container(
-                        width: double.infinity,
-                        alignment: Alignment.centerRight,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            RaisedButton(
-                              color: Colors.blue[800],
-                              onPressed: isCurrentStepButtonEnabled()
-                                  ? onStepContinue
-                                  : null,
-                              child: const Text('NEXT',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  )),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            OutlinedButton(
-                              style: ButtonStyle(),
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext contextCancel) {
-                                    return cancelConfirmation;
-                                  },
-                                );
-                              },
-                              child: const Text('CANCEL',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                  )),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                    steps: _getSteps(context),
-                    type: StepperType.horizontal,
-                    currentStep: currentStep,
-                    onStepContinue: next,
-                    onStepCancel: cancel,
-                    // onStepTapped: (step) => goTo(step)
-                  ),
+                      controlsBuilder: (context,
+                          {onStepCancel, onStepContinue}) {
+                        return Container(
+                          width: double.infinity,
+                          alignment: Alignment.centerRight,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              RaisedButton(
+                                color: Colors.blue[800],
+                                onPressed: isCurrentStepButtonEnabled()
+                                    ? onStepContinue
+                                    : null,
+                                child: const Text('NEXT',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    )),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              OutlinedButton(
+                                style: ButtonStyle(),
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext contextCancel) {
+                                      return cancelConfirmation;
+                                    },
+                                  );
+                                },
+                                child: const Text('CANCEL',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                    )),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      steps: _getSteps(context),
+                      type: StepperType.horizontal,
+                      currentStep: currentStep,
+                      onStepContinue: next,
+                      onStepCancel: cancel,
+                      onStepTapped: (step) => goTo(step)),
                 ),
         ]),
       ),

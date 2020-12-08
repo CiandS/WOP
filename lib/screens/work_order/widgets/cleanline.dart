@@ -119,7 +119,16 @@ class _CleanlineState extends State<Cleanline> {
                   child: Container(
                     margin: const EdgeInsets.all(20.0),
                     padding: const EdgeInsets.all(30.0),
-                    color: Colors.white,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black54,
+                          blurRadius: 5.0,
+                          spreadRadius: 1.0,
+                        )
+                      ],
+                    ),
                     child: Column(children: [
                       Text("Select your Machine\n",
                           style: TextStyle(
@@ -163,7 +172,16 @@ class _CleanlineState extends State<Cleanline> {
                     child: Container(
                       margin: const EdgeInsets.all(20.0),
                       padding: const EdgeInsets.all(30.0),
-                      color: Colors.white,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black54,
+                            blurRadius: 5.0,
+                            spreadRadius: 1.0,
+                          )
+                        ],
+                      ),
                       child: Column(
                         children: <Widget>[
                           Align(
@@ -175,115 +193,137 @@ class _CleanlineState extends State<Cleanline> {
                               textAlign: TextAlign.left,
                             )),
                           ),
-                          CheckboxListTile(
-                              title: Text('ECC Checks'),
-                              subtitle: Text('Frequency: Shift'),
-                              secondary: Icon(Icons.alarm_on),
-                              value: eccShiftCleanCheck,
-                              onChanged: (value) {
-                                setState(() {
-                                  eccShiftCleanCheck = value;
-                                });
-                              }),
-                          CheckboxListTile(
-                              title: Text('ECC Checks'),
-                              subtitle: Text('Frequency: Daily'),
-                              secondary: Icon(Icons.alarm_on),
-                              value: eccDailyCleanCheck,
-                              onChanged: (value) {
-                                setState(() {
-                                  eccDailyCleanCheck = value;
-                                });
-                              }),
-                          CheckboxListTile(
-                              title: Text('ECC Checks'),
-                              subtitle: Text('Frequency: Weekly'),
-                              secondary: Icon(
-                                Icons.alarm_on,
-                              ),
-                              value: eccWeeklyCleanCheck,
-                              onChanged: (value) {
-                                setState(() {
-                                  eccWeeklyCleanCheck = value;
-                                });
-                              }),
                           Container(
-                              width: 400.0,
-                              child: Expanded(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Flexible(
-                                      child: SizedBox(
-                                        width: 200,
-                                        child: TextFormField(
-                                          controller:
-                                              quantityProcessedTextController,
-                                          decoration: InputDecoration(
-                                              labelText:
-                                                  'Input Quantity Processed'),
-                                          keyboardType: TextInputType.number,
+                            margin: EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey)),
+                            child: CheckboxListTile(
+                                title: Text('ECC Checks'),
+                                subtitle: Text('Frequency: Shift'),
+                                secondary: Icon(
+                                  Icons.assignment,
+                                ),
+                                value: eccShiftCleanCheck,
+                                onChanged: (value) {
+                                  setState(() {
+                                    eccShiftCleanCheck = value;
+                                  });
+                                }),
+                          ),
+                          Container(
+                            margin: EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey)),
+                            child: CheckboxListTile(
+                                title: Text('ECC Checks'),
+                                subtitle: Text('Frequency: Daily'),
+                                secondary: Icon(
+                                  Icons.assignment,
+                                ),
+                                value: eccDailyCleanCheck,
+                                onChanged: (value) {
+                                  setState(() {
+                                    eccDailyCleanCheck = value;
+                                  });
+                                }),
+                          ),
+                          Container(
+                            margin: EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey)),
+                            child: CheckboxListTile(
+                                title: Text('ECC Checks'),
+                                subtitle: Text('Frequency: Weekly'),
+                                secondary: Icon(
+                                  Icons.assignment,
+                                ),
+                                value: eccWeeklyCleanCheck,
+                                onChanged: (value) {
+                                  setState(() {
+                                    eccWeeklyCleanCheck = value;
+                                  });
+                                }),
+                          ),
+                          if (eccDailyCleanCheck == true &&
+                              eccShiftCleanCheck == true &&
+                              eccWeeklyCleanCheck == true)
+                            Container(
+                                width: 400.0,
+                                child: Expanded(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Flexible(
+                                        child: SizedBox(
+                                          width: 200,
+                                          child: TextFormField(
+                                            controller:
+                                                quantityProcessedTextController,
+                                            decoration: InputDecoration(
+                                                labelText:
+                                                    'Input Quantity Processed'),
+                                            keyboardType: TextInputType.number,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                        height: 40,
-                                        child: OutlinedButton.icon(
-                                          label: Text(
-                                            'Process',
-                                            style: TextStyle(fontSize: 16),
-                                          ),
-                                          icon: Icon(
-                                            Icons.settings,
-                                            size: 28,
-                                          ),
-                                          onPressed: quantityProcessed == 1.0
-                                              ? null
-                                              : () {
-                                                  setState(() {
-                                                    (double.parse(quantityProcessedTextController
-                                                                        .text) /
-                                                                    10 +
-                                                                quantityProcessed >
-                                                            1.0)
-                                                        ? showDialog(
-                                                            context: context,
-                                                            builder:
-                                                                (BuildContext
-                                                                    context) {
-                                                              return overQuantity;
-                                                            },
-                                                          )
-                                                        : quantityProcessed +=
-                                                            double.parse(
-                                                                    quantityProcessedTextController
-                                                                        .text) /
-                                                                10;
-                                                  });
+                                      SizedBox(
+                                          height: 40,
+                                          child: OutlinedButton.icon(
+                                            label: Text(
+                                              'Process',
+                                              style: TextStyle(fontSize: 16),
+                                            ),
+                                            icon: Icon(
+                                              Icons.miscellaneous_services,
+                                              size: 28,
+                                            ),
+                                            onPressed: quantityProcessed == 1.0
+                                                ? null
+                                                : () {
+                                                    setState(() {
+                                                      (double.parse(quantityProcessedTextController
+                                                                          .text) /
+                                                                      10 +
+                                                                  quantityProcessed >
+                                                              1.0)
+                                                          ? showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (BuildContext
+                                                                      context) {
+                                                                return overQuantity;
+                                                              },
+                                                            )
+                                                          : quantityProcessed +=
+                                                              double.parse(
+                                                                      quantityProcessedTextController
+                                                                          .text) /
+                                                                  10;
+                                                    });
 
-                                                  if (quantityProcessed ==
-                                                      1.0) {
-                                                    Provider.of<WorkOrderHistoryProvider>(
-                                                            context)
-                                                        .addWorkOrderHistory(
-                                                      WorkOrderHistory(
-                                                          Constants.CLEANLINE,
-                                                          DateTime.now(),
-                                                          "test1234",
-                                                          WorkOrderUtil
-                                                              .getInstance
-                                                              .getQuantityProcessedPercentage(
-                                                                  quantityProcessed),
-                                                          null),
-                                                    );
-                                                    widget.callback();
-                                                  }
-                                                },
-                                        ))
-                                  ],
-                                ),
-                              )),
+                                                    if (quantityProcessed ==
+                                                        1.0) {
+                                                      Provider.of<WorkOrderHistoryProvider>(
+                                                              context)
+                                                          .addWorkOrderHistory(
+                                                        WorkOrderHistory(
+                                                            Constants.CLEANLINE,
+                                                            DateTime.now(),
+                                                            "test1234",
+                                                            WorkOrderUtil
+                                                                .getInstance
+                                                                .getQuantityProcessedPercentage(
+                                                                    quantityProcessed),
+                                                            null),
+                                                      );
+                                                      widget.callback();
+                                                    }
+                                                  },
+                                          ))
+                                    ],
+                                  ),
+                                )),
                         ],
                       ),
                     ),

@@ -52,7 +52,19 @@ class _GenLabelsState extends State<GenLabels> {
                 userComment = userCommentController.text;
               });
             },
-            child: Text('Enter'))
+            child: Text(
+              'Enter',
+              style: TextStyle(color: Colors.blue[800]),
+            )),
+        TextButton(
+          child: Text(
+            'Close',
+            //  style: TextStyle(color: Colors.blue[800]),
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ],
     );
 
@@ -69,7 +81,10 @@ class _GenLabelsState extends State<GenLabels> {
       ),
       actions: <Widget>[
         TextButton(
-          child: Text('Close'),
+          child: Text(
+            'Close',
+            style: TextStyle(color: Colors.blue[800]),
+          ),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -84,167 +99,232 @@ class _GenLabelsState extends State<GenLabels> {
       ),
       actions: [
         FlatButton(
-            onPressed: () {
-              setState(() {
-                userSignature = userSignatureController.text;
-              });
-            },
-            child: Text('Enter'))
+          onPressed: () {
+            setState(() {
+              userSignature = userSignatureController.text;
+            });
+          },
+          child: Text(
+            'Enter',
+            style: TextStyle(color: Colors.blue[800]),
+          ),
+        ),
+        TextButton(
+          child: Text(
+            'Close',
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ],
     );
 
     return Center(
-        child: Column(
-      children: [
-        Text("Work Order Number: ${workOrder.getWorkOrderNumber}",
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-        Text("Attune PS Inserts",
-            style: TextStyle(
-              fontSize: 22,
-            )),
-        Column(
-          children: <Widget>[
-            Align(
+      child: Column(
+        children: [
+          Text("Work Order Number: ${workOrder.getWorkOrderNumber}",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+          Text("Attune PS Inserts",
+              style: TextStyle(
+                fontSize: 22,
+              )),
+          Column(
+            children: <Widget>[
+              Align(
                 alignment: Alignment.topRight,
                 child: Container(
-                    width: 200,
-                    child: Center(
-                        child: Text('Quantity Processed:',
-                            style: TextStyle(
-                              fontSize: 16,
-                            ))))),
-            Align(
-              alignment: Alignment.topRight,
-              child: Container(
-                width: 200,
-                padding: const EdgeInsets.only(bottom: 10.0),
-                child: new LinearPercentIndicator(
-                  animation: true,
-                  width: 200.0,
-                  lineHeight: 40.0,
-                  percent: quantityProcessed,
-                  center: Text(
-                    "${WorkOrderUtil.getInstance.getQuantityProcessedPercentage(quantityProcessed)}/10",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
+                  width: 200,
+                  child: Center(
+                    child: Text(
+                      'Quantity Processed:',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
                     ),
                   ),
-                  backgroundColor: Colors.grey,
-                  progressColor: quantityProcessed == 1.0
-                      ? Colors.green
-                      : Colors.blue[800],
                 ),
               ),
-            ),
-          ],
-        ),
-        Container(
-          color: Colors.black12,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
+              Align(
+                alignment: Alignment.topRight,
                 child: Container(
-                  margin: const EdgeInsets.all(20.0),
-                  padding: const EdgeInsets.all(30.0),
-                  color: Colors.white,
-                  child: Column(children: [
-                    Text("Q1 Pressure Logs Checks: 18-NOV-2020",
-                        style: TextStyle(
-                            fontSize: 22, fontWeight: FontWeight.bold)),
-                    Text("Day Logs",
-                        style: TextStyle(
-                          fontSize: 16,
-                        )),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 25.0),
-                      child: DataTable(showCheckboxColumn: true, columns: [
-                        DataColumn(label: Text('Time')),
-                        DataColumn(label: Text('A')),
-                        DataColumn(label: Text('B')),
-                        DataColumn(label: Text('A - B')),
-                        DataColumn(label: Text('C')),
-                        DataColumn(label: Text('Signature')),
-                      ], rows: [
-                        DataRow(cells: [
-                          DataCell(Text('07:00')),
-                          DataCell(Text('15')),
-                          DataCell(Text('3')),
-                          DataCell(Text('12')),
-                          DataCell(Text('3')),
-                          DataCell(
-                            Text(userSignature),
-                            onTap: () => showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return inputSignature;
-                              },
-                            ),
-                            showEditIcon: true,
-                          ),
-                        ]),
-                      ]),
+                  width: 200,
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: new LinearPercentIndicator(
+                    animation: true,
+                    width: 200.0,
+                    lineHeight: 40.0,
+                    percent: quantityProcessed,
+                    center: Text(
+                      "${WorkOrderUtil.getInstance.getQuantityProcessedPercentage(quantityProcessed)}/10",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
                     ),
-                  ]),
+                    backgroundColor: Colors.grey,
+                    progressColor: quantityProcessed == 1.0
+                        ? Colors.green
+                        : Colors.blue[800],
+                  ),
                 ),
               ),
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.all(20.0),
-                  padding: const EdgeInsets.all(30.0),
-                  color: Colors.white,
-                  child: Column(
-                    children: <Widget>[
-                      DataTable(showCheckboxColumn: true, columns: [
-                        DataColumn(label: Text('Time')),
-                        DataColumn(label: Text('Pressure Comment')),
-                        DataColumn(label: Text('Signature')),
-                      ], rows: [
-                        DataRow(cells: [
-                          DataCell(Text('07:00')),
-                          DataCell(
-                            Text(userComment),
-                            onTap: () => showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return inputComment;
-                              },
-                            ),
+            ],
+          ),
+          Container(
+            color: Colors.black12,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(30.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black54,
+                          blurRadius: 5.0,
+                          spreadRadius: 1.0,
+                        )
+                      ],
+                    ),
+                    child: Column(children: [
+                      Text("Q1 Pressure Logs Checks: 18-NOV-2020",
+                          style: TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold)),
+                      Text("Day Logs",
+                          style: TextStyle(
+                            fontSize: 16,
+                          )),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 25.0),
+                        child: DataTable(showCheckboxColumn: true, columns: [
+                          DataColumn(
+                            label: Text('Time'),
                           ),
-                          DataCell(
-                            Text(userSignature),
-                            onTap: () => showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return inputSignature;
-                              },
-                            ),
-                            showEditIcon: true,
+                          DataColumn(
+                            label: Text('A'),
                           ),
+                          DataColumn(
+                            label: Text('B'),
+                          ),
+                          DataColumn(
+                            label: Text('A - B'),
+                          ),
+                          DataColumn(
+                            label: Text('C'),
+                          ),
+                          DataColumn(
+                            label: Text('Signature'),
+                          ),
+                        ], rows: [
+                          DataRow(cells: [
+                            DataCell(
+                              Text('07:00'),
+                            ),
+                            DataCell(
+                              Text('15'),
+                            ),
+                            DataCell(
+                              Text('3'),
+                            ),
+                            DataCell(
+                              Text('12'),
+                            ),
+                            DataCell(
+                              Text('3'),
+                            ),
+                            DataCell(
+                              Text(userSignature),
+                              onTap: () => showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return inputSignature;
+                                },
+                              ),
+                              showEditIcon: true,
+                            ),
+                          ]),
                         ]),
-                      ]),
+                      ),
+                    ]),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(30.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black54,
+                          blurRadius: 5.0,
+                          spreadRadius: 1.0,
+                        )
+                      ],
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        DataTable(showCheckboxColumn: true, columns: [
+                          DataColumn(
+                            label: Text('Time'),
+                          ),
+                          DataColumn(
+                            label: Text('Pressure Comment'),
+                          ),
+                          DataColumn(
+                            label: Text('Signature'),
+                          ),
+                        ], rows: [
+                          DataRow(cells: [
+                            DataCell(
+                              Text('07:00'),
+                            ),
+                            DataCell(
+                              Text(userComment),
+                              onTap: () => showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return inputComment;
+                                },
+                              ),
+                            ),
+                            DataCell(
+                              Text(userSignature),
+                              onTap: () => showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return inputSignature;
+                                },
+                              ),
+                              showEditIcon: true,
+                            ),
+                          ]),
+                        ]),
 
-                      // TextFormField(
-                      //   controller: userCommentController,
-                      // ),
-                      // FlatButton(onPressed: () {
-                      //   setState(() {
-                      //     userComment = userCommentController.text;
-                      //   });
-                      // }, child: Text(
-                      //   'press'
-                      // ),),
-                      // Align(
-                      //   alignment: Alignment.centerLeft,
-                      //   child: Container(
-                      //       child: Text(
-                      //     'Condition Checks',
-                      //     style: TextStyle(fontWeight: FontWeight.bold),
-                      //     textAlign: TextAlign.left,
-                      //   )),
-                      // ),
-                      Container(
+                        // TextFormField(
+                        //   controller: userCommentController,
+                        // ),
+                        // FlatButton(onPressed: () {
+                        //   setState(() {
+                        //     userComment = userCommentController.text;
+                        //   });
+                        // }, child: Text(
+                        //   'press'
+                        // ),),
+                        // Align(
+                        //   alignment: Alignment.centerLeft,
+                        //   child: Container(
+                        //       child: Text(
+                        //     'Condition Checks',
+                        //     style: TextStyle(fontWeight: FontWeight.bold),
+                        //     textAlign: TextAlign.left,
+                        //   )),
+                        // ),
+                        Container(
                           padding: const EdgeInsets.only(top: 20),
                           width: 450.0,
                           child: Expanded(
@@ -280,7 +360,7 @@ class _GenLabelsState extends State<GenLabels> {
                                         style: TextStyle(fontSize: 16),
                                       ),
                                       icon: Icon(
-                                        Icons.settings,
+                                        Icons.miscellaneous_services,
                                         size: 28,
                                       ),
                                       onPressed: quantityProcessed == 1.0
@@ -334,39 +414,41 @@ class _GenLabelsState extends State<GenLabels> {
                                 )
                               ],
                             ),
-                          )),
-                    ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
-        ),
-        //       Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        // children: [
-        //       Column(
-        //         children: [
-        //           Padding(
-        //             padding: const EdgeInsets.all(20.0),
-        //             child: Column(
-        //               children: [
-        //                 T
-        //               ],
-        //             ),
-        //           ),
-        //             Container(
-        //                 width: 300.0,
-        //                 child: TextFormField(
-        //                   decoration:
-        //                       InputDecoration(labelText: 'Input Quantity Processed'),
-        //                   keyboardType: TextInputType.number,
-        //                 )),
-        //           ],
-        //         )
-        //   ],
-        // ),
-      ],
-    ));
+          //       Row(
+          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          // children: [
+          //       Column(
+          //         children: [
+          //           Padding(
+          //             padding: const EdgeInsets.all(20.0),
+          //             child: Column(
+          //               children: [
+          //                 T
+          //               ],
+          //             ),
+          //           ),
+          //             Container(
+          //                 width: 300.0,
+          //                 child: TextFormField(
+          //                   decoration:
+          //                       InputDecoration(labelText: 'Input Quantity Processed'),
+          //                   keyboardType: TextInputType.number,
+          //                 )),
+          //           ],
+          //         )
+          //   ],
+          // ),
+        ],
+      ),
+    );
   }
 }
