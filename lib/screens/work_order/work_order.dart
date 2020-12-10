@@ -30,6 +30,8 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
   List<WorkOrderStep> workOrderSteps;
   bool isWorkOrderStepProcessed = false;
   bool allStepsCompleted = false;
+  final double screenWidth =
+      MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width;
 
   @override
   void initState() {
@@ -236,7 +238,9 @@ class _WorkOrderPageState extends State<WorkOrderPage> {
                         );
                       },
                       steps: _getSteps(context),
-                      type: StepperType.horizontal,
+                      type: (screenWidth > 500)
+                          ? StepperType.horizontal
+                          : StepperType.vertical,
                       currentStep: currentStep,
                       onStepContinue: next,
                       onStepCancel: cancel,
