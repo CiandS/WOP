@@ -36,10 +36,12 @@ class _WorkOrderInputState extends State<WorkOrderInput> {
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.asset(
-              'j&j.png',
-              height: 150,
-              fit: BoxFit.cover,
+            FittedBox(
+              child: Image.asset(
+                'j&j.png',
+                height: 150,
+                fit: BoxFit.cover,
+              ),
             ),
             SizedBox(
               height: 20,
@@ -64,9 +66,11 @@ class _WorkOrderInputState extends State<WorkOrderInput> {
                       ),
                       child: Column(
                         children: [
-                          Text("Enter your Work Order\n",
-                              style: TextStyle(
-                                  fontSize: 22, fontWeight: FontWeight.bold)),
+                          FittedBox(
+                            child: Text("Enter your Work Order\n",
+                                style: TextStyle(
+                                    fontSize: 22, fontWeight: FontWeight.bold)),
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(bottom: 25.0),
                             child: Container(
